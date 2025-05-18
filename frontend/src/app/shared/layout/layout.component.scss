@@ -1,0 +1,230 @@
+/* Layout Container */
+.layout-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.layout-container.collapsed .sidebar {
+  width: 72px;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  background-color: #dbeafe; /* Muted Indigo */
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: width 0.3s ease;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+ 
+}
+
+.sidebar-title {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.sidebar-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.menu-top,
+.menu-bottom {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-top {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.menu-bottom {
+  margin-bottom: 1rem;
+}
+
+.menu-top li,
+.menu-bottom li {
+  padding: 0.5rem 1rem;
+}
+
+a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  color: inherit;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+a:hover {
+  background-color: #c7d2fe; /* Slightly darker hover background */
+}
+
+.logout-link {
+  color: #ff6b6b;
+}
+
+/* Main Panel */
+.main-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Header */
+.header-bar {
+  height: 74px;
+  background-color: #003366;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header-spacer {
+  width: 80px;
+}
+
+.header-title {
+  margin: 0 auto;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Content Area */
+.content {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  background-color: #f0f0f000;
+}
+
+/* Dark Mode Inversion */
+.dark-mode .sidebar {
+  background-color: #ffffff;  /* Sidebar becomes white */
+  color: #333;                /* Dark text */
+}
+
+.dark-mode .sidebar a {
+  color: #333;
+}
+
+.dark-mode .sidebar a:hover {
+  background-color: #f3f4f6;  /* Light hover effect */
+}
+
+.dark-mode .header-bar {
+  background-color: #ffffff;  /* Header becomes white */
+  color: #333;                /* Dark text */
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+}
+
+.dark-mode .header-title {
+  color: #333;
+}
+
+.dark-mode .header-actions mat-icon {
+  color: #333; /* Optional if you're using Angular Material icons */
+}
+
+
+.dark-mode .content {
+  background-color: #1a1a1a;
+  color: #eee;
+}
+.profile-card {
+  position: absolute;
+  top: 60px;
+  right: 1rem;
+  background-color: white;
+  color: black;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 1000;
+  min-width: 220px;
+
+  p {
+    margin: 0.3rem 0;
+    font-size: 0.95rem;
+  }
+}
+.profile-card {
+  position: absolute;
+  top: 60px;
+  right: 1rem;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  min-width: 250px;
+  z-index: 1000;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+
+  .profile-header {
+    display: flex;
+    align-items: flex-start; 
+   
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+
+   .profile-avatar {
+  font-size: 24px;        
+  color: #3f51b5;
+  margin-top: 2px;       
+}
+
+    h3 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    small {
+      color: gray;
+      font-size: 0.9rem;
+    }
+  }
+
+  .profile-info {
+    p {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0.5rem 0;
+      font-size: 0.95rem;
+
+      mat-icon {
+        font-size: 24px;
+        color: #616161;
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+<!-- Unified Login Card -->
+<div class="card-container">
+  <!-- Left Image Panel -->
+  <div class="image-section">
+    <img src="/assets/images/erp-image.png" alt="ERP Illustration" />
+  </div>
+
+  <!-- Right Login Form -->
+  <div class="form-section">
+    <h2>Welcome to ERP portal</h2>
+    <br />
+    <div class="user-type-selector">
+      <div class="user-buttons">
+        <div class="user-card" [class.active]="selectedUser === 'Customer'" (click)="setUser('Customer')">
+          <span class="material-icons">person</span>
+          <span>Customer</span>
+          <span class="material-icons tick" *ngIf="selectedUser === 'Customer'">check_circle</span>
+        </div>
+        <div class="user-card" [class.active]="selectedUser === 'Vendor'" (click)="setUser('Vendor')">
+          <span class="material-icons">storefront</span>
+          <span>Vendor</span>
+          <span class="material-icons tick" *ngIf="selectedUser === 'Vendor'">check_circle</span>
+        </div>
+        <div class="user-card" [class.active]="selectedUser === 'Employee'" (click)="setUser('Employee')">
+          <span class="material-icons">badge</span>
+          <span>Employee</span>
+          <span class="material-icons tick" *ngIf="selectedUser === 'Employee'">check_circle</span>
+        </div>
+      </div>
+      <p class="welcome-text" *ngIf="selectedUser">Welcome, {{ selectedUser }}</p>
+    </div>
+
+    <!-- Login Form -->
+    <form (ngSubmit)="onLogin()">
+      <input type="text" placeholder="UserID" [(ngModel)]="username" name="username" required />
+      <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
+      <button type="submit" class="login-btn">Login</button>
+    </form>
+  </div>
+</div>
