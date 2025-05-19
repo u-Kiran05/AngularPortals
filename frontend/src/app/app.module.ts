@@ -13,14 +13,14 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { SharedModule } from './shared/shared.module';
 import { vendormodule } from './vendor/vendor.module';
 import { EmployeeModule } from './employee/employee.module';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent 
   ],
   imports: [
-    BrowserModule,
+    BrowserModule,HttpClientModule,
     FormsModule,
     RouterModule.forRoot(routes),
     MatButtonModule,

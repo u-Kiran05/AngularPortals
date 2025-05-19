@@ -20,12 +20,31 @@ export class LoginComponent {
   }
 
   onLogin() {
-    if (!this.selectedUser || !this.username || !this.password) {
-      alert('Please select user type and fill in all fields.');
-      return;
-    }
+  if (!this.selectedUser || !this.username || !this.password) {
+    alert('Please select user type and fill in all fields.');
+    return;
+  }
 
-    // Save user info
+  if (this.selectedUser === 'Customer') {
+    // Call backend to validate customer login
+    this.authService.validateCustomerLogin(this.username, this.password).subscribe(
+      (res) => {
+        if (res.success) {
+          this.authService.setUserInfo({
+            id: this.username,
+            name: this.username,
+            role: this.selectedUser,
+            lastLogin: new Date()
+          });
+          this.router.navigate(['/customer']);
+        } else {
+          alert('Invalid Customer ID or Password.');
+        }
+      },
+      () => alert('Login request failed. Please try again later.')
+    );
+  } else {
+    // Fallback for other user types
     this.authService.setUserInfo({
       id: this.username,
       name: this.username,
@@ -33,11 +52,7 @@ export class LoginComponent {
       lastLogin: new Date()
     });
 
-    // Navigate based on user type
     switch (this.selectedUser) {
-      case 'Customer':
-        this.router.navigate(['/customer']);
-        break;
       case 'Vendor':
         this.router.navigate(['/vendor']);
         break;
@@ -48,4 +63,6 @@ export class LoginComponent {
         alert('Invalid user type selected.');
     }
   }
+}
+
 }

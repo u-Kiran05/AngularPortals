@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
@@ -10,11 +10,11 @@ export interface MenuItem {
 
 @Component({
   selector: 'app-layout',
-  standalone:false,
+  standalone: false,
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent {
+export class LayoutComponent implements OnInit {
   @Input() headerTitle: string = 'ERP Dashboard';
   @Input() menuItems: MenuItem[] = [];
   @Output() menuClick = new EventEmitter<string>();
@@ -25,7 +25,21 @@ export class LayoutComponent {
   isDarkMode = false;
   showProfileCard = false;
 
+  user: any;
+  customerProfile: any;
+
   constructor(public authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.user = this.authService.getUserInfo();
+
+    if (this.user?.role === 'Customer') {
+      this.authService.getCustomerProfile(this.user.id).subscribe(
+        (profile) => this.customerProfile = profile,
+        () => this.customerProfile = null
+      );
+    }
+  }
 
   toggleSidebar(): void {
     this.isCollapsed = !this.isCollapsed;
@@ -51,13 +65,12 @@ export class LayoutComponent {
   }
 
   getRoleIcon(): string {
-    const role = this.authService.getUserInfo()?.role?.toLowerCase();
+    const role = this.user?.role?.toLowerCase();
     if (role === 'vendor') return 'store';
     if (role === 'employee') return 'engineering';
     return 'person';
   }
 
-  // Optional: Auto-close on outside click
   @HostListener('document:click', ['$event'])
   onClickOutside(event: MouseEvent): void {
     const target = event.target as HTMLElement;
