@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon'; // Add MatIconModule
 import { LayoutComponent } from './layout/layout.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MatDividerModule } from '@angular/material/divider';
+import { SalesComponent } from '../customer/sales/sales.component';
 @NgModule({
   declarations: [
     LayoutComponent,ProfileComponent,

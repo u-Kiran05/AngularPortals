@@ -14,6 +14,7 @@ import { SharedModule } from './shared/shared.module';
 import { vendormodule } from './vendor/vendor.module';
 import { EmployeeModule } from './employee/employee.module';
 import { HttpClientModule } from '@angular/common/http';
+import { AgGridModule } from 'ag-grid-angular';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+     AgGridModule,
+      
     MatTooltipModule,
     CustomerModule,EmployeeModule, vendormodule,
     SharedModule,

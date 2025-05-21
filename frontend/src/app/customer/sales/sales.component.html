@@ -1,1 +1,13 @@
-<p>sales works!</p>
+<div class="sales-container" *ngIf="rowData.length">
+  <h2>Customer Sales Areas</h2>
+    <br>
+  <ag-grid-angular
+    class="ag-theme-alpine grid-box"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    [defaultColDef]="defaultColDef"
+    rowSelection="single"
+    domLayout="autoHeight"
+  >
+  </ag-grid-angular>
+</div>

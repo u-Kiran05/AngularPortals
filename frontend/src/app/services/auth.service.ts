@@ -23,7 +23,16 @@ export class AuthService {
       customerId
     });
   }
-
+  getCustomerSales(customerId: string): Observable<any> {
+    return this.http.post('http://localhost:3000/api/customer/sales', {
+      customerId
+    });
+  }
+  getCustomerInquiries(customerId: string): Observable<any> {
+    return this.http.post('http://localhost:3000/api/customer/inquiry', {
+      customerId
+    });
+  }
   validateCustomerLogin(customerId: string, password: string): Observable<any> {
     return this.http.post('http://localhost:3000/api/customer/login', {
       customerId,

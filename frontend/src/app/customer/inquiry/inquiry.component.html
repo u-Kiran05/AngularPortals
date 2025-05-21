@@ -1,1 +1,37 @@
-<p>inquiry works!</p>
+<div class="inquiry-container">
+  <h2>Customer Inquiries</h2>
+  <br>
+
+  <!-- MASTER TABLE CARD -->
+  <div class="card">
+    <div class="card-header">
+      <h3>Inquiry List</h3>
+    </div>
+    <div class="card-body">
+      <ag-grid-angular
+        class="ag-theme-alpine master-grid"
+        [rowData]="rowData"
+        [columnDefs]="inquiryColumnDefs"
+        [defaultColDef]="defaultColDef"
+        rowSelection="single"
+        (rowClicked)="onRowClicked($event)">
+      </ag-grid-angular>
+    </div>
+  </div>
+
+  <!-- DETAIL TABLE CARD -->
+  <div *ngIf="selectedItems.length > 0" class="card detail-section">
+    <div class="card-header">
+      <h3>Items for Inquiry #{{ selectedInquiryNo }}</h3>
+    </div>
+    <div class="card-body">
+      <ag-grid-angular
+        class="ag-theme-alpine detail-grid"
+        [rowData]="selectedItems"
+        [columnDefs]="itemColumnDefs"
+        [defaultColDef]="defaultColDef"
+        domLayout="autoHeight">
+      </ag-grid-angular>
+    </div>
+  </div>
+</div>
