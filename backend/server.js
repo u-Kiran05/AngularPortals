@@ -12,13 +12,15 @@ app.use(express.json());
 // Routes
 const customerLoginRoute = require('./routes/customerRoutes/customerLogin');
 const customerProfileRoute = require('./routes/customerRoutes/customerProfile');
-const customerSalesRoute=require('./routes/customerRoutes/customerSales')
-const customerInquiryRoute=require('./routes/customerRoutes/customerInquiry')
+const customerSalesRoute=require('./routes/customerRoutes/customerSales');
+const customerInquiryRoute=require('./routes/customerRoutes/customerInquiry');
+const customerDeliveryRoute=require('./routes/customerRoutes/customerDelivery');
 // Use routes
 app.use('/api/customer', customerLoginRoute);
 app.use('/api/customer', customerProfileRoute); 
 app.use('/api/customer', customerSalesRoute);
 app.use('/api/customer', customerInquiryRoute);
+app.use('/api/customer', customerDeliveryRoute);
 // Default 404 handler
 app.use((req, res) => {
   res.status(404).json({ message: 'Not Found', path: req.path });

@@ -3,12 +3,12 @@ const router = express.Router();
 const { callSapService } = require("D:\\PortalProject\\backend\\utils\\parser.js");
 
 router.post('/inquiry', async (req, res) => {
+    console.log('Request body:', req.body);
   const { customerId } = req.body;
 
   if (!customerId) {
     return res.status(400).json({ success: false, message: 'Customer ID is required.' });
   }
-
   const soapEnvelope = `
     <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"
                        xmlns:urn="urn:sap-com:document:sap:rfc:functions">
