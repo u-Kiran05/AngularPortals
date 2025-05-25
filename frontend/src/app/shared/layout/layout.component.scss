@@ -6,14 +6,14 @@
 }
 
 .layout-container.collapsed .sidebar {
-  width: 72px;
+  width: 74px;
 }
 
 /* Sidebar */
 .sidebar {
   width: 240px;
   height: 100vh;
-  background-color: #dbeafe; /* Muted Indigo */
+  background-color: rgb(243, 214, 213); 
   color: #333;
   display: flex;
   flex-direction: column;
@@ -26,7 +26,6 @@
   align-items: center;
   gap: 0.75rem;
   padding: 1rem;
- 
 }
 
 .sidebar-title {
@@ -70,15 +69,27 @@ a {
   border-radius: 6px;
   color: inherit;
   text-decoration: none;
-  transition: background 0.2s ease;
-}
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
 
-a:hover {
-  background-color: #c7d2fe; /* Slightly darker hover background */
+  &:hover {
+    background-color: rgb(232, 182, 180); /* Deeper light hover background */
+  }
+
+  &.selected {
+    background-color: rgb(232, 182, 180); /* Match hover background */
+    color: rgb(159, 40, 37); /* Main red tone */
+    transform: scale(1.05);
+    border-left: 4px solid rgb(159, 40, 37); /* Red border indicator */
+
+    mat-icon {
+      color: rgb(159, 40, 37); /* Red icon for selected item */
+    }
+  }
 }
 
 .logout-link {
-  color: #ff6b6b;
+  color: rgb(159, 40, 37);
 }
 
 /* Main Panel */
@@ -93,7 +104,7 @@ a:hover {
 /* Header */
 .header-bar {
   height: 74px;
-  background-color: #003366;
+  background-color: rgb(159, 40, 37); /* Main red tone */
   color: white;
   display: flex;
   align-items: center;
@@ -125,13 +136,13 @@ a:hover {
   flex: 1;
   padding: 1rem;
   overflow-y: auto;
-  background-color: #f0f0f000;
+  background-color: #f0eeee; /* Very light background to complement red */
 }
 
 /* Dark Mode Inversion */
 .dark-mode .sidebar {
-  background-color: #ffffff;  /* Sidebar becomes white */
-  color: #333;                /* Dark text */
+  background-color: #ffffff;
+  color: #333;
 }
 
 .dark-mode .sidebar a {
@@ -139,13 +150,25 @@ a:hover {
 }
 
 .dark-mode .sidebar a:hover {
-  background-color: #f3f4f6;  /* Light hover effect */
+  background-color: #f3f4f6;
 }
 
+.dark-mode .sidebar a.selected {
+  background-color: #f3f4f6; /* Keep the background */
+  color: #000000; /* Change text color to black */
+  transform: scale(1.05);
+  border-left: 4px solid #000000; /* Change border to black */
+
+  mat-icon {
+    color: #000000; /* Change icon color to black */
+  }
+}
+
+
 .dark-mode .header-bar {
-  background-color: #ffffff;  /* Header becomes white */
-  color: #333;                /* Dark text */
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+  background-color: #ffffff;
+  color: #333;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 .dark-mode .header-title {
@@ -153,31 +176,15 @@ a:hover {
 }
 
 .dark-mode .header-actions mat-icon {
-  color: #333; /* Optional if you're using Angular Material icons */
+  color: #333;
 }
-
 
 .dark-mode .content {
   background-color: #1a1a1a;
   color: #eee;
 }
-.profile-card {
-  position: absolute;
-  top: 60px;
-  right: 1rem;
-  background-color: white;
-  color: black;
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  z-index: 1000;
-  min-width: 220px;
 
-  p {
-    margin: 0.3rem 0;
-    font-size: 0.95rem;
-  }
-}
+/* Profile Card */
 .profile-card {
   position: absolute;
   top: 60px;
@@ -188,27 +195,28 @@ a:hover {
   min-width: 250px;
   z-index: 1000;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  color: black;
 
   .profile-header {
     display: flex;
-    align-items: flex-start; 
-   
+    align-items: flex-start;
     gap: 0.75rem;
     margin-bottom: 0.5rem;
 
-   .profile-avatar {
-  font-size: 24px;        
-  color: #3f51b5;
-  margin-top: 2px;       
-}
+    .profile-avatar {
+      font-size: 24px;
+      color: rgb(159, 40, 37); 
+      margin-top: 2px;
+    }
 
     h3 {
       margin: 0;
       font-size: 1.2rem;
+      color: black;
     }
 
     small {
-      color: gray;
+      color: black;
       font-size: 0.9rem;
     }
   }
@@ -220,10 +228,15 @@ a:hover {
       gap: 0.5rem;
       margin: 0.5rem 0;
       font-size: 0.95rem;
+      color: black;
 
       mat-icon {
         font-size: 24px;
         color: #616161;
+      }
+
+      span {
+        color: black;
       }
     }
   }

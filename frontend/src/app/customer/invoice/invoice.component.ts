@@ -12,30 +12,32 @@ export class InvoiceComponent {
   rowData: any[] = [];
   customerId: string = '';
 
-  columnDefs: ColDef[] = [
-    { headerName: 'Invoice No.', field: 'vbeln', filter: true, sortable: true },
-    { headerName: 'Invoice Date', field: 'fkdat', filter: true, sortable: true },
-    {
-      headerName: 'Net Value',
-      field: 'netwr',
-      filter: true,
-      sortable: true,
-      valueFormatter: (params) => this.formatNetValue(params.value, params.data?.waerk)
-    },
-    //{ headerName: 'Currency', field: 'waerk', filter: true, sortable: true },
-    { headerName: 'Pricing Procedure', field: 'knumv', filter: true, sortable: true },
-    { headerName: 'Billing Type', field: 'fkart', filter: true, sortable: true },
-    { headerName: 'Item No.', field: 'posnr', filter: true, sortable: true },
-    { headerName: 'Material No.', field: 'matnr', filter: true, sortable: true },
-    { headerName: 'Material Desc', field: 'arktx', filter: true, sortable: true },
-    { headerName: 'Quantity', field: 'fkimg', filter: true, sortable: true },
-    { headerName: 'Unit', field: 'vrkme', filter: true, sortable: true }
-  ];
+columnDefs: ColDef[] = [
+  { headerName: 'Invoice No.', field: 'vbeln', headerClass: 'custom-header', filter: true, sortable: true },
+  { headerName: 'Invoice Date', field: 'fkdat', headerClass: 'custom-header', filter: true, sortable: true },
+  {
+    headerName: 'Net Value',
+    field: 'netwr',
+    headerClass: 'custom-header',
+    filter: true,
+    sortable: true,
+    valueFormatter: (params) => this.formatNetValue(params.value, params.data?.waerk)
+  },
+  // { headerName: 'Currency', field: 'waerk', headerClass: 'custom-header', filter: true, sortable: true },
+  { headerName: 'Pricing Procedure', field: 'knumv', headerClass: 'custom-header', filter: true, sortable: true },
+  { headerName: 'Billing Type', field: 'fkart', headerClass: 'custom-header', filter: true, sortable: true },
+  { headerName: 'Item No.', field: 'posnr', headerClass: 'custom-header', filter: true, sortable: true },
+  { headerName: 'Material No.', field: 'matnr', headerClass: 'custom-header', filter: true, sortable: true },
+  { headerName: 'Material Desc', field: 'arktx', headerClass: 'custom-header', filter: true, sortable: true },
+  { headerName: 'Quantity', field: 'fkimg', headerClass: 'custom-header', filter: true, sortable: true },
+  { headerName: 'Unit', field: 'vrkme', headerClass: 'custom-header', filter: true, sortable: true }
+];
 
-  defaultColDef: ColDef = {
-    flex: 1,
-    resizable: true
-  };
+defaultColDef: ColDef = {
+  flex: 1,
+  resizable: true,
+  headerClass: 'custom-header'
+};
 
   constructor(private authService: AuthService) {}
 

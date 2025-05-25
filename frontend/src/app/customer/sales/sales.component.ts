@@ -13,23 +13,25 @@ export class SalesComponent implements OnInit {
   customerId: string = '';
 
   columnDefs: ColDef[] = [
-    { headerName: 'Sales Order No', field: 'salesOrderNo', filter: true, sortable: true },
-    { headerName: 'Document Type', field: 'docType', filter: true, sortable: true },
-    { headerName: 'Order Date', field: 'orderDate', filter: true, sortable: true },
-    { headerName: 'Sales Org', field: 'salesOrgName', filter: true, sortable: true },
-    { headerName: 'Dist. Channel', field: 'distChannel', filter: true, sortable: true },
-    { headerName: 'Division', field: 'division', filter: true, sortable: true },
-    { headerName: 'Material No', field: 'materialNo', filter: true, sortable: true },
-    { headerName: 'Description', field: 'description', filter: true, sortable: true },
-    {
-      headerName: 'Net Value',
-      field: 'netValue',
-      filter: true,
-      sortable: true,
-      valueFormatter: formatNetValue
-    },
-    //{ headerName: 'Currency', field: 'currency', filter: true, sortable: true }
-  ];
+  { headerName: 'Sales Order No', field: 'salesOrderNo', headerClass: 'custom-header', filter: true, sortable: true },
+  { headerName: 'Document Type', field: 'docType', headerClass: 'custom-header', filter: true, sortable: true },
+  { headerName: 'Order Date', field: 'orderDate', headerClass: 'custom-header', filter: true, sortable: true },
+  { headerName: 'Sales Org', field: 'salesOrgName', headerClass: 'custom-header', filter: true, sortable: true },
+  { headerName: 'Dist. Channel', field: 'distChannel', headerClass: 'custom-header', filter: true, sortable: true },
+  { headerName: 'Division', field: 'division', headerClass: 'custom-header', filter: true, sortable: true },
+  { headerName: 'Material No', field: 'materialNo', headerClass: 'custom-header', filter: true, sortable: true },
+  { headerName: 'Description', field: 'description', headerClass: 'custom-header', filter: true, sortable: true },
+  {
+    headerName: 'Net Value',
+    field: 'netValue',
+    headerClass: 'custom-header',
+    filter: true,
+    sortable: true,
+    valueFormatter: formatNetValue
+  }
+  // { headerName: 'Currency', field: 'currency', headerClass: 'custom-header', filter: true, sortable: true }
+];
+
 
   defaultColDef: ColDef = {
     flex: 1,

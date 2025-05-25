@@ -13,18 +13,20 @@ export class DeliveryComponent {
   customerId: string = '';
 
   columnDefs: ColDef[] = [
-    { headerName: 'Delivery No.', field: 'vbeln', filter: true, sortable: true },
-    { headerName: 'Delivery Date', field: 'erdat', filter: true, sortable: true },
-    { headerName: 'Material No.', field: 'matnr', filter: true, sortable: true },
-    { headerName: 'Material Desc', field: 'arktx', filter: true, sortable: true },
-    { headerName: 'Quantity', field: 'lfimg', filter: true, sortable: true },
-    { headerName: 'Unit', field: 'meins', filter: true, sortable: true }
-  ];
+  { headerName: 'Delivery No.', field: 'vbeln', headerClass: 'custom-header', filter: true, sortable: true },
+  { headerName: 'Delivery Date', field: 'erdat', headerClass: 'custom-header', filter: true, sortable: true },
+  { headerName: 'Material No.', field: 'matnr', headerClass: 'custom-header', filter: true, sortable: true },
+  { headerName: 'Material Desc', field: 'arktx', headerClass: 'custom-header', filter: true, sortable: true },
+  { headerName: 'Quantity', field: 'lfimg', headerClass: 'custom-header', filter: true, sortable: true },
+  { headerName: 'Unit', field: 'meins', headerClass: 'custom-header', filter: true, sortable: true }
+];
 
-  defaultColDef: ColDef = {
-    flex: 1,
-    resizable: true
-  };
+defaultColDef: ColDef = {
+  flex: 1,
+  resizable: true,
+  headerClass: 'custom-header'
+};
+
 
   constructor(private authService: AuthService) {}
 

@@ -24,7 +24,7 @@ export class LayoutComponent implements OnInit {
   isCollapsed = false;
   isDarkMode = false;
   showProfileCard = false;
-
+  selectedMenu: string = ''; // Added for selection effect
   user: any;
   customerProfile: any;
 
@@ -32,6 +32,7 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.authService.getUserInfo();
+    this.selectedMenu = this.router.url;  // Initialize from URL
 
     if (this.user?.role === 'Customer') {
       this.authService.getCustomerProfile(this.user.id).subscribe(
@@ -60,6 +61,7 @@ export class LayoutComponent implements OnInit {
   }
 
   onMenuClick(link: string): void {
+    this.selectedMenu = link;  // Track selected menu item
     this.menuClick.emit(link);
     this.router.navigate([link]);
   }
