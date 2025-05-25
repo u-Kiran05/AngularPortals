@@ -34,7 +34,7 @@ export class LoginComponent {
             id: this.username,
             name: this.username,
             role: this.selectedUser,
-            lastLogin: new Date()
+            lastLogin: new Date().toISOString(),
           });
           this.router.navigate(['/customer']);
         } else {
@@ -49,7 +49,7 @@ export class LoginComponent {
       id: this.username,
       name: this.username,
       role: this.selectedUser,
-      lastLogin: new Date()
+      lastLogin:  new Date().toISOString(),
     });
 
     switch (this.selectedUser) {

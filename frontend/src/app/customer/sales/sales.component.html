@@ -1,12 +1,15 @@
 <div class="sales-container" *ngIf="rowData.length">
   <h2>Customer Sales Orders</h2>
   <br>
-  <ag-grid-angular
-    class="ag-theme-alpine grid-box"
-    [rowData]="rowData"
-    [columnDefs]="columnDefs"
-    [defaultColDef]="defaultColDef"
-    rowSelection="single"
-    domLayout="autoHeight">
-  </ag-grid-angular>
+  <div class="grid-wrapper">
+    <ag-grid-angular
+      class="ag-theme-alpine"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [defaultColDef]="defaultColDef"
+      rowSelection="single"
+      style="width: 100%; height: 440px;"
+      domLayout="normal"> <!-- Needed for scrolling inside grid -->
+    </ag-grid-angular>
+  </div>
 </div>

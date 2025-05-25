@@ -38,6 +38,11 @@ export class AuthService {
       customerId
     });
   }
+  getCustomerInvoices(customerId: string): Observable<any> {
+    return this.http.post('http://localhost:3000/api/customer/invoice', {
+      customerId
+    });
+  }
   validateCustomerLogin(customerId: string, password: string): Observable<any> {
     return this.http.post('http://localhost:3000/api/customer/login', {
       customerId,

@@ -1,10 +1,31 @@
-.grid-box {
+.delivery-container {
+  padding: 0;
+  background-color: transparent;
+  max-width: 100%;
+}
+
+.grid-wrapper {
   width: 100%;
+  height: 450px; 
+  overflow: hidden;
 }
 
 .ag-theme-alpine {
+  width: 100%;
+  font-family: 'Segoe UI', sans-serif !important;
   --ag-header-background-color: #003366 !important;
   --ag-header-foreground-color: #dbeafe !important;
   --ag-row-hover-color: #dbeafe !important;
-  font-family: 'Segoe UI', sans-serif !important;
+}
+
+.ag-theme-alpine .ag-header-cell-label {
+  white-space: normal;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.ag-theme-alpine .ag-cell {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

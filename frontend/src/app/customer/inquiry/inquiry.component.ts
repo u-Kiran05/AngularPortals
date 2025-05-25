@@ -4,7 +4,7 @@ import { ColDef } from 'ag-grid-community';
 
 @Component({
   selector: 'app-inquiry',
-  standalone:false,
+  standalone: false,
   templateUrl: './inquiry.component.html',
   styleUrls: ['./inquiry.component.scss']
 })
@@ -13,6 +13,7 @@ export class InquiryComponent implements OnInit {
   selectedItems: any[] = [];
   selectedInquiryNo: string = '';
   customerId: string = '';
+  showDetailPopup = false; // Flag for modal popup
 
   inquiryColumnDefs: ColDef[] = [
     { headerName: 'Inquiry No', field: 'vbeln' },
@@ -72,5 +73,10 @@ export class InquiryComponent implements OnInit {
   onRowClicked(event: any): void {
     this.selectedItems = event.data.items;
     this.selectedInquiryNo = event.data.vbeln;
+    this.showDetailPopup = true; // Open popup
+  }
+
+  closeDetailPopup(): void {
+    this.showDetailPopup = false; // Close popup
   }
 }

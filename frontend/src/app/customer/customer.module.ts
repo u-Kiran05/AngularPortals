@@ -8,9 +8,8 @@ import { DeliveryComponent } from './delivery/delivery.component';
 import { CdashboardComponent } from './cdashboard/cdashboard.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { PaymentComponent } from './payment/payment.component';
-
 import { AgGridModule } from 'ag-grid-angular';
- import { ModuleRegistry, AllCommunityModule } from 'ag-grid-community';
+import { ModuleRegistry, AllCommunityModule } from 'ag-grid-community';
 import { InquiryComponent } from './inquiry/inquiry.component';
     
 ModuleRegistry.registerModules([ AllCommunityModule ]);

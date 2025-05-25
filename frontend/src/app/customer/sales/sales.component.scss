@@ -1,19 +1,32 @@
 .sales-container {
-  padding: 1rem;
-  background-color: #f9fafb;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  background-color: transparent;
+  max-width: 100%;
 }
 
-.grid-box {
+.grid-wrapper {
   width: 100%;
-  min-height: 300px;
+  height: 450px; 
+  overflow: hidden; 
 }
 
 .ag-theme-alpine {
+  width: 100%;
+  font-family: 'Segoe UI', sans-serif !important;
+
   --ag-header-background-color: #003366 !important;
   --ag-header-foreground-color: #dbeafe !important;
   --ag-row-hover-color: #e0f2fe !important;
-  font-family: 'Segoe UI', sans-serif !important;
-  border-radius: 6px;
+}
+
+.ag-theme-alpine .ag-header-cell-label {
+  white-space: normal;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.ag-theme-alpine .ag-cell {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

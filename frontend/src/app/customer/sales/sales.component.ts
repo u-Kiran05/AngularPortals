@@ -28,7 +28,7 @@ export class SalesComponent implements OnInit {
       sortable: true,
       valueFormatter: formatNetValue
     },
-    { headerName: 'Currency', field: 'currency', filter: true, sortable: true }
+    //{ headerName: 'Currency', field: 'currency', filter: true, sortable: true }
   ];
 
   defaultColDef: ColDef = {

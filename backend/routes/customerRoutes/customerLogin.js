@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { callSapService } = require("D:\\PortalProject\\backend\\utils\\parser.js")
+const { callSapService } = require("D:\\PortalProject\\backend\\utils\\parser.js");
+//const redisClient = require('D:\\PortalProject\\backend\\utils\\redisClient.js');
 
 router.post('/login', async (req, res) => {
   const { customerId, password } = req.body;
@@ -32,7 +33,34 @@ router.post('/login', async (req, res) => {
     const message = rfcResponse.E_MESSAGE?.[0] || 'Unknown';
     const valid = rfcResponse.E_VALID?.[0] === 'Y';
 
-    res.json({ success: valid, message });
+    if (valid) {
+      const sessionData = {
+        id: customerId,
+        loginTime: new Date()
+      };
+
+      /*req.session.customer = sessionData;
+
+      try {
+        await redisClient.setEx(`session:${customerId}`, 3600, JSON.stringify(sessionData));
+        console.log(`Redis setEx success for session:${customerId}`);
+      } catch (redisError) {
+        console.error('Redis setEx error:', redisError.message);
+        return res.status(500).json({
+          success: false,
+          message: 'Failed to store session in Redis',
+          error: redisError.message
+        });
+      }
+
+      // Debug session store
+      console.log('Session data set:', req.session.customer);
+      console.log('Session ID:', req.sessionID);*/
+
+      return res.json({ success: true, message });
+    } else {
+      return res.json({ success: false, message });
+    }
 
   } catch (error) {
     console.error('LOGIN ERROR:', error.message);

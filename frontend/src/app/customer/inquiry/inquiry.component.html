@@ -2,11 +2,8 @@
   <h2>Customer Inquiries</h2>
   <br>
 
-  <!-- MASTER TABLE CARD -->
+  <!-- Master Table -->
   <div class="card">
-    <div class="card-header">
-      <h3>Inquiry List</h3>
-    </div>
     <div class="card-body">
       <ag-grid-angular
         class="ag-theme-alpine master-grid"
@@ -19,19 +16,22 @@
     </div>
   </div>
 
-  <!-- DETAIL TABLE CARD -->
-  <div *ngIf="selectedItems.length > 0" class="card detail-section">
-    <div class="card-header">
-      <h3>Items for Inquiry #{{ selectedInquiryNo }}</h3>
-    </div>
-    <div class="card-body">
-      <ag-grid-angular
-        class="ag-theme-alpine detail-grid"
-        [rowData]="selectedItems"
-        [columnDefs]="itemColumnDefs"
-        [defaultColDef]="defaultColDef"
-        domLayout="autoHeight">
-      </ag-grid-angular>
-    </div>
+  <!-- Popup Modal for Detail Table -->
+<div *ngIf="showDetailPopup" class="popup-overlay">
+  <div class="popup-content">
+    <!-- Close button aligned to top-right -->
+    <button class="close-btn" (click)="closeDetailPopup()">
+      <span class="material-icons">close</span>
+    </button>
+
+    <h3>Items for Inquiry #{{ selectedInquiryNo }}</h3>
+    <br>
+    <ag-grid-angular
+      class="ag-theme-alpine detail-grid"
+      [rowData]="selectedItems"
+      [columnDefs]="itemColumnDefs"
+      [defaultColDef]="defaultColDef"
+      domLayout="autoHeight">
+    </ag-grid-angular>
   </div>
 </div>

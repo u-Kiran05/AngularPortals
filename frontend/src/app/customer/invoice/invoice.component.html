@@ -1,1 +1,12 @@
-<p>invoice works!</p>
+<div class="delivery-container" *ngIf="rowData.length">
+  <h2>Customer Invoices Details</h2>
+  <br>
+  <ag-grid-angular
+    class="ag-theme-alpine grid-box"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    [defaultColDef]="defaultColDef"
+    rowSelection="single"
+    domLayout="autoHeight">
+  </ag-grid-angular>
+</div>
