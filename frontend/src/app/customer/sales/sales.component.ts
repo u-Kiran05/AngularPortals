@@ -10,32 +10,45 @@ import { ColDef } from 'ag-grid-community';
 })
 export class SalesComponent implements OnInit {
   rowData: any[] = [];
+  selectedItems: any[] = [];
+  selectedSalesNo: string = '';
   customerId: string = '';
+  showDetailPopup = false;
 
-  columnDefs: ColDef[] = [
-  { headerName: 'Sales Order No', field: 'salesOrderNo', headerClass: 'custom-header', filter: true, sortable: true },
-  { headerName: 'Document Type', field: 'docType', headerClass: 'custom-header', filter: true, sortable: true },
-  { headerName: 'Order Date', field: 'orderDate', headerClass: 'custom-header', filter: true, sortable: true },
-  { headerName: 'Sales Org', field: 'salesOrgName', headerClass: 'custom-header', filter: true, sortable: true },
-  { headerName: 'Dist. Channel', field: 'distChannel', headerClass: 'custom-header', filter: true, sortable: true },
-  { headerName: 'Division', field: 'division', headerClass: 'custom-header', filter: true, sortable: true },
-  { headerName: 'Material No', field: 'materialNo', headerClass: 'custom-header', filter: true, sortable: true },
-  { headerName: 'Description', field: 'description', headerClass: 'custom-header', filter: true, sortable: true },
-  {
-    headerName: 'Net Value',
-    field: 'netValue',
-    headerClass: 'custom-header',
-    filter: true,
-    sortable: true,
-    valueFormatter: formatNetValue
-  }
-  // { headerName: 'Currency', field: 'currency', headerClass: 'custom-header', filter: true, sortable: true }
-];
+  salesColumnDefs: ColDef[] = [
+    { headerName: 'Sales Order No', field: 'vbeln', headerClass: 'custom-header' },
+    { headerName: 'Created On', field: 'erdat', headerClass: 'custom-header' },
+    { headerName: 'Type', field: 'auart', headerClass: 'custom-header' },
+    {
+      headerName: 'Net Value',
+      field: 'netwr',
+      headerClass: 'custom-header',
+      valueFormatter: (params) => this.formatNetValue(params.value, params.data?.waerk)
+    },
+    { headerName: 'Currency', field: 'waerk', headerClass: 'custom-header' }
+  ];
 
+  itemColumnDefs: ColDef[] = [
+    { headerName: 'Item No', field: 'posnr', headerClass: 'custom-header' },
+    { headerName: 'Material No', field: 'matnr', headerClass: 'custom-header' },
+    { headerName: 'Description', field: 'arktx', headerClass: 'custom-header' },
+    { headerName: 'Quantity', field: 'kwmeng', headerClass: 'custom-header' },
+    { headerName: 'UOM', field: 'vrkme', headerClass: 'custom-header' },
+    {
+      headerName: 'Net Value',
+      field: 'netwr',
+      headerClass: 'custom-header',
+      valueFormatter: (params) => this.formatNetValue(params.value, params.data?.waerk)
+    },
+    { headerName: 'Currency', field: 'waerk', headerClass: 'custom-header' }
+  ];
 
   defaultColDef: ColDef = {
     flex: 1,
-    resizable: true
+    resizable: true,
+    sortable: true,
+    filter: true,
+    headerClass: 'custom-header'
   };
 
   constructor(private authService: AuthService) {}
@@ -51,28 +64,73 @@ export class SalesComponent implements OnInit {
   fetchCustomerSales(customerId: string): void {
     this.authService.getCustomerSales(customerId).subscribe({
       next: (res) => {
-        this.rowData = res.data || [];
+        const { headerData = [], itemData = [] } = res;
+        const itemsBySalesOrderNo: Record<string, any[]> = {};
+
+        itemData.forEach((item: any) => {
+          if (!itemsBySalesOrderNo[item.salesOrderNo]) {
+            itemsBySalesOrderNo[item.salesOrderNo] = [];
+          }
+          itemsBySalesOrderNo[item.salesOrderNo].push({
+            posnr: item.itemNo,
+            matnr: item.materialNo,
+            arktx: item.description,
+            netwr: item.netValue,
+            kwmeng: item.quantity,
+            vrkme: item.unit,
+            waerk: item.currency
+          });
+        });
+
+        this.rowData = headerData.map((header: any) => ({
+          vbeln: header.salesOrderNo,
+          auart: header.docType,
+          erdat: header.orderDate,
+          netwr: header.netValue,
+          waerk: header.currency,
+          items: itemsBySalesOrderNo[header.salesOrderNo] || []
+        }));
+
+        console.log('Final rowData for grid:', this.rowData);
       },
       error: (err) => {
-        console.error('Failed to load sales data:', err);
+        console.error('Failed to load sales orders:', err);
+        this.rowData = [];
       }
     });
   }
-}
 
-// 💡 Helper to format net value with currency symbol and locale formatting
-function formatNetValue(params: any): string {
-  const currency = params.data?.currency;
-  const value = parseFloat(params.value);
-  let symbol = '';
-
-  switch (currency) {
-    case 'USD': symbol = '$'; break;
-    case 'EUR': symbol = '€'; break;
-    case 'INR': symbol = '₹'; break;
-    case 'GBP': symbol = '£'; break;
-    default: symbol = currency + ' ';
+  onRowClicked(event: any): void {
+    this.selectedItems = event.data.items;
+    this.selectedSalesNo = event.data.vbeln;
+    this.showDetailPopup = true;
   }
 
-  return `${symbol}${value.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+  closeDetailPopup(): void {
+    this.showDetailPopup = false;
+  }
+
+  formatNetValue(value: any, currency: string): string {
+    if (!value) return '';
+    let symbol = '';
+
+    switch (currency) {
+      case 'USD':
+        symbol = '$';
+        break;
+      case 'INR':
+        symbol = '₹';
+        break;
+      case 'EUR':
+        symbol = '€';
+        break;
+      case 'GBP':
+        symbol = '£';
+        break;
+      default:
+        symbol = currency || '';
+    }
+
+    return `${symbol}${value}`;
+  }
 }

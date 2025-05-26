@@ -9,15 +9,17 @@ router.post('/delivery', async (req, res) => {
     return res.status(400).json({ success: false, message: 'Customer ID is required.' });
   }
 
+  // Updated SOAP envelope with correct RFC call and input structure
   const soapEnvelope = `
     <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"
                        xmlns:urn="urn:sap-com:document:sap:rfc:functions">
       <soap-env:Header/>
       <soap-env:Body>
-        <urn:ZFM_CUDELIVERY>
+        <urn:ZFM_CDELIVERY>
           <I_CUSTOMER_ID>${customerId}</I_CUSTOMER_ID>
-          <T_DELIVERIES/>
-        </urn:ZFM_CUDELIVERY>
+          <T_HEADER/>
+          <T_ITEMS/>
+        </urn:ZFM_CDELIVERY>
       </soap-env:Body>
     </soap-env:Envelope>`;
 
@@ -25,23 +27,39 @@ router.post('/delivery', async (req, res) => {
     const rfcResponse = await callSapService({
       url: process.env.SAP_CDELIVERY_URL?.trim(),
       soapEnvelope,
-      soapAction: 'urn:sap-com:document:sap:rfc:functions:ZFM_CUDELIVERY',
-      rfcFunction: 'ZFM_CUDELIVERY'
+      soapAction: 'urn:sap-com:document:sap:rfc:functions:ZFM_CDELIVERY',
+      rfcFunction: 'ZFM_CDELIVERY'
     });
 
-    const deliveries = rfcResponse.T_DELIVERIES?.[0]?.item || [];
-
-    const formattedDeliveries = deliveries.map(d => ({
-      vbeln: d.VBELN?.[0] || '',
-      erdat: d.ERDAT?.[0] || '',
-      kunnr: d.KUNNR?.[0] || '',
-      matnr: d.MATNR?.[0] || '',
-      arktx: d.ARKTX?.[0] || '',
-      lfimg: d.LFIMG?.[0] || '',
-      meins: d.MEINS?.[0] || ''
+    // Extract and format T_HEADER (Delivery Headers)
+    const headers = rfcResponse.T_HEADER?.[0]?.item || [];
+    const formattedHeaders = headers.map(h => ({
+      vbeln: h.VBELN?.[0] || '',
+      erdat: h.ERDAT?.[0] || '',
+      lfdat: h.LFDAT?.[0] || '',
+      vstel: h.VSTEL?.[0] || '',
+      route: h.ROUTE?.[0] || '',
+      waerk: h.WAERK?.[0] || ''
     }));
 
-    res.json({ success: true, data: formattedDeliveries });
+    // Extract and format T_ITEMS (Delivery Items)
+    const items = rfcResponse.T_ITEMS?.[0]?.item || [];
+    const formattedItems = items.map(i => ({
+      vbeln: i.VBELN?.[0] || '',
+      posnr: i.POSNR?.[0] || '',
+      matnr: i.MATNR?.[0] || '',
+      arktx: i.ARKTX?.[0] || '',
+      lfimg: i.LFIMG?.[0] || ''
+    }));
+
+    // Respond with both headers and items
+    res.json({
+      success: true,
+      data: {
+        headers: formattedHeaders,
+        items: formattedItems
+      }
+    });
 
   } catch (error) {
     console.error('DELIVERY ERROR:', error.message);

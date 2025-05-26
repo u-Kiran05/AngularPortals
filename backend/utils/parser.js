@@ -39,6 +39,10 @@ async function callSapService({ url, soapEnvelope, soapAction, rfcFunction }) {
     return body[rfcTag][0];
   } catch (error) {
     console.error('SAP Call Error:', error.message, error.stack);
+     if (error.response) {
+    console.error('Status:', error.response.status);
+    console.error('Response Data:', error.response.data); // Log the raw SAP error
+  }
     throw error;
   }
 }

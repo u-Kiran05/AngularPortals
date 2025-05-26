@@ -1,7 +1,5 @@
 .sales-container {
-  padding: 0;
-  background-color: transparent;
-  max-width: 100%;
+  padding: 20px;
   ::ng-deep {
     .custom-header {
       background-color: rgb(255, 240, 235) !important;
@@ -14,29 +12,44 @@
   }
 }
 
-.grid-wrapper {
+.master-grid {
   width: 100%;
-  height: 450px; 
-  overflow: hidden; 
+  height: 450px;
 }
 
-.ag-theme-alpine {
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  font-family: 'Segoe UI', sans-serif !important;
-
-  --ag-header-background-color: #003366 !important;
-  --ag-header-foreground-color: #dbeafe !important;
-  --ag-row-hover-color: #e0f2fe !important;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-.ag-theme-alpine .ag-header-cell-label {
-  white-space: normal;
-  text-overflow: ellipsis;
-  overflow: hidden;
+.popup-content {
+  position: relative;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-height: 80%;
+  max-width: 90%;
+  width: 950px;
+  overflow-y: auto;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-.ag-theme-alpine .ag-cell {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  .material-icons {
+    font-size: 24px;
+  }
 }

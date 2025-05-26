@@ -1,15 +1,38 @@
-<div class="delivery-container" *ngIf="rowData.length">
-  <h2>Customer Delivery Details</h2>
+<div class="delivery-container">
+  <h2>Customer Deliveries</h2>
   <br>
-  <div class="grid-wrapper">
-    <ag-grid-angular
-      class="ag-theme-alpine"
-      [rowData]="rowData"
-      [columnDefs]="columnDefs"
-      [defaultColDef]="defaultColDef"
-      rowSelection="single"
-      style="width: 100%; height: 440px;"
-      domLayout="normal"> 
-    </ag-grid-angular>
+
+  <!-- Master Table -->
+  <div class="card">
+    <div class="card-body">
+      <ag-grid-angular
+        class="ag-theme-alpine master-grid"
+        [rowData]="rowData"
+        [columnDefs]="deliveryColumnDefs"
+        [defaultColDef]="defaultColDef"
+        rowSelection="single"
+        (rowClicked)="onRowClicked($event)"
+        style="width: 100%; height: 500px;">  <!-- ✅ Explicit height -->
+      </ag-grid-angular>
+    </div>
+  </div>
+
+  <!-- Popup Modal for Detail Table -->
+  <div *ngIf="showDetailPopup" class="popup-overlay">
+    <div class="popup-content">
+      <button class="close-btn" (click)="closeDetailPopup()">
+        <span class="material-icons">close</span>
+      </button>
+
+      <h3>Items for Delivery #{{ selectedDeliveryNo }}</h3>
+      <br>
+      <ag-grid-angular
+        class="ag-theme-alpine detail-grid"
+        [rowData]="selectedItems"
+        [columnDefs]="itemColumnDefs"
+        [defaultColDef]="defaultColDef"
+        style="width: 100%; height: 300px;">  <!-- ✅ Explicit height -->
+      </ag-grid-angular>
+    </div>
   </div>
 </div>

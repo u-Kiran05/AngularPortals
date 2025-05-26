@@ -1,15 +1,37 @@
-<div class="sales-container" *ngIf="rowData.length">
+<div class="sales-container">
   <h2>Customer Sales Orders</h2>
   <br>
-  <div class="grid-wrapper">
-    <ag-grid-angular
-      class="ag-theme-alpine"
-      [rowData]="rowData"
-      [columnDefs]="columnDefs"
-      [defaultColDef]="defaultColDef"
-      rowSelection="single"
-      style="width: 100%; height: 440px;"
-      domLayout="normal"> <!-- Needed for scrolling inside grid -->
-    </ag-grid-angular>
+
+  <!-- Master Table -->
+  <div class="card">
+    <div class="card-body">
+      <ag-grid-angular
+        class="ag-theme-alpine master-grid"
+        [rowData]="rowData"
+        [columnDefs]="salesColumnDefs"
+        [defaultColDef]="defaultColDef"
+        rowSelection="single"
+        (rowClicked)="onRowClicked($event)">
+      </ag-grid-angular>
+    </div>
+  </div>
+
+  <!-- Popup Modal for Detail Table -->
+  <div *ngIf="showDetailPopup" class="popup-overlay">
+    <div class="popup-content">
+      <button class="close-btn" (click)="closeDetailPopup()">
+        <span class="material-icons">close</span>
+      </button>
+
+      <h3>Items for Sales Order #{{ selectedSalesNo }}</h3>
+      <br>
+      <ag-grid-angular
+        class="ag-theme-alpine detail-grid"
+        [rowData]="selectedItems"
+        [columnDefs]="itemColumnDefs"
+        [defaultColDef]="defaultColDef"
+        domLayout="autoHeight">
+      </ag-grid-angular>
+    </div>
   </div>
 </div>
