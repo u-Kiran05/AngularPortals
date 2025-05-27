@@ -11,7 +11,6 @@ import { PaymentComponent } from './payment/payment.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { ModuleRegistry, AllCommunityModule } from 'ag-grid-community';
 import { InquiryComponent } from './inquiry/inquiry.component';
-    
 ModuleRegistry.registerModules([ AllCommunityModule ]);
 @NgModule({
   declarations: [

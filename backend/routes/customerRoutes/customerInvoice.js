@@ -16,7 +16,8 @@ router.post('/invoice', async (req, res) => {
       <soap-env:Body>
         <urn:ZFM_CINVOICE>
           <I_CUSTOMER_ID>${customerId}</I_CUSTOMER_ID>
-          <T_INVOICES/>
+          <T_HEADER/>
+          <T_ITEMS/>
         </urn:ZFM_CINVOICE>
       </soap-env:Body>
     </soap-env:Envelope>`;
@@ -29,23 +30,30 @@ router.post('/invoice', async (req, res) => {
       rfcFunction: 'ZFM_CINVOICE'
     });
 
-    const invoices = rfcResponse.T_INVOICES?.[0]?.item || [];
+    const headers = rfcResponse.T_HEADER?.[0]?.item || [];
+    const items = rfcResponse.T_ITEMS?.[0]?.item || [];
 
-    const formattedInvoices = invoices.map(inv => ({
-      vbeln: inv.VBELN?.[0] || '',
-      fkdat: inv.FKDAT?.[0] || '',
-      netwr: inv.NETWR?.[0] || '',
-      waerk: inv.WAERK?.[0] || '',
-      knumv: inv.KNUMV?.[0] || '',
-      fkart: inv.FKART?.[0] || '',
-      posnr: inv.POSNR?.[0] || '',
-      matnr: inv.MATNR?.[0] || '',
-      arktx: inv.ARKTX?.[0] || '',
-      fkimg: inv.FKIMG?.[0] || '',
-      vrkme: inv.VRKME?.[0] || ''
-    }));
+    const formattedData = {
+      headers: headers.map(header => ({
+        vbeln: header.VBELN?.[0] || '',
+        fkdat: header.FKDAT?.[0] || '',
+        netwr: header.NETWR?.[0] || '',
+        waerk: header.WAERK?.[0] || '',
+        erdat: header.ERDAT?.[0] || '',
+        bukrs: header.BUKRS?.[0] || ''
+      })),
+      items: items.map(item => ({
+        vbeln: item.VBELN?.[0] || '',
+        posnr: item.POSNR?.[0] || '',
+        matnr: item.MATNR?.[0] || '',
+        arktx: item.ARKTX?.[0] || '',
+        fkimg: item.FKIMG?.[0] || '',
+        vrkme: item.VRKME?.[0] || '',
+        netwr: item.NETWR?.[0] || ''
+      }))
+    };
 
-    res.json({ success: true, data: formattedInvoices });
+    res.json({ success: true, data: formattedData });
 
   } catch (error) {
     console.error('INVOICE ERROR:', error.message);

@@ -3,24 +3,28 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatIconModule } from '@angular/material/icon'; // Add MatIconModule
+import { MatIconModule } from '@angular/material/icon'; 
 import { LayoutComponent } from './layout/layout.component';
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileCardComponent } from './profile/profile.component';
 import { MatDividerModule } from '@angular/material/divider';
-import { SalesComponent } from '../customer/sales/sales.component';
+import { TablewithItemsComponent } from './tablewith-items/tablewith-items.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { ModuleRegistry, AllCommunityModule } from 'ag-grid-community';
+ModuleRegistry.registerModules([ AllCommunityModule ]);
 @NgModule({
   declarations: [
-    LayoutComponent,ProfileComponent,
+    LayoutComponent,ProfileCardComponent,TablewithItemsComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     MatButtonModule,
     MatTooltipModule,
-    MatIconModule,MatDividerModule // Include MatIconModule
+    MatIconModule,MatDividerModule,AgGridModule,
   ],
   exports: [
-    ProfileComponent,
+    TablewithItemsComponent,
+    ProfileCardComponent,
     LayoutComponent,
     CommonModule,
     MatButtonModule,

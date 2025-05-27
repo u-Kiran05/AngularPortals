@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProfileCardComponent } from './profile.component';
+import { AgTableComponent } from './ag-table.component';
 
-describe('ProfileComponent', () => {
-  let component: ProfileCardComponent;
-  let fixture: ComponentFixture<ProfileCardComponent>;
+describe('AgTableComponent', () => {
+  let component: AgTableComponent;
+  let fixture: ComponentFixture<AgTableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProfileCardComponent]
+      imports: [AgTableComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ProfileCardComponent);
+    fixture = TestBed.createComponent(AgTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

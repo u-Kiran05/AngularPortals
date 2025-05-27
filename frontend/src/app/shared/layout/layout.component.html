@@ -49,26 +49,8 @@
         </button>
       </div>
 
-      <div class="profile-card mat-elevation-z4" *ngIf="showProfileCard">
-        <div class="profile-header">
-          <mat-icon class="profile-avatar">{{ getRoleIcon() }}</mat-icon>
-          <div>
-            <ng-container *ngIf="customerProfile">
-              <h3><span>{{ customerProfile.name }}</span></h3>
-            </ng-container>
-            <small>{{ user?.role }}</small>
-          </div>
-        </div>
-        <mat-divider></mat-divider>
-        <div class="profile-info">
-          <p><mat-icon>badge</mat-icon> <span>ID: {{ user?.id }}</span></p>
-          <ng-container *ngIf="customerProfile">
-            <p><mat-icon>location_on</mat-icon> <span>{{ customerProfile.street }}, {{ customerProfile.city }}</span></p>
-            <p><mat-icon>flag</mat-icon> <span>{{ customerProfile.country }} - {{ customerProfile.postalCode }}</span></p>
-          </ng-container>
-          <p><mat-icon>schedule</mat-icon> <span>Last login: {{ user?.lastLogin | date:'short' }}</span></p>
-        </div>
-      </div>
+
+      <app-profile [showProfileCard]="showProfileCard"></app-profile>
     </header>
 
     <main class="content">

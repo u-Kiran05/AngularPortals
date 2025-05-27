@@ -1,37 +1,10 @@
 <div class="sales-container">
-  <h2>Customer Sales Orders</h2>
-  <br>
-
-  <!-- Master Table -->
-  <div class="card">
-    <div class="card-body">
-      <ag-grid-angular
-        class="ag-theme-alpine master-grid"
-        [rowData]="rowData"
-        [columnDefs]="salesColumnDefs"
-        [defaultColDef]="defaultColDef"
-        rowSelection="single"
-        (rowClicked)="onRowClicked($event)">
-      </ag-grid-angular>
-    </div>
-  </div>
-
-  <!-- Popup Modal for Detail Table -->
-  <div *ngIf="showDetailPopup" class="popup-overlay">
-    <div class="popup-content">
-      <button class="close-btn" (click)="closeDetailPopup()">
-        <span class="material-icons">close</span>
-      </button>
-
-      <h3>Items for Sales Order #{{ selectedSalesNo }}</h3>
-      <br>
-      <ag-grid-angular
-        class="ag-theme-alpine detail-grid"
-        [rowData]="selectedItems"
-        [columnDefs]="itemColumnDefs"
-        [defaultColDef]="defaultColDef"
-        domLayout="autoHeight">
-      </ag-grid-angular>
-    </div>
-  </div>
+  <h2>Customer Sales</h2>
+  <app-tablewith-items
+    [rowData]="rowData"
+    [columnDefs]="salesColumnDefs"
+    [itemColumnDefs]="itemColumnDefs"
+    [defaultColDef]="defaultColDef"
+    [popupTitle]="'Items for sales'">
+  </app-tablewith-items>
 </div>

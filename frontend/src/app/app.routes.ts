@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from './services/authg.guard';
 import { LoginComponent } from './auth/login/login.component';
 import { CustomerComponent } from './customer/customer.component';
 import { VendorComponent } from './vendor/vendor.component';
@@ -9,7 +10,7 @@ import { InvoiceComponent } from './customer/invoice/invoice.component';
 import { PaymentComponent } from './customer/payment/payment.component';
 import { CreditComponent } from './customer/credit/credit.component';
 import { CdashboardComponent } from './customer/cdashboard/cdashboard.component';
-import { ProfileComponent } from './shared/profile/profile.component';
+import { ProfileCardComponent } from './shared/profile/profile.component';
 import { VdashboardComponent } from './vendor/vdashboard/vdashboard.component';
 import { VfinanceComponent } from './vendor/vfinance/vfinance.component';
 import { EmployeeComponent } from './employee/employee.component';
@@ -20,7 +21,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: 'customer',
-    component: CustomerComponent,
+    component: CustomerComponent,  canActivate: [AuthGuard] ,
     children: [
       { path: 'cdashboard', component:CdashboardComponent},
       { path: 'inquiry', component: InquiryComponent },
@@ -32,14 +33,14 @@ export const routes: Routes = [
       { path: '', redirectTo: 'cdashboard', pathMatch: 'full' }
     ]
   },
-  { path: 'vendor', component: VendorComponent,
+  { path: 'vendor', component: VendorComponent,  canActivate: [AuthGuard] ,
     children:[
       { path: 'vdashboard', component:VdashboardComponent},
       { path: 'vfinance', component: VfinanceComponent },
       { path: '', redirectTo: 'vdashboard', pathMatch: 'full' }
     ]
    },
-   { path: 'employee', component: EmployeeComponent,
+   { path: 'employee', component: EmployeeComponent, canActivate: [AuthGuard] ,
     children:[
       { path: 'edashboard', component:EdashboardComponent},
       
@@ -47,6 +48,6 @@ export const routes: Routes = [
     ]
    },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'profile', component: ProfileComponent }
+  { path: 'profile', component: ProfileCardComponent }
 
 ];

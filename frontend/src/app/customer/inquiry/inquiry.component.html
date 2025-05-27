@@ -1,37 +1,11 @@
 <div class="inquiry-container">
-  <h2>Customer Inquiries</h2>
-  <br>
-
-  <!-- Master Table -->
-  <div class="card">
-    <div class="card-body">
-      <ag-grid-angular
-        class="ag-theme-alpine master-grid"
-        [rowData]="rowData"
-        [columnDefs]="inquiryColumnDefs"
-        [defaultColDef]="defaultColDef"
-        rowSelection="single"
-        (rowClicked)="onRowClicked($event)">
-      </ag-grid-angular>
-    </div>
-  </div>
-
-  <!-- Popup Modal for Detail Table -->
-<div *ngIf="showDetailPopup" class="popup-overlay">
-  <div class="popup-content">
-    <!-- Close button aligned to top-right -->
-    <button class="close-btn" (click)="closeDetailPopup()">
-      <span class="material-icons">close</span>
-    </button>
-
-    <h3>Items for Inquiry #{{ selectedInquiryNo }}</h3>
-    <br>
-    <ag-grid-angular
-      class="ag-theme-alpine detail-grid"
-      [rowData]="selectedItems"
-      [columnDefs]="itemColumnDefs"
-      [defaultColDef]="defaultColDef"
-      domLayout="autoHeight">
-    </ag-grid-angular>
-  </div>
+  <h2>Customer Inquires</h2>
+  
+  <app-tablewith-items
+    [rowData]="rowData"
+    [columnDefs]="inquiryColumnDefs"
+    [itemColumnDefs]="itemColumnDefs"
+    [defaultColDef]="defaultColDef"
+    [popupTitle]="'Items for Inquiry'">
+  </app-tablewith-items>
 </div>

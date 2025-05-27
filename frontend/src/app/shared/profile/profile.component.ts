@@ -1,31 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-profile',
-  standalone: false,
+  standalone:false,
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileCardComponent implements OnInit {
+  @Input() showProfileCard: boolean = false;
   user: any;
-  profile: any;
+  customerProfile: any;
 
   constructor(private authService: AuthService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.user = this.authService.getUserInfo();
 
     if (this.user?.role === 'Customer') {
-      this.authService.getCustomerProfile(this.user.id).subscribe(
-        (data) => {
-          this.profile = data;
-        },
-        () => {
-          this.profile = null;
-          alert('Failed to fetch customer profile.');
-        }
+      this.authService.getCustomerProfile().subscribe(
+        (profile) => this.customerProfile = profile,
+        () => this.customerProfile = null
       );
     }
+  }
+
+  getRoleIcon(): string {
+    const role = this.user?.role?.toLowerCase();
+    if (role === 'vendor') return 'store';
+    if (role === 'employee') return 'engineering';
+    return 'person';
   }
 }
