@@ -25,21 +25,11 @@ export class LayoutComponent implements OnInit {
   isDarkMode = false;
   showProfileCard = false;
   selectedMenu: string = ''; // Added for selection effect
-  user: any;
-  customerProfile: any;
 
   constructor(public authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.user = this.authService.getUserInfo();
     this.selectedMenu = this.router.url;  // Initialize from URL
-
-    if (this.user?.role === 'Customer') {
-      this.authService.getCustomerProfile(this.user.id).subscribe(
-        (profile) => this.customerProfile = profile,
-        () => this.customerProfile = null
-      );
-    }
   }
 
   toggleSidebar(): void {
@@ -55,8 +45,7 @@ export class LayoutComponent implements OnInit {
   }
 
   handleLogout(): void {
-    localStorage.clear();
-    sessionStorage.clear();
+    this.authService.clearUserInfo();
     this.router.navigate(['/login']);
   }
 
@@ -66,17 +55,10 @@ export class LayoutComponent implements OnInit {
     this.router.navigate([link]);
   }
 
-  getRoleIcon(): string {
-    const role = this.user?.role?.toLowerCase();
-    if (role === 'vendor') return 'store';
-    if (role === 'employee') return 'engineering';
-    return 'person';
-  }
-
   @HostListener('document:click', ['$event'])
   onClickOutside(event: MouseEvent): void {
     const target = event.target as HTMLElement;
-    const insideCard = target.closest('.profile-card') || target.closest('button[mat-icon-button]');
+    const insideCard = target.closest('app-profile-card') || target.closest('button[mat-icon-button]');
     if (!insideCard) this.showProfileCard = false;
   }
 }

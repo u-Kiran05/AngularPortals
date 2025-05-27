@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProfileCardComponent } from './profile.component';
+import { TablewithItemsComponent } from './tablewith-items.component';
 
-describe('ProfileComponent', () => {
-  let component: ProfileCardComponent;
-  let fixture: ComponentFixture<ProfileCardComponent>;
+describe('TablewithItemsComponent', () => {
+  let component: TablewithItemsComponent;
+  let fixture: ComponentFixture<TablewithItemsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProfileCardComponent]
+      imports: [TablewithItemsComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ProfileCardComponent);
+    fixture = TestBed.createComponent(TablewithItemsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -32,7 +32,6 @@ router.post('/sales', async (req, res) => {
       rfcFunction: 'ZFM_CSALES'
     });
 
-    // Extract header and item arrays
     const headerItems = rfcResponse?.T_HEADER?.[0]?.item || [];
     const itemItems = rfcResponse?.T_ITEMS?.[0]?.item || [];
 
@@ -57,7 +56,7 @@ router.post('/sales', async (req, res) => {
       currency: item.WAERK?.[0] || ''
     }));
 
-    // Send the combined response
+
     res.json({
       success: true,
       headerData: formattedHeaders,

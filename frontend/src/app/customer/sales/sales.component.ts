@@ -4,43 +4,38 @@ import { ColDef } from 'ag-grid-community';
 
 @Component({
   selector: 'app-sales',
-  standalone: false,
+  standalone:false,
   templateUrl: './sales.component.html',
   styleUrls: ['./sales.component.scss']
 })
 export class SalesComponent implements OnInit {
   rowData: any[] = [];
-  selectedItems: any[] = [];
-  selectedSalesNo: string = '';
   customerId: string = '';
-  showDetailPopup = false;
 
   salesColumnDefs: ColDef[] = [
-    { headerName: 'Sales Order No', field: 'vbeln', headerClass: 'custom-header' },
-    { headerName: 'Created On', field: 'erdat', headerClass: 'custom-header' },
-    { headerName: 'Type', field: 'auart', headerClass: 'custom-header' },
+    { headerName: 'Sales Order No', field: 'vbeln' },
+    { headerName: 'Created On', field: 'erdat' },
+    { headerName: 'Type', field: 'auart' },
     {
       headerName: 'Net Value',
       field: 'netwr',
-      headerClass: 'custom-header',
       valueFormatter: (params) => this.formatNetValue(params.value, params.data?.waerk)
     },
-    { headerName: 'Currency', field: 'waerk', headerClass: 'custom-header' }
+    { headerName: 'Currency', field: 'waerk' }
   ];
 
   itemColumnDefs: ColDef[] = [
-    { headerName: 'Item No', field: 'posnr', headerClass: 'custom-header' },
-    { headerName: 'Material No', field: 'matnr', headerClass: 'custom-header' },
-    { headerName: 'Description', field: 'arktx', headerClass: 'custom-header' },
-    { headerName: 'Quantity', field: 'kwmeng', headerClass: 'custom-header' },
-    { headerName: 'UOM', field: 'vrkme', headerClass: 'custom-header' },
+    { headerName: 'Item No', field: 'posnr' },
+    { headerName: 'Material No', field: 'matnr' },
+    { headerName: 'Description', field: 'arktx' },
+    { headerName: 'Quantity', field: 'kwmeng' },
+    { headerName: 'UOM', field: 'vrkme' },
     {
       headerName: 'Net Value',
       field: 'netwr',
-      headerClass: 'custom-header',
       valueFormatter: (params) => this.formatNetValue(params.value, params.data?.waerk)
     },
-    { headerName: 'Currency', field: 'waerk', headerClass: 'custom-header' }
+    { headerName: 'Currency', field: 'waerk' }
   ];
 
   defaultColDef: ColDef = {
@@ -62,7 +57,7 @@ export class SalesComponent implements OnInit {
   }
 
   fetchCustomerSales(customerId: string): void {
-    this.authService.getCustomerSales(customerId).subscribe({
+    this.authService.getCustomerSales().subscribe({
       next: (res) => {
         const { headerData = [], itemData = [] } = res;
         const itemsBySalesOrderNo: Record<string, any[]> = {};
@@ -90,8 +85,6 @@ export class SalesComponent implements OnInit {
           waerk: header.currency,
           items: itemsBySalesOrderNo[header.salesOrderNo] || []
         }));
-
-        console.log('Final rowData for grid:', this.rowData);
       },
       error: (err) => {
         console.error('Failed to load sales orders:', err);
@@ -100,35 +93,16 @@ export class SalesComponent implements OnInit {
     });
   }
 
-  onRowClicked(event: any): void {
-    this.selectedItems = event.data.items;
-    this.selectedSalesNo = event.data.vbeln;
-    this.showDetailPopup = true;
-  }
-
-  closeDetailPopup(): void {
-    this.showDetailPopup = false;
-  }
-
   formatNetValue(value: any, currency: string): string {
     if (!value) return '';
     let symbol = '';
 
     switch (currency) {
-      case 'USD':
-        symbol = '$';
-        break;
-      case 'INR':
-        symbol = '₹';
-        break;
-      case 'EUR':
-        symbol = '€';
-        break;
-      case 'GBP':
-        symbol = '£';
-        break;
-      default:
-        symbol = currency || '';
+      case 'USD': symbol = '$'; break;
+      case 'INR': symbol = '₹'; break;
+      case 'EUR': symbol = '€'; break;
+      case 'GBP': symbol = '£'; break;
+      default: symbol = currency || '';
     }
 
     return `${symbol}${value}`;

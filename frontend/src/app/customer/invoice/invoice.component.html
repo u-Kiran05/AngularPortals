@@ -1,12 +1,10 @@
-<div class="invoice-container" *ngIf="rowData.length">
-  <h2>Customer Invoices Details</h2>
-  <br>
-  <ag-grid-angular
-    class="ag-theme-alpine grid-box"
+<div class="invoice-container">
+  <h2>Customer Invoices</h2>
+  <app-tablewith-items
     [rowData]="rowData"
-    [columnDefs]="columnDefs"
+    [columnDefs]="invoiceColumnDefs"
+    [itemColumnDefs]="itemColumnDefs"
     [defaultColDef]="defaultColDef"
-    rowSelection="single"
-    domLayout="autoHeight">
-  </ag-grid-angular>
+    [popupTitle]="'Items for invoice'">
+  </app-tablewith-items>
 </div>

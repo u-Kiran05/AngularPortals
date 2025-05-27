@@ -8,45 +8,90 @@ import { Observable } from 'rxjs';
 export class AuthService {
   private userInfo: any = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    // Load user info from localStorage
+    const storedUser = localStorage.getItem('userInfo');
+    if (storedUser) {
+      this.userInfo = JSON.parse(storedUser);
+    }
+  }
 
   setUserInfo(user: any) {
     this.userInfo = user;
+    localStorage.setItem('userInfo', JSON.stringify(user));
   }
 
   getUserInfo() {
+    if (!this.userInfo) {
+      const storedUser = localStorage.getItem('userInfo');
+      if (storedUser) {
+        this.userInfo = JSON.parse(storedUser);
+      }
+    }
     return this.userInfo;
   }
 
-    getCustomerProfile(customerId: string): Observable<any> {
-    return this.http.post('http://localhost:3000/api/customer/profile', {
-      customerId
-    });
+  clearUserInfo() {
+    this.userInfo = null;
+    localStorage.removeItem('userInfo');
   }
-  getCustomerSales(customerId: string): Observable<any> {
-    return this.http.post('http://localhost:3000/api/customer/sales', {
-      customerId
-    });
+
+  isLoggedIn() {
+    return !!this.getUserInfo();
   }
-  getCustomerInquiries(customerId: string): Observable<any> {
-    return this.http.post('http://localhost:3000/api/customer/inquiry', {
-      customerId
-    });
-  }
-  getCustomerDeliveries(customerId: string): Observable<any> {
-    return this.http.post('http://localhost:3000/api/customer/delivery', {
-      customerId
-    });
-  }
-  getCustomerInvoices(customerId: string): Observable<any> {
-    return this.http.post('http://localhost:3000/api/customer/invoice', {
-      customerId
-    });
-  }
+
   validateCustomerLogin(customerId: string, password: string): Observable<any> {
-    return this.http.post('http://localhost:3000/api/customer/login', {
-      customerId,
-      password
+    return this.http.post('http://localhost:3000/api/customer/login', { customerId, password });
+  }
+
+  // Example of using stored user info in a service call
+  getCustomerProfile(): Observable<any> {
+    const user = this.getUserInfo();
+    if (!user || !user.id) {
+      throw new Error('User not logged in');
+    }
+    return this.http.post('http://localhost:3000/api/customer/profile', {
+      customerId: user.id
+    });
+  }
+
+  getCustomerSales(): Observable<any> {
+    const user = this.getUserInfo();
+    if (!user || !user.id) {
+      throw new Error('User not logged in');
+    }
+    return this.http.post('http://localhost:3000/api/customer/sales', {
+      customerId: user.id
+    });
+  }
+
+  getCustomerInquiries(): Observable<any> {
+    const user = this.getUserInfo();
+    if (!user || !user.id) {
+      throw new Error('User not logged in');
+    }
+    return this.http.post('http://localhost:3000/api/customer/inquiry', {
+      customerId: user.id
+    });
+  }
+
+  getCustomerDeliveries(): Observable<any> {
+    const user = this.getUserInfo();
+    if (!user || !user.id) {
+      throw new Error('User not logged in');
+    }
+    return this.http.post('http://localhost:3000/api/customer/delivery', {
+      customerId: user.id
+    });
+  }
+
+  getCustomerInvoices(): Observable<any> {
+    const user = this.getUserInfo();
+    if (!user || !user.id) {
+      throw new Error('User not logged in');
+    }
+    return this.http.post('http://localhost:3000/api/customer/invoice', {
+      customerId: user.id
     });
   }
 }
