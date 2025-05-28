@@ -13,4 +13,5 @@ export class AppComponent {
   constructor(private titleService: Title) {
     this.titleService.setTitle(this.title);
   }
+  
 }
