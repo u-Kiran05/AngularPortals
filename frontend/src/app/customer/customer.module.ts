@@ -11,6 +11,8 @@ import { PaymentComponent } from './payment/payment.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { ModuleRegistry, AllCommunityModule } from 'ag-grid-community';
 import { InquiryComponent } from './inquiry/inquiry.component';
+import { CreditComponent } from './credit/credit.component';
+import { FormsModule } from '@angular/forms';
 ModuleRegistry.registerModules([ AllCommunityModule ]);
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ ModuleRegistry.registerModules([ AllCommunityModule ]);
     SalesComponent,
     DeliveryComponent,
     CdashboardComponent,
+    CreditComponent,
     InvoiceComponent,
     PaymentComponent,
     InquiryComponent
@@ -26,7 +29,7 @@ ModuleRegistry.registerModules([ AllCommunityModule ]);
     CommonModule,
     RouterModule,
     SharedModule ,
-     AgGridModule,
+     AgGridModule,FormsModule,
   ]
 })
 export class CustomerModule { }

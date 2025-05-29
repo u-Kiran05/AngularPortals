@@ -1,0 +1,13 @@
+/* Minimal custom styling, you can expand this as needed */
+.ag-theme-alpine {
+  width: 100%;
+  
+   border-radius: 8px;
+  height: calc(100vh - 50px); 
+}
+
+.custom-header {
+  background-color: rgb(255, 240, 235);
+  font-weight: 600;
+  color: #333;
+}

@@ -10,10 +10,11 @@ import { MatDividerModule } from '@angular/material/divider';
 import { TablewithItemsComponent } from './tablewith-items/tablewith-items.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { ModuleRegistry, AllCommunityModule } from 'ag-grid-community';
+import { AgTableComponent } from './ag-table/ag-table.component';
 ModuleRegistry.registerModules([ AllCommunityModule ]);
 @NgModule({
   declarations: [
-    LayoutComponent,ProfileCardComponent,TablewithItemsComponent,
+    LayoutComponent,ProfileCardComponent,TablewithItemsComponent,AgTableComponent,
   ],
   imports: [
     CommonModule,

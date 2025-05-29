@@ -54,6 +54,36 @@ export class AuthService {
       customerId: user.id
     });
   }
+  getCustomerCandD(): Observable<any> {
+    const user = this.getUserInfo();
+    if (!user || !user.id) {
+      throw new Error('User not logged in');
+    }
+    return this.http.post('http://localhost:3000/api/customer/cand', {
+      customerId: user.id
+    });
+  }
+  getCustomerAging(): Observable<any> {
+    const user = this.getUserInfo();
+    if (!user || !user.id) {
+      throw new Error('User not logged in');
+    }
+    return this.http.post('http://localhost:3000/api/customer/aging', {
+      customerId: user.id
+    });
+  }
+    downloadInvoicePDF(vbeln: string): Observable<Blob> {
+    const user = this.getUserInfo();
+    if (!user || !user.id) {
+      throw new Error('User not logged in');
+    }
+    const customerId = user.id; // Retrieved from AuthService
+
+    return this.http.post('http://localhost:3000/api/customer/invoice/download', 
+      { customerId, vbeln }, 
+      { responseType: 'blob' } // Important: expects binary Blob
+    );
+  }
 
   getCustomerSales(): Observable<any> {
     const user = this.getUserInfo();
@@ -94,4 +124,5 @@ export class AuthService {
       customerId: user.id
     });
   }
+  
 }

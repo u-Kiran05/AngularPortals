@@ -1,1 +1,14 @@
-<p>payment works!</p>
+<div class="payment-container">
+  <h2>Customer Payment Details</h2>
+  
+  <ag-grid-angular
+    style="width: 100%; height: 450px;"
+    class="ag-theme-alpine"
+    [rowData]="rowData"
+    [columnDefs]="agingColumnDefs"
+ 
+    rowSelection="single"
+   
+    >
+  </ag-grid-angular>
+</div>

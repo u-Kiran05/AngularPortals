@@ -1,16 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { ColDef } from 'ag-grid-community';
+import { saveAs } from 'file-saver';  // Make sure you have file-saver installed
 
 @Component({
   selector: 'app-invoice',
-  standalone:false,
+  standalone: false,
   templateUrl: './invoice.component.html',
   styleUrls: ['./invoice.component.scss']
 })
 export class InvoiceComponent implements OnInit {
   rowData: any[] = [];
   customerId: string = '';
+  selectedRow: any = null;
+  selectedItems: any[] = [];
+  showDetailPopup: boolean = false;
+  popupTitle: string = 'Items for invoice';
 
   invoiceColumnDefs: ColDef[] = [
     { headerName: 'Invoice No', field: 'vbeln' },
@@ -19,6 +24,7 @@ export class InvoiceComponent implements OnInit {
     { headerName: 'Currency', field: 'waerk' },
     { headerName: 'Company Code', field: 'bukrs' },
     { headerName: 'Created On', field: 'erdat' }
+    
   ];
 
   itemColumnDefs: ColDef[] = [
@@ -71,6 +77,34 @@ export class InvoiceComponent implements OnInit {
       error: (err) => {
         console.error('Failed to load invoices:', err);
         this.rowData = [];
+      }
+    });
+  }
+
+  onRowClicked(event: any) {
+    this.selectedItems = event.data.items;
+    this.selectedRow = event.data;
+    this.showDetailPopup = true;
+  }
+
+  closeDetailPopup() {
+    this.showDetailPopup = false;
+  }
+
+  downloadInvoicePDF() {
+    if (!this.selectedRow?.vbeln) {
+      alert('No invoice selected.');
+      return;
+    }
+
+    this.authService.downloadInvoicePDF(this.selectedRow.vbeln).subscribe({
+      next: (blob) => {
+        const fileName = `Invoice_${this.selectedRow.vbeln}.pdf`;
+        saveAs(blob, fileName);
+      },
+      error: (err) => {
+        console.error('Download failed:', err);
+        alert('Failed to download invoice PDF.');
       }
     });
   }
