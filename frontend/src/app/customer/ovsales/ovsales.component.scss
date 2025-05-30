@@ -1,20 +1,135 @@
 .overall-sales-container {
   padding: 10px;
-  background-color: transparent;
-  ::ng-deep {
-    .custom-header {
-      background-color: rgb(240, 250, 255) !important;
-      color: #333;
-      font-weight: 600;
+
+  .header-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    h2 {
+      margin: 0;
     }
-    .ag-theme-alpine .ag-header {
-      background-color: rgb(240, 250, 255) !important;
+
+    .bi-icon {
+      font-size: 2rem;
+      cursor: pointer;
+      color: rgb(159, 40, 37);
+      transition: transform 0.2s, background-color 0.3s;
+      padding: 0.3rem;
+      border-radius: 5px;
+
+      &:hover, &:active {
+        transform: scale(1.1);
+        background-color: #e0e0e0; /* Light grey background */
+      }
+    }
+  }
+
+  .ag-theme-alpine {
+    width: 100%;
+    height: 450px;
+  }
+
+  .insights-modal {
+    position: fixed;
+    top: 15%;
+    left: 15%;
+    width: 70vw;
+    height: 70vh;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .insights-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.insights-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background-color: rgb(232, 182, 180);
+  color: black;
+
+  .insights-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    h3 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+  }
+
+  .currency-picker {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-grow: 1;
+
+    .currency-icon {
+      cursor: pointer;
+      padding: 0.3rem 0.5rem;
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: black;
+      font-size: 0.9rem;
+      transition: background-color 0.3s;
+
+      &.active {
+        background-color: rgb(159, 40, 37);
+        color: black;
+      }
+    }
+  }
+
+  .close-btn {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    box-shadow: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .material-icons {
+      font-size: 1.5rem;
+      color:black;
+    }
+
+    &:hover {
+      transform: scale(1.1);
     }
   }
 }
 
-h2 {
-  text-align: left;
-  color: #333;
-  margin-bottom: 20px;
+.charts-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+
+  canvas {
+    flex: 1 1 45%;
+    max-width: 45%;
+    height: 300px;
+  }
 }

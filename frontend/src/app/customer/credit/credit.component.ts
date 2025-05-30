@@ -32,7 +32,13 @@ export class CreditComponent implements OnInit {
     { headerName: 'Entry Date', field: 'erdat' },
     { headerName: 'Sales Org', field: 'vkorg' }
   ];
-
+  defaultColDef: ColDef = {
+    flex: 1,
+    resizable: true,
+    sortable: true,
+    filter: true,
+    headerClass: 'custom-header'
+  };
   creditData: any[] = [];
   debitData: any[] = [];
   customerId: string = '';  // Set from input or user login

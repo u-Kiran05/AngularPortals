@@ -1,12 +1,45 @@
 <div class="overall-sales-container">
-  <h2>Customer Overall Sales Data</h2>
+  <div class="header-line">
+    <h2>Customer Overall Sales Data</h2> 
+    <span class="material-icons bi-icon" (click)="toggleInsights()">bar_chart</span>
+  </div>
 
-  <ag-grid-angular
-    class="ag-theme-alpine"
-    style="width: 100%; height: 450px;"
-    [rowData]="rowData"
-    [columnDefs]="overallSalesColumnDefs"
-    [defaultColDef]="defaultColDef"
-    rowSelection="single">
-  </ag-grid-angular>
+  <ag-grid-angular class="ag-theme-alpine" style="width: 100%; height: 450px;"
+                   [rowData]="rowData"
+                   [columnDefs]="overallSalesColumnDefs"
+                   [defaultColDef]="defaultColDef"
+                   rowSelection="single"></ag-grid-angular>
+
+ <div class="insights-modal" *ngIf="showInsights">
+  <div class="insights-content">
+   <div class="insights-header">
+  <!-- Left: Insights Icon and Title -->
+  <div class="insights-left">
+    <span class="material-icons">bar_chart</span>
+    <h3>Insights</h3>
+  </div>
+
+  <!-- Center: Currency Picker -->
+  <div class="currency-picker">
+    <span *ngFor="let currency of availableCurrencies"
+          [class.active]="selectedCurrency === currency"
+          class="currency-icon"
+          (click)="onCurrencyClick(currency)">
+      {{ currencySymbols[currency] || currency }}
+    </span>
+  </div>
+
+  <!-- Right: Close Button (no background) -->
+  <button class="close-btn no-bg" (click)="toggleInsights()">
+    <span class="material-icons">close</span>
+  </button>
 </div>
+
+
+    <div class="charts-container">
+      <canvas id="chart1"></canvas>
+      <canvas id="chart2"></canvas>
+    </div>
+  </div>
+</div>
+  
