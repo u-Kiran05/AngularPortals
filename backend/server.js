@@ -31,6 +31,7 @@ const customerCandDRoute=require('./routes/customerRoutes/customerCandD');
 const customerAgingRoute=require('./routes/customerRoutes/customerAging');
 const customerInvoiceDownloadRoute = require('./routes/customerRoutes/customerInvoicePDF')
 const customerOverallsales=require('./routes/customerRoutes/customerOvasales')
+const customerBI=require('./routes/customerRoutes/customerBI')
 // Use routes
 
 app.use('/api/customer', customerLoginRoute);
@@ -42,8 +43,8 @@ app.use('/api/customer', customerInvoiceRoute);
 app.use('/api/customer', customerCandDRoute);
 app.use('/api/customer', customerAgingRoute);
 app.use('/api/customer', customerOverallsales);
-
-app.use('/api/customer', customerInvoiceDownloadRoute);
+app.use('/api/customer', customerOverallsales);
+app.use('/api/customer', customerBI);
 // Default 404 handler
 app.use((req, res) => {
   res.status(404).json({ message: 'Not Found', path: req.path });

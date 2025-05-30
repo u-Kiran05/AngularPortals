@@ -103,7 +103,15 @@ export class AuthService {
       customerId: user.id
     });
   }
-
+ getCustomerBI(): Observable<any> {
+    const user = this.getUserInfo();
+    if (!user || !user.id) {
+      throw new Error('User not logged in');
+    }
+    return this.http.post('http://localhost:3000/api/customer/customerbi', {
+      customerId: user.id
+    });
+  }
   getCustomerInquiries(): Observable<any> {
     const user = this.getUserInfo();
     if (!user || !user.id) {
