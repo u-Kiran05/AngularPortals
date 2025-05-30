@@ -13,11 +13,13 @@ import { ModuleRegistry, AllCommunityModule } from 'ag-grid-community';
 import { InquiryComponent } from './inquiry/inquiry.component';
 import { CreditComponent } from './credit/credit.component';
 import { FormsModule } from '@angular/forms';
+import { OvsalesComponent } from './ovsales/ovsales.component';
 ModuleRegistry.registerModules([ AllCommunityModule ]);
 @NgModule({
   declarations: [
     CustomerComponent ,
     SalesComponent,
+    OvsalesComponent,
     DeliveryComponent,
     CdashboardComponent,
     CreditComponent,
@@ -29,7 +31,8 @@ ModuleRegistry.registerModules([ AllCommunityModule ]);
     CommonModule,
     RouterModule,
     SharedModule ,
-     AgGridModule,FormsModule,
+    AgGridModule,
+    FormsModule,
   ]
 })
 export class CustomerModule { }

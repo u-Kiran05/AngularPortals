@@ -30,7 +30,7 @@ const customerInvoiceRoute=require('./routes/customerRoutes/customerInvoice');
 const customerCandDRoute=require('./routes/customerRoutes/customerCandD');
 const customerAgingRoute=require('./routes/customerRoutes/customerAging');
 const customerInvoiceDownloadRoute = require('./routes/customerRoutes/customerInvoicePDF')
-
+const customerOverallsales=require('./routes/customerRoutes/customerOvasales')
 // Use routes
 
 app.use('/api/customer', customerLoginRoute);
@@ -41,6 +41,8 @@ app.use('/api/customer', customerDeliveryRoute);
 app.use('/api/customer', customerInvoiceRoute);
 app.use('/api/customer', customerCandDRoute);
 app.use('/api/customer', customerAgingRoute);
+app.use('/api/customer', customerOverallsales);
+
 app.use('/api/customer', customerInvoiceDownloadRoute);
 // Default 404 handler
 app.use((req, res) => {

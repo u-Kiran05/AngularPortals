@@ -6,7 +6,8 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-credit',
   standalone:false,
   templateUrl: './credit.component.html',
-  styleUrl: './credit.component.scss'
+  styleUrl: './credit.component.scss',
+   
 })
 export class CreditComponent implements OnInit {
   selectedType: string = 'credit';  // Default selection

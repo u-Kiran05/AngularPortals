@@ -15,7 +15,8 @@ export class CustomerComponent {
     { icon: 'local_shipping', title: 'Delivery', link: '/customer/delivery' },
     { icon: 'request_quote', title: 'Invoice', link: '/customer/invoice' },
     { icon: 'payments', title: 'Payments', link: '/customer/payment' },
-    { icon: 'credit_score', title: 'Credit/Debit ', link: '/customer/credit' }
+    { icon: 'credit_score', title: 'Credit/Debit ', link: '/customer/credit' },
+    { icon: 'insights', title: 'OverallSales ', link: '/customer/ovsales' }
   ];
 
   constructor(private router: Router) {}

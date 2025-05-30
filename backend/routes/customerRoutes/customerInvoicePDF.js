@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const axios = require('axios');
-const xml2js = require('xml2js');
+const { callSapService } = require("D:\\PortalProject\\backend\\utils\\parser.js");
 
 router.post('/invoice/download', async (req, res) => {
   const { customerId, vbeln } = req.body;
@@ -10,6 +9,7 @@ router.post('/invoice/download', async (req, res) => {
     return res.status(400).json({ success: false, message: 'customerId and vbeln are required' });
   }
 
+  // Build SOAP envelope for ZFM_CINVOICE_PDF
   const soapEnvelope = `
     <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"
                        xmlns:urn="urn:sap-com:document:sap:rfc:functions">
@@ -23,44 +23,31 @@ router.post('/invoice/download', async (req, res) => {
     </soap-env:Envelope>`;
 
   try {
-    const authHeader = 'Basic ' + Buffer.from(`${process.env.SAP_USERNAME}:${process.env.SAP_PASSWORD}`).toString('base64');
-
-    const sapResponse = await axios.post(process.env.SAP_CINVOICE_PDF_URL?.trim(), soapEnvelope, {
-      headers: {
-        'Content-Type': 'text/xml',
-        'SOAPAction': 'urn:sap-com:document:sap:rfc:functions:ZFM_CINVOICE_PDF',
-        'Authorization': authHeader
-      }
+    const rfcResponse = await callSapService({
+      url: process.env.SAP_CINVOICE_PDF_URL?.trim(),
+      soapEnvelope,
+      soapAction: 'urn:sap-com:document:sap:rfc:functions:ZFM_CINVOICE_PDF',
+      rfcFunction: 'ZFM_CINVOICE_PDF'
     });
 
-    xml2js.parseString(sapResponse.data, { explicitArray: false }, (err, result) => {
-      if (err) {
-        console.error('XML Parse Error:', err);
-        return res.status(500).json({ success: false, message: 'Failed to parse SAP response', error: err.message });
-      }
-
-      try {
-        const pdfBase64 = result['soap-env:Envelope']['soap-env:Body']['n0:ZFM_CINVOICE_PDFResponse']['PDF_B64'];
-        if (!pdfBase64) {
-          return res.status(404).json({ success: false, message: 'PDF not found in SAP response' });
-        }
-
-        const pdfBuffer = Buffer.from(pdfBase64, 'base64');
-
-        res.setHeader('Content-Type', 'application/pdf');
-        res.setHeader('Content-Disposition', `attachment; filename=Invoice_${vbeln}.pdf`);
-        res.send(pdfBuffer);
-      } catch (e) {
-        console.error('PDF Extraction Error:', e);
-        res.status(500).json({ success: false, message: 'Failed to extract PDF from SAP response', error: e.message });
-      }
-    });
-  } catch (error) {
-    console.error('SAP CALL ERROR:', error.message);
-    if (error.response) {
-      console.error('SAP RESPONSE BODY:', error.response.data);
+    // Extract PDF base64 string from the SAP response
+    const pdfBase64 = rfcResponse.PDF_B64?.[0] || null;
+    if (!pdfBase64) {
+      return res.status(404).json({ success: false, message: 'PDF not found in SAP response' });
     }
-    res.status(500).json({ success: false, message: 'Failed to call SAP service', error: error.message });
+
+    const pdfBuffer = Buffer.from(pdfBase64, 'base64');
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename=Invoice_${vbeln}.pdf`);
+    res.send(pdfBuffer);
+
+  } catch (error) {
+    console.error('INVOICE DOWNLOAD ERROR:', error.message);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to download invoice from SAP',
+      error: error.message
+    });
   }
 });
 

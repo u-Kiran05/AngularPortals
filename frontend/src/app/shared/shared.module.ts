@@ -25,6 +25,7 @@ ModuleRegistry.registerModules([ AllCommunityModule ]);
   ],
   exports: [
     TablewithItemsComponent,
+    AgTableComponent,
     ProfileCardComponent,
     LayoutComponent,
     CommonModule,

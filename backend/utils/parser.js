@@ -23,7 +23,7 @@ async function callSapService({ url, soapEnvelope, soapAction, rfcFunction }) {
       timeout: 30000 // Increase to 30 seconds
     });
 
-    console.log('SAP Raw Response:', data);
+    //console.log('SAP Raw Response:', data);
 
     const parser = new xml2js.Parser();
     const result = await parser.parseStringPromise(data);
@@ -35,7 +35,7 @@ async function callSapService({ url, soapEnvelope, soapAction, rfcFunction }) {
     );
     if (!rfcTag) throw new Error(`RFC tag '${rfcFunction}' not found in SAP response.`);
 
-    console.log('RFC Result:', body[rfcTag][0]);
+    //console.log('RFC Result:', body[rfcTag][0]);
     return body[rfcTag][0];
   } catch (error) {
     console.error('SAP Call Error:', error.message, error.stack);

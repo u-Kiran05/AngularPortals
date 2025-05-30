@@ -72,6 +72,15 @@ export class AuthService {
       customerId: user.id
     });
   }
+    getCustomerOverallSales(): Observable<any> {
+    const user = this.getUserInfo();
+    if (!user || !user.id) {
+      throw new Error('User not logged in');
+    }
+    return this.http.post('http://localhost:3000/api/customer/overallSales', {
+      customerId: user.id
+    });
+  }
     downloadInvoicePDF(vbeln: string): Observable<Blob> {
     const user = this.getUserInfo();
     if (!user || !user.id) {

@@ -6,7 +6,8 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-payment',
   standalone:false,
   templateUrl: './payment.component.html',
-  styleUrl: './payment.component.scss'
+  styleUrl: './payment.component.scss',
+  
 })
 export class PaymentComponent {
 
@@ -22,7 +23,7 @@ export class PaymentComponent {
     field: 'netwr',
     valueFormatter: (params) => {
       const value = params.value;
-      const currencyCode = params.data?.waerk || 'USD'; // Fallback to USD
+      const currencyCode = params.data?.waerk || 'INR'; // Fallback to USD
       if (value != null) {
         // Map of common currency codes to symbols
         const currencySymbols: { [code: string]: string } = {

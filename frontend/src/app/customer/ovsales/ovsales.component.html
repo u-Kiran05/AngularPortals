@@ -1,11 +1,11 @@
-<div class="payment-container">
-  <h2>Customer Payment Details</h2>
+<div class="overall-sales-container">
+  <h2>Customer Overall Sales Data</h2>
 
   <ag-grid-angular
     class="ag-theme-alpine"
     style="width: 100%; height: 450px;"
     [rowData]="rowData"
-    [columnDefs]="agingColumnDefs"
+    [columnDefs]="overallSalesColumnDefs"
     [defaultColDef]="defaultColDef"
     rowSelection="single">
   </ag-grid-angular>
