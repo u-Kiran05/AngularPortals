@@ -1,67 +1,61 @@
 import { Component, OnInit } from '@angular/core';
 import { ColDef } from 'ag-grid-community';
-import { AuthService } from '../../services/auth.service';
+import { CustomerService } from '../../services/customer/customer.service';  // Updated import
 
 @Component({
   selector: 'app-payment',
-  standalone:false,
+  standalone: false,
   templateUrl: './payment.component.html',
-  styleUrl: './payment.component.scss',
-  
+  styleUrl: './payment.component.scss'
 })
-export class PaymentComponent {
+export class PaymentComponent implements OnInit {
 
   rowData: any[] = [];
-  customerId: string = '';
 
- agingColumnDefs: ColDef[] = [
-  { headerName: 'Document No', field: 'vbeln' },
-  { headerName: 'Bill Date', field: 'fkdat' },
-  { headerName: 'Due Date', field: 'dueDate' },
-  { 
-    headerName: 'Net Amount', 
-    field: 'netwr',
-    valueFormatter: (params) => {
-      const value = params.value;
-      const currencyCode = params.data?.waerk || 'INR'; // Fallback to USD
-      if (value != null) {
-        // Map of common currency codes to symbols
-        const currencySymbols: { [code: string]: string } = {
-          USD: '$', INR: '₹', EUR: '€', GBP: '£', JPY: '¥', AUD: 'A$', CAD: 'C$', CHF: 'CHF', CNY: '¥', KRW: '₩'
-        };
-        const symbol = currencySymbols[currencyCode.toUpperCase()] || currencyCode; // Fallback to code
-        const formattedValue = new Intl.NumberFormat(undefined, { 
-          minimumFractionDigits: 2, maximumFractionDigits: 2 
-        }).format(value);
-        return `${symbol} ${formattedValue}`; 
+  agingColumnDefs: ColDef[] = [
+    { headerName: 'Document No', field: 'vbeln' },
+    { headerName: 'Bill Date', field: 'fkdat' },
+    { headerName: 'Due Date', field: 'dueDate' },
+    { 
+      headerName: 'Net Amount', 
+      field: 'netwr',
+      valueFormatter: (params) => {
+        const value = params.value;
+        const currencyCode = params.data?.waerk || 'INR';
+        if (value != null) {
+          const currencySymbols: { [code: string]: string } = {
+            USD: '$', INR: '₹', EUR: '€', GBP: '£', JPY: '¥', AUD: 'A$', CAD: 'C$', CHF: 'CHF', CNY: '¥', KRW: '₩'
+          };
+          const symbol = currencySymbols[currencyCode.toUpperCase()] || currencyCode;
+          const formattedValue = new Intl.NumberFormat(undefined, { 
+            minimumFractionDigits: 2, maximumFractionDigits: 2 
+          }).format(value);
+          return `${symbol} ${formattedValue}`; 
+        }
+        return value;
       }
-      return value;
-    }
-  },
-  { headerName: 'Currency', field: 'waerk' },
-  { headerName: 'Aging (Days)', field: 'aging' }
-];
+    },
+    { headerName: 'Currency', field: 'waerk' },
+    { headerName: 'Aging (Days)', field: 'aging' }
+  ];
+
   defaultColDef: ColDef = {
     flex: 1,
     resizable: true,
     sortable: true,
     filter: true,
-    headerClass: 'custom-header',
+    headerClass: 'custom-header'
   };
 
-  constructor(private authService: AuthService) {}
+  constructor(private cuService: CustomerService) {}  // Updated service
 
   ngOnInit(): void {
-    const user = this.authService.getUserInfo();
-    if (user?.id) {
-      this.customerId = user.id;
-      this.fetchCustomerAging(this.customerId);
-    }
+    this.fetchCustomerAging();
   }
 
-  fetchCustomerAging(customerId: string): void {
-    console.log('Fetching Customer Aging for customerId:', customerId);
-    this.authService.getCustomerAging().subscribe({
+  fetchCustomerAging(): void {
+    console.log('Fetching Customer Aging data...');
+    this.cuService.getCustomerAging().subscribe({
       next: (res) => {
         console.log('Aging response received:', res);
         this.rowData = res?.data ?? [];

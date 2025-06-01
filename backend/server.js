@@ -43,7 +43,7 @@ app.use('/api/customer', customerInvoiceRoute);
 app.use('/api/customer', customerCandDRoute);
 app.use('/api/customer', customerAgingRoute);
 app.use('/api/customer', customerOverallsales);
-app.use('/api/customer', customerOverallsales);
+app.use('/api/customer', customerInvoiceDownloadRoute);
 app.use('/api/customer', customerBI);
 // Default 404 handler
 app.use((req, res) => {

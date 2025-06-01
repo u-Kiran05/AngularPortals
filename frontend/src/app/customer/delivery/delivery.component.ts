@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { CustomerService } from '../../services/customer/customer.service';
 import { ColDef } from 'ag-grid-community';
 
 @Component({
   selector: 'app-delivery',
-  standalone:false,
+  standalone: false,
   templateUrl: './delivery.component.html',
   styleUrl: './delivery.component.scss'
 })
@@ -35,18 +35,14 @@ export class DeliveryComponent implements OnInit {
     headerClass: 'custom-header'
   };
 
-  constructor(private authService: AuthService) {}
+  constructor(private cuService: CustomerService) {}  // Updated constructor
 
   ngOnInit(): void {
-    const user = this.authService.getUserInfo();
-    if (user?.id) {
-      this.customerId = user.id;
-      this.fetchCustomerDeliveries(this.customerId);
-    }
+    this.fetchCustomerDeliveries();  // No need for customerId, handled inside service
   }
 
-  fetchCustomerDeliveries(customerId: string): void {
-    this.authService.getCustomerDeliveries().subscribe({
+  fetchCustomerDeliveries(): void {
+    this.cuService.getCustomerDeliveries().subscribe({
       next: (res) => {
         const { data } = res || {};
         const T_HEADER = data?.headers ?? [];

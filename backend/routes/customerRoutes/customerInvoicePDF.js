@@ -3,6 +3,7 @@ const router = express.Router();
 const { callSapService } = require("D:\\PortalProject\\backend\\utils\\parser.js");
 
 router.post('/invoice/download', async (req, res) => {
+  debugger; // Added debugger statement to pause execution for inspection
   const { customerId, vbeln } = req.body;
 
   if (!customerId || !vbeln) {
@@ -32,6 +33,7 @@ router.post('/invoice/download', async (req, res) => {
 
     // Extract PDF base64 string from the SAP response
     const pdfBase64 = rfcResponse.PDF_B64?.[0] || null;
+   
     if (!pdfBase64) {
       return res.status(404).json({ success: false, message: 'PDF not found in SAP response' });
     }

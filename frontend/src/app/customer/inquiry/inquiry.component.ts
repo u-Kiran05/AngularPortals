@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { CustomerService } from '../../services/customer/customer.service';
 import { ColDef } from 'ag-grid-community';
 
 @Component({
   selector: 'app-inquiry',
-  standalone:false,
+  standalone: false,
   templateUrl: './inquiry.component.html',
   styleUrls: ['./inquiry.component.scss']
 })
 export class InquiryComponent implements OnInit {
   rowData: any[] = [];
-  customerId: string = '';
 
   inquiryColumnDefs: ColDef[] = [
     { headerName: 'Inquiry No', field: 'vbeln' },
@@ -36,20 +35,16 @@ export class InquiryComponent implements OnInit {
     headerClass: 'custom-header'
   };
 
-  constructor(private authService: AuthService) {}
+  constructor(private cuService: CustomerService) {}
 
   ngOnInit(): void {
-    const user = this.authService.getUserInfo();
-    if (user?.id) {
-      this.customerId = user.id;
-      this.fetchCustomerInquiries(this.customerId);
-    }
+    this.fetchCustomerInquiries();
   }
 
-  fetchCustomerInquiries(customerId: string): void {
-    this.authService.getCustomerInquiries().subscribe({
+  fetchCustomerInquiries(): void {
+    this.cuService.getCustomerInquiries().subscribe({
       next: (res) => {
-        const { inquiries = [], inquiryItems = [] } = res.data;
+        const { inquiries = [], inquiryItems = [] } = res.data ?? {};
         const itemsByVbeln: Record<string, any[]> = {};
         inquiryItems.forEach((item: any) => {
           if (!itemsByVbeln[item.vbeln]) {

@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 import { ColDef } from 'ag-grid-community';
+import { CustomerService } from '../../services/customer/customer.service';  // Updated import
 
 @Component({
   selector: 'app-sales',
-  standalone:false,
+  standalone: false,
   templateUrl: './sales.component.html',
   styleUrls: ['./sales.component.scss']
 })
 export class SalesComponent implements OnInit {
   rowData: any[] = [];
-  customerId: string = '';
 
   salesColumnDefs: ColDef[] = [
     { headerName: 'Sales Order No', field: 'vbeln' },
@@ -46,18 +45,14 @@ export class SalesComponent implements OnInit {
     headerClass: 'custom-header'
   };
 
-  constructor(private authService: AuthService) {}
+  constructor(private cuService: CustomerService) {}  // Updated service
 
   ngOnInit(): void {
-    const user = this.authService.getUserInfo();
-    if (user?.id) {
-      this.customerId = user.id;
-      this.fetchCustomerSales(this.customerId);
-    }
+    this.fetchCustomerSales();
   }
 
-  fetchCustomerSales(customerId: string): void {
-    this.authService.getCustomerSales().subscribe({
+  fetchCustomerSales(): void {
+    this.cuService.getCustomerSales().subscribe({
       next: (res) => {
         const { headerData = [], itemData = [] } = res;
         const itemsBySalesOrderNo: Record<string, any[]> = {};

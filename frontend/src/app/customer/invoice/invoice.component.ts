@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { CustomerService } from '../../services/customer/customer.service';  // Updated import
 import { ColDef } from 'ag-grid-community';
 import { saveAs } from 'file-saver';  // Make sure you have file-saver installed
 
@@ -11,7 +11,6 @@ import { saveAs } from 'file-saver';  // Make sure you have file-saver installed
 })
 export class InvoiceComponent implements OnInit {
   rowData: any[] = [];
-  customerId: string = '';
   selectedRow: any = null;
   selectedItems: any[] = [];
   showDetailPopup: boolean = false;
@@ -24,7 +23,6 @@ export class InvoiceComponent implements OnInit {
     { headerName: 'Currency', field: 'waerk' },
     { headerName: 'Company Code', field: 'bukrs' },
     { headerName: 'Created On', field: 'erdat' }
-    
   ];
 
   itemColumnDefs: ColDef[] = [
@@ -44,18 +42,14 @@ export class InvoiceComponent implements OnInit {
     headerClass: 'custom-header'
   };
 
-  constructor(private authService: AuthService) {}
+  constructor(private cuService: CustomerService) {}  // Updated service
 
   ngOnInit(): void {
-    const user = this.authService.getUserInfo();
-    if (user?.id) {
-      this.customerId = user.id;
-      this.fetchCustomerInvoices(this.customerId);
-    }
+    this.fetchCustomerInvoices();
   }
 
-  fetchCustomerInvoices(customerId: string): void {
-    this.authService.getCustomerInvoices().subscribe({
+  fetchCustomerInvoices(): void {
+    this.cuService.getCustomerInvoices().subscribe({
       next: (res) => {
         const { data } = res || {};
         const T_HEADER = data?.headers ?? [];
@@ -97,7 +91,7 @@ export class InvoiceComponent implements OnInit {
       return;
     }
 
-    this.authService.downloadInvoicePDF(this.selectedRow.vbeln).subscribe({
+    this.cuService.downloadInvoicePDF(this.selectedRow.vbeln).subscribe({  // Updated service
       next: (blob) => {
         const fileName = `Invoice_${this.selectedRow.vbeln}.pdf`;
         saveAs(blob, fileName);

@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { CustomerService } from '../../services/customer/customer.service';  // Updated import
 
 @Component({
   selector: 'app-profile',
-  standalone:false,
+  standalone: false,
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
@@ -12,13 +13,13 @@ export class ProfileCardComponent implements OnInit {
   user: any;
   customerProfile: any;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private cuService: CustomerService) {}  // Updated constructor
 
   ngOnInit(): void {
     this.user = this.authService.getUserInfo();
 
     if (this.user?.role === 'Customer') {
-      this.authService.getCustomerProfile().subscribe(
+      this.cuService.getCustomerProfile().subscribe(
         (profile) => this.customerProfile = profile,
         () => this.customerProfile = null
       );

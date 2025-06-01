@@ -1,37 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { ColDef } from 'ag-grid-community';
+import { CustomerService } from '../../services/customer/customer.service';
 
-import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-credit',
-  standalone:false,
+  standalone: false,
   templateUrl: './credit.component.html',
-  styleUrl: './credit.component.scss',
-   
+  styleUrl: './credit.component.scss'
 })
 export class CreditComponent implements OnInit {
   selectedType: string = 'credit';  // Default selection
   rowData: any[] = [];
+  creditData: any[] = [];
+  debitData: any[] = [];
+
   columnDefs: ColDef[] = [
     { headerName: 'Document No', field: 'vbeln' },
     { headerName: 'Doc Type', field: 'fkart' },
-    //{ headerName: 'Category', field: 'fktyp' },
     { headerName: 'Bill Date', field: 'fkdat' },
-   //{ headerName: 'Doc Kind', field: 'vbtyp' },
-     {
+    {
       headerName: 'Net Amount',
       field: 'netwr',
       valueFormatter: (params) => this.formatCurrency(params.value, params.data?.waerk)
     },
-   // { headerName: 'Currency', field: 'waerk' },
     { headerName: 'Item No', field: 'posnr' },
     { headerName: 'Material No', field: 'matnr' },
     { headerName: 'Pricing Ref', field: 'knumv' },
-   // { headerName: 'Ref Doc', field: 'kidno' },
-    //{ headerName: 'Entry Time', field: 'erzet' },
     { headerName: 'Entry Date', field: 'erdat' },
     { headerName: 'Sales Org', field: 'vkorg' }
   ];
+
   defaultColDef: ColDef = {
     flex: 1,
     resizable: true,
@@ -39,41 +37,16 @@ export class CreditComponent implements OnInit {
     filter: true,
     headerClass: 'custom-header'
   };
-  creditData: any[] = [];
-  debitData: any[] = [];
-  customerId: string = '';  // Set from input or user login
 
-  constructor(private authService: AuthService) {}
-   formatCurrency(amount: number, currencyCode: string): string {
-    if (!amount || !currencyCode) {
-      return amount?.toString() || '';
-    }
-
-    const currencySymbols: { [key: string]: string } = {
-      'USD': '$',
-      'EUR': '€',
-      'GBP': '£',
-      'INR': '₹',
-      'JPY': '¥',
-      'CNY': '¥',
-      'AUD': 'A$',
-      'CAD': 'C$',
-      // Add more currency codes and symbols as needed
-    };
-
-    const symbol = currencySymbols[currencyCode.toUpperCase()] || currencyCode + ' ';
-    return `${symbol}${amount.toFixed(2)}`;
-  }
+  constructor(private cuService: CustomerService) {}  // Kept as cuService
 
   ngOnInit() {
-    this.fetchCustomerCandD(this.customerId);
+    this.fetchCustomerCandD();
   }
-  
 
-  
-  fetchCustomerCandD(customerId: string): void {
-    console.log('Fetching Customer C&D for customerId:', customerId);
-    this.authService.getCustomerCandD().subscribe({
+  fetchCustomerCandD(): void {
+    console.log('Fetching Customer Credit & Debit data...');
+    this.cuService.getCustomerCandD().subscribe({
       next: (res) => {
         console.log('Response received:', res);
         const data = res?.data ?? {};
@@ -89,17 +62,33 @@ export class CreditComponent implements OnInit {
       }
     });
   }
- 
-selectType(type: string) {
-  this.selectedType = type;
-  this.onTypeChange(); // Call your function if needed
-}
 
-  onTypeChange() {
+  selectType(type: string) {
+    this.selectedType = type;
     this.updateTable();
   }
-  
+
   updateTable() {
     this.rowData = this.selectedType === 'credit' ? this.creditData : this.debitData;
+  }
+
+  formatCurrency(amount: number, currencyCode: string): string {
+    if (!amount || !currencyCode) {
+      return amount?.toString() || '';
+    }
+
+    const currencySymbols: { [key: string]: string } = {
+      'USD': '$',
+      'EUR': '€',
+      'GBP': '£',
+      'INR': '₹',
+      'JPY': '¥',
+      'CNY': '¥',
+      'AUD': 'A$',
+      'CAD': 'C$',
+    };
+
+    const symbol = currencySymbols[currencyCode.toUpperCase()] || currencyCode + ' ';
+    return `${symbol}${amount.toFixed(2)}`;
   }
 }

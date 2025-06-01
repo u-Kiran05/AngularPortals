@@ -6,8 +6,8 @@ async function callSapService({ url, soapEnvelope, soapAction, rfcFunction }) {
   const username = process.env.SAP_USERNAME;
   const password = process.env.SAP_PASSWORD;
 
-  console.log('SAP Config:', { url, username, password: '***' });
-  //console.log('SAP Request:', { soapAction, soapEnvelope });
+ // console.log('SAP Config:', { url, username, password: '***' });
+ // console.log('SAP Request:', { soapAction, soapEnvelope });
 
   if (!url || !username || !password) {
     throw new Error('SAP credentials or URL are not set properly in environment variables.');
@@ -23,11 +23,11 @@ async function callSapService({ url, soapEnvelope, soapAction, rfcFunction }) {
       timeout: 30000 // Increase to 30 seconds
     });
 
-    //console.log('SAP Raw Response:', data);
+   // console.log('SAP Raw Response:', data);
 
     const parser = new xml2js.Parser();
     const result = await parser.parseStringPromise(data);
-    //console.log('Parsed SAP Response:', JSON.stringify(result, null, 2));
+   // console.log('Parsed SAP Response:', JSON.stringify(result, null, 2));
 
     const body = result['soap-env:Envelope']['soap-env:Body'][0];
     const rfcTag = Object.keys(body).find(key =>

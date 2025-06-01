@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-
+import { CustomerService } from '../../services/customer/customer.service';
 @Component({
   selector: 'app-login',
   standalone:false,
@@ -13,7 +13,7 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService, private cuService:CustomerService) {}
 
   setUser(type: string) {
     this.selectedUser = type;
@@ -27,7 +27,7 @@ export class LoginComponent {
 
   if (this.selectedUser === 'Customer') {
     // Call backend to validate customer login
-    this.authService.validateCustomerLogin(this.username, this.password).subscribe(
+    this.cuService.validateCustomerLogin(this.username, this.password).subscribe(
       (res) => {
         if (res.success) {
           this.authService.setUserInfo({
