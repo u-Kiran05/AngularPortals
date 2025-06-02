@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ColDef } from 'ag-grid-community';
 import { CustomerService } from '../../services/customer/customer.service';
+import { ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-credit',
   standalone: false,
   templateUrl: './credit.component.html',
-  styleUrl: './credit.component.scss'
+  styleUrl: './credit.component.scss',
+   encapsulation: ViewEncapsulation.None
 })
 export class CreditComponent implements OnInit {
   selectedType: string = 'credit';  // Default selection

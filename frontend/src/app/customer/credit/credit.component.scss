@@ -3,17 +3,10 @@
  
   padding: 10px;
   background-color: transparent;
-  ::ng-deep {
-    .custom-header {
-      background-color: rgb(255, 240, 235) !important;
-      color: #333;
-      font-weight: 600;
-    }
-    .ag-theme-alpine .ag-header {
-      background-color: rgb(255, 240, 235) !important;
-    }
-  }
+ 
 
+    
+  }
 
 
   .header-line {
@@ -74,6 +67,9 @@
       }
     }
   }
-}
 
 
+
+ .ag-header {
+      background-color: rgb(255, 240, 235) !important;
+    }

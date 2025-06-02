@@ -1,21 +1,12 @@
 .inquiry-container {
   padding: 10px;
   background-color: transparent;
-  ::ng-deep {
-    .custom-header {
-      background-color: rgb(255, 240, 235) !important;
-      color: #333;
-      font-weight: 600;
-    }
-    .ag-theme-alpine .ag-header {
-      background-color: rgb(255, 240, 235) !important;
-    }
-  }
+  
 }
 
 h2 {
   text-align: left;
-  color: #333;
+  //color: #333;
   margin-bottom: 20px;
 }
 
@@ -23,15 +14,16 @@ h2 {
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 15px;
+  padding: 10px;
 }
 
 .card-body {
   padding: 0;
 }
 
-.ag-theme-alpine {
-  border-radius: 8px;
-}
 
 
+
+ .ag-header {
+      background-color: rgb(255, 240, 235) !important;
+    }

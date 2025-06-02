@@ -178,7 +178,6 @@ a.selected mat-icon {
 .dark-mode .content {
   background-color: #1a1a1a;
   color: #000000;
-  
 }
 
 .dark-mode .content h1,
@@ -217,36 +216,8 @@ a.selected mat-icon {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* AG Grid Dark Mode */
-.dark-mode .ag-theme-alpine {
-  --ag-background-color: #1a1a1a;
-  --ag-foreground-color: #e0e0e0;
-  --ag-header-background-color: #2d2d2d;
-  --ag-header-foreground-color: #ffffff;
-  --ag-odd-row-background-color: #1f1f1f;
-  --ag-row-hover-color: #2d2d2d;
-  --ag-border-color: #3a3a3a;
-  --ag-selected-row-background-color: #333;
-  --ag-modal-overlay-background-color: rgba(0, 0, 0, 0.7);
-  --ag-input-disabled-background-color: #2d2d2d;
-  --ag-input-focus-border-color: #ff6b6b;
-  --ag-range-selection-background-color: rgba(255, 107, 107, 0.2);
-  --ag-range-selection-border-color: #ff6b6b;
-}
-
-.ag-theme-alpine-dark {
-  --ag-background-color: #1a1a1a;
-  --ag-foreground-color: #e0e0e0;
-  --ag-header-background-color: #2d2d2d;
-  --ag-header-foreground-color: #ffffff;
-  --ag-odd-row-background-color: #1f1f1f;
-  --ag-row-hover-color: #2d2d2d;
-  --ag-border-color: #3a3a3a;
-  --ag-selected-row-background-color: #333;
-}
-
-/* Popup Styling */
-.popup-overlay {
+/* General Popup Styling - Only for components that don't have their own specific popup styles */
+.popup-overlay:not(.invoice-container .popup-overlay) {
   position: fixed;
   top: 0;
   left: 0;
@@ -259,33 +230,35 @@ a.selected mat-icon {
   z-index: 1000;
 }
 
-.popup-content {
+.popup-content:not(.invoice-container .popup-content) {
   background: #fff;
-  padding: 1.5rem;
+  padding: 2rem; /* Reduced from 5rem to be more reasonable */
   border-radius: 8px;
   width: 80%;
   max-width: 800px;
   position: relative;
 }
 
-.dark-mode .popup-content {
+.dark-mode .popup-content:not(.invoice-container .popup-content) {
   background: #2d2d2d;
 }
 
-.popup-content h3 {
+/* Only apply h3 styles to non-invoice popups */
+.popup-content:not(.invoice-container .popup-content) h3 {
   font-size: 1.5rem;
   font-weight: 600;
   margin: 0;
-  padding-bottom: 1rem;
+ 
   color: #333;
 }
 
-.dark-mode .popup-content h3 {
+.dark-mode .popup-content:not(.invoice-container .popup-content) h3 {
   color: #fff;
 }
 
-.close-btn {
-  position: absolute;
+/* Only apply close button absolute positioning to non-invoice popups */
+.popup-content:not(.invoice-container .popup-content) .close-btn {
+  
   top: 10px;
   right: 10px;
   background: none;
@@ -293,11 +266,11 @@ a.selected mat-icon {
   cursor: pointer;
 }
 
-.close-btn .material-icons {
+.popup-content:not(.invoice-container .popup-content) .close-btn .material-icons {
   color: #333;
 }
 
-.dark-mode .close-btn .material-icons {
+.dark-mode .popup-content:not(.invoice-container .popup-content) .close-btn .material-icons {
   color: #e0e0e0;
 }
 
@@ -329,4 +302,48 @@ a.selected mat-icon {
   background-color: #222;
   border-bottom-color: #3a3a3a;
   color: #fff;
+}
+.dark-mode .ag-header {
+  background-color: #fff0eb !important;
+  color: #000000 !important;
+}
+.dark-mode .ag-viewport{
+  background-color: #3a3a3a !important;
+}
+.dark-mode  .ag-cell {
+  background-color: #3a3a3a !important;
+  color: #e0e0e0 !important;
+}
+/* Dark mode styling for invoice popup */
+.dark-mode .invoice-container .popup-content {
+  background-color: #2d2d2d;
+  color: #e0e0e0;
+}
+
+.dark-mode .invoice-container .popup-header {
+  border-bottom-color: #3a3a3a;
+}
+
+.dark-mode .invoice-container .popup-header h3 {
+  color: #fff;
+}
+
+.dark-mode .invoice-container .download-btn,
+.dark-mode .invoice-container .close-btn {
+  color: #e0e0e0;
+}
+
+.dark-mode .invoice-container .download-btn:hover
+ {
+  color: #ff6b6b;
+}
+
+.dark-mode .invoice-container .ag-theme-alpine .ag-header {
+  background-color: #3a3a3a !important;
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .invoice-container .ag-theme-alpine .ag-cell {
+  background-color: #2d2d2d !important;
+  color: #e0e0e0 !important;
 }

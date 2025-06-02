@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../../services/customer/customer.service';
 import { ColDef } from 'ag-grid-community';
-
+import { ViewEncapsulation } from '@angular/core';
 @Component({
   selector: 'app-delivery',
   standalone: false,
   templateUrl: './delivery.component.html',
-  styleUrl: './delivery.component.scss'
+  styleUrl: './delivery.component.scss',
+   encapsulation: ViewEncapsulation.None
 })
 export class DeliveryComponent implements OnInit {
   rowData: any[] = [];

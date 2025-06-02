@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../../services/customer/customer.service';  // Updated import
 import { ColDef } from 'ag-grid-community';
 import { saveAs } from 'file-saver';  // Make sure you have file-saver installed
-
+import { ViewEncapsulation } from '@angular/core';
 @Component({
   selector: 'app-invoice',
   standalone: false,
   templateUrl: './invoice.component.html',
-  styleUrls: ['./invoice.component.scss']
+  styleUrls: ['./invoice.component.scss'],
+   encapsulation: ViewEncapsulation.None
 })
 export class InvoiceComponent implements OnInit {
   rowData: any[] = [];

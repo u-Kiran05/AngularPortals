@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ColDef } from 'ag-grid-community';
-import { CustomerService } from '../../services/customer/customer.service';  // Updated import
+import { CustomerService } from '../../services/customer/customer.service';  
+import { ViewEncapsulation } from '@angular/core';
 import {
   Chart,
   LineController,
@@ -48,7 +49,8 @@ interface OrgValues {
   selector: 'app-ovsales',
   standalone: false,
   templateUrl: './ovsales.component.html',
-  styleUrl: './ovsales.component.scss'
+  styleUrl: './ovsales.component.scss',
+  encapsulation: ViewEncapsulation.None
 })
 export class OvsalesComponent implements OnInit {
   rowData: SalesData[] = [];

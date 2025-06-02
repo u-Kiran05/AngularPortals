@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../../services/customer/customer.service';
 import { ColDef } from 'ag-grid-community';
-
+import { ViewEncapsulation } from '@angular/core';
 @Component({
   selector: 'app-inquiry',
   standalone: false,
   templateUrl: './inquiry.component.html',
-  styleUrls: ['./inquiry.component.scss']
+  styleUrls: ['./inquiry.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class InquiryComponent implements OnInit {
   rowData: any[] = [];

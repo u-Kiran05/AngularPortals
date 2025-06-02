@@ -1,10 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ColDef } from 'ag-grid-community';
+import { ViewEncapsulation } from '@angular/core';
 @Component({
   selector: 'app-tablewith-items',
   standalone:false,
   templateUrl: './tablewith-items.component.html',
-  styleUrl: './tablewith-items.component.scss'
+  styleUrl: './tablewith-items.component.scss',
+  encapsulation: ViewEncapsulation.None
 })
 export class TablewithItemsComponent {
   @Input() rowData: any[] = [];
