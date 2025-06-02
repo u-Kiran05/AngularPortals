@@ -1,12 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { CustomerService } from '../../services/customer/customer.service';  // Updated import
-
+import { ViewEncapsulation } from '@angular/core';
 @Component({
   selector: 'app-profile',
   standalone: false,
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ProfileCardComponent implements OnInit {
   @Input() showProfileCard: boolean = false;

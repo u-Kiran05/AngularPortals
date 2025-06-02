@@ -298,11 +298,44 @@ a.selected mat-icon {
 }
 
 /* Cards in dark mode */
-.dark-mode .card-header {
-  background-color: #222;
-  border-bottom-color: #3a3a3a;
-  color: #fff;
+/*ag table*/
+.dark-mode .ag-filter-body-wrapper {
+  background-color: #fff0eb !important;
+  color: #000000 !important;
 }
+.dark-mode .ag-wrapper {
+  background-color: #fff0eb !important;
+  color: #000000 !important;
+}
+.dark-mode .ag-picker-field-wrapper {
+  background-color: #fff0eb !important;
+  color: #000000 !important;
+}
+.dark-mode .ag-picker-collapsed {
+  background-color: #fff0eb !important;
+  color: #000000 !important;
+}
+.dark-mode .ag-input-field-input {
+  background-color: #fff0eb !important;
+  color: #000000 !important;
+}
+.dark-mode .ag-text-field-input {
+  background-color: #fff0eb !important;
+  color: #000000 !important;
+}
+.dark-mode .ag-filter-to {
+  background-color: #fff0eb !important;
+  color: #000000 !important;
+}
+.dark-mode .ag-filter-date-to {
+  background-color: #fff0eb !important;
+  color: #000000 !important;
+}
+.dark-mode .ag-hidden {
+  background-color: #fff0eb !important;
+  color: #000000 !important;
+}
+ 
 .dark-mode .ag-header {
   background-color: #fff0eb !important;
   color: #000000 !important;
@@ -313,6 +346,16 @@ a.selected mat-icon {
 .dark-mode  .ag-cell {
   background-color: #3a3a3a !important;
   color: #e0e0e0 !important;
+}
+.dark-mode .ag-body-vertical-scroll-container {
+  background-color: #3a3a3a !important;
+  color: #e0e0e0 !important;
+}
+/*ag table ends here*/
+.dark-mode .card-header {
+  background-color: #222;
+  border-bottom-color: #3a3a3a;
+  color: #fff;
 }
 /* Dark mode styling for invoice popup */
 .dark-mode .invoice-container .popup-content {
@@ -347,3 +390,72 @@ a.selected mat-icon {
   background-color: #2d2d2d !important;
   color: #e0e0e0 !important;
 }
+/*dark mode profile*/
+.dark-mode .profile-card {
+  background-color: #2d2d2d !important;
+  color: #e0e0e0 !important;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.dark-mode .profile-header {
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .profile-header h3 span {
+  color: #fff !important;
+}
+
+.dark-mode .profile-info p span {
+  color: #e0e0e0 !important;
+}
+.dark-mode .profile-header small {
+  color: #e0e0e0 !important;
+}
+.dark-mode .profile-info mat-icon {
+  color: #ff6b6b !important;
+}
+
+/*dark mode profile ends here*/
+
+
+/* Dark mode styling for insights modal */
+.dark-mode .insights-modal {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.dark-mode .insights-content {
+  background-color: #2d2d2d;
+  color: #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.dark-mode .insights-header {
+  border-bottom: 2px solid #3a3a3a;
+}
+
+.dark-mode .insights-header h3,
+.dark-mode .insights-header .material-icons {
+  color: #fff;
+}
+
+.dark-mode .currency-picker span {
+  color: #e0e0e0;
+  background-color: #3a3a3a;
+  border-radius: 4px;
+  padding: 4px 8px;
+  margin: 0 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dark-mode .currency-picker span.active {
+  background-color: #ff6b6b;
+  color: #fff;
+}
+
+.dark-mode .charts-container canvas {
+  background-color: #2d2d2d;
+}
+/* Dark mode styling for insights modal ends here*/
