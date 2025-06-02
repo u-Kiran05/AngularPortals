@@ -1,14 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { PaymentComponent } from './payment.component';
+import { AgGridModule } from 'ag-grid-angular';  // Import AgGridModule
 
-describe('PaymentComponent', () => {
+
+describe('CreditComponent', () => {
   let component: PaymentComponent;
   let fixture: ComponentFixture<PaymentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PaymentComponent]
+      declarations: [PaymentComponent],
+      imports: [
+        HttpClientTestingModule,
+        AgGridModule,  // Initialize AgGridModule without custom components
+        
+      ]
     })
     .compileComponents();
 

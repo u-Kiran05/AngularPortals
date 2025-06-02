@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CreditComponent } from './credit.component';
+import { AgGridModule } from 'ag-grid-angular';  // Import AgGridModule
+
 
 describe('CreditComponent', () => {
   let component: CreditComponent;
@@ -8,7 +10,12 @@ describe('CreditComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CreditComponent]
+      declarations: [CreditComponent],
+      imports: [
+        HttpClientTestingModule,
+        AgGridModule,  // Initialize AgGridModule without custom components
+        
+      ]
     })
     .compileComponents();
 
