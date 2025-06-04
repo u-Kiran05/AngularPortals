@@ -12,7 +12,7 @@ import { ViewEncapsulation } from '@angular/core';
 export class DeliveryComponent implements OnInit {
   rowData: any[] = [];
   customerId: string = '';
-
+ 
   deliveryColumnDefs: ColDef[] = [
     { headerName: 'Delivery No', field: 'vbeln' },
     { headerName: 'Created On', field: 'erdat' },

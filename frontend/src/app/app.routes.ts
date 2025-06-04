@@ -18,9 +18,15 @@ import { ProfileCardComponent } from './shared/profile/profile.component';
 //Vendor Components
 import { VdashboardComponent } from './vendor/vdashboard/vdashboard.component';
 import { VfinanceComponent } from './vendor/vfinance/vfinance.component';
+import { VpurchaseComponent } from './vendor/vpurchase/vpurchase.component';
 //Vendor ends here
 import { EmployeeComponent } from './employee/employee.component';
 import { EdashboardComponent } from './employee/edashboard/edashboard.component';
+import { VquotationComponent } from './vendor/vquotation/vquotation.component';
+import { VgoodsComponent } from './vendor/vgoods/vgoods.component';
+import { VinvoiceComponent } from './vendor/vinvoice/vinvoice.component';
+import { VagingComponent } from './vendor/vaging/vaging.component';
+import { VcreditComponent } from './vendor/vcredit/vcredit.component';
 
 
 export const routes: Routes = [
@@ -28,6 +34,7 @@ export const routes: Routes = [
   {
     path: 'customer',
     component: CustomerComponent,  canActivate: [AuthGuard] ,
+    data: { role: 'Customer' },
     children: [
       { path: 'cdashboard', component:CdashboardComponent},
       { path: 'inquiry', component: InquiryComponent },
@@ -41,13 +48,21 @@ export const routes: Routes = [
     ]
   },
   { path: 'vendor', component: VendorComponent,  canActivate: [AuthGuard] ,
+     data: { role: 'Vendor' },
     children:[
       { path: 'vdashboard', component:VdashboardComponent},
       { path: 'vfinance', component: VfinanceComponent },
+      {path:'vpurchase',component:VpurchaseComponent},
+      {path:'vquotation',component:VquotationComponent},
+      {path:'vgoods',component:VgoodsComponent},
+      {path:'vinvoice',component:VinvoiceComponent},
+      {path:'vaging',component:VagingComponent},
+       {path:'vcandd',component:VcreditComponent},
       { path: '', redirectTo: 'vdashboard', pathMatch: 'full' }
     ]
    },
    { path: 'employee', component: EmployeeComponent, canActivate: [AuthGuard] ,
+    data: { role: 'Employee' },
     children:[
       { path: 'edashboard', component:EdashboardComponent},
       

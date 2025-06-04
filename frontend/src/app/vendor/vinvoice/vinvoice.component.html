@@ -1,0 +1,14 @@
+<div class="invoice-container" style="position: relative;">
+  <app-tablewith-items
+  [rowData]="rowData"
+  [columnDefs]="invoiceColumnDefs"
+  [itemColumnDefs]="itemColumnDefs"
+  [defaultColDef]="defaultColDef"
+  [popupTitle]="'Vendor Invoices'"
+  [enableItemPopup]="true"
+  [enableDownload]="selectedRow !== null"
+  (downloadClicked)="downloadInvoicePDF()"
+  (rowSelected)="onRowClicked($event)">
+</app-tablewith-items>
+
+</div>

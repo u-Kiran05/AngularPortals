@@ -1,4 +1,3 @@
-// customer.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -19,9 +18,13 @@ export class CustomerService {
     return user.id;
   }
 
-  validateCustomerLogin(customerId: string, password: string): Observable<any> {
-    return this.http.post('http://localhost:3000/api/customer/login', { customerId, password });
-  }
+ validateCustomerLogin(customerId: string, password: string): Observable<{ success: boolean; token: string }> {
+  return this.http.post<{ success: boolean; token: string }>('http://localhost:3000/api/customer/login', {
+    customerId,
+    password
+  });
+}
+
 
   getCustomerProfile(): Observable<any> {
     return this.http.post('http://localhost:3000/api/customer/profile', { customerId: this.customerId });
@@ -40,8 +43,9 @@ export class CustomerService {
   }
 
   downloadInvoicePDF(vbeln: string): Observable<Blob> {
-    return this.http.post('http://localhost:3000/api/customer/invoice/download', 
-      { customerId: this.customerId, vbeln }, 
+    return this.http.post(
+      'http://localhost:3000/api/customer/invoice/download',
+      { customerId: this.customerId, vbeln },
       { responseType: 'blob' }
     );
   }

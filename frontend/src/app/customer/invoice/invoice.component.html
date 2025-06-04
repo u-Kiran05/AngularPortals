@@ -1,42 +1,14 @@
-<div class="invoice-container">
-  <h2>Customer Invoices</h2>
-<br>
-  <!-- Main Table -->
-  <ag-grid-angular
-    class="ag-theme-alpine"
-    [rowData]="rowData"
-    [columnDefs]="invoiceColumnDefs"
-    [defaultColDef]="defaultColDef"
-    rowSelection="single"
-    (rowDoubleClicked)="onRowClicked($event)"
-    style="width: 100%; height: 450px;">
-  </ag-grid-angular>
-  
-  <!-- Sub-table Popup -->
-  <div *ngIf="showDetailPopup" class="popup-overlay">
-    <div class="popup-content">
-      <div class="popup-header">
-        <h3>
-          {{ popupTitle }}
-          <span *ngIf="selectedRow">#{{ selectedRow?.vbeln || 'N/A' }}</span>
-        </h3>
-        <div class="header-buttons">
-          <button class="download-btn" (click)="downloadInvoicePDF()" title="Download PDF">
-            <span class="material-icons">download</span>
-          </button>
-          <button class="close-btn" (click)="closeDetailPopup()" title="Close">
-            <span class="material-icons">close</span>
-          </button>
-        </div>
-      </div>
+<div class="invoice-container" style="position: relative;">
+  <app-tablewith-items
+  [rowData]="rowData"
+  [columnDefs]="invoiceColumnDefs"
+  [itemColumnDefs]="itemColumnDefs"
+  [defaultColDef]="defaultColDef"
+  [popupTitle]="'Customer Invoices'"
+  [enableItemPopup]="true"
+  [enableDownload]="selectedRow !== null"
+  (downloadClicked)="downloadInvoicePDF()"
+  (rowSelected)="onRowClicked($event)">
+</app-tablewith-items>
 
-      <ag-grid-angular
-        class="ag-theme-alpine"
-        [rowData]="selectedItems"
-        [columnDefs]="itemColumnDefs"
-        [defaultColDef]="defaultColDef"
-        style="width: 100%; height: 300px;">
-      </ag-grid-angular>
-    </div>
-  </div>
 </div>

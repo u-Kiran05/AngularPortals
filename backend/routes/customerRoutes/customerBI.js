@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { callSapService } = require("D:\\PortalProject\\backend\\utils\\parser.js"); 
+const { callSapService } = require("../../utils/parser");
 
 router.post('/customerbi', async (req, res) => {
     const { customerId } = req.body;
-    console.log('Request body:', req.body);
+   // console.log('Request body:', req.body);
 
     if (!customerId) {
         return res.status(400).json({ success: false, message: 'Customer ID is required.' });

@@ -11,7 +11,7 @@ import { ViewEncapsulation } from '@angular/core';
 })
 export class SalesComponent implements OnInit {
   rowData: any[] = [];
-
+  showGif = false;
   salesColumnDefs: ColDef[] = [
     { headerName: 'Sales Order No', field: 'vbeln' },
     { headerName: 'Created On', field: 'erdat' },

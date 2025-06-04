@@ -8,7 +8,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'SAP-ERP-PORTAL';
 
   constructor(private titleService: Title) {
     this.titleService.setTitle(this.title);

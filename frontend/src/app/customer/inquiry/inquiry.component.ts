@@ -11,7 +11,7 @@ import { ViewEncapsulation } from '@angular/core';
 })
 export class InquiryComponent implements OnInit {
   rowData: any[] = [];
-
+  showGif = false;
   inquiryColumnDefs: ColDef[] = [
     { headerName: 'Inquiry No', field: 'vbeln' },
     { headerName: 'Created On', field: 'erdat' },

@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { CustomerService } from '../../services/customer/customer.service';  // Updated import
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { CustomerService } from '../../services/customer/customer.service';
 import { ColDef } from 'ag-grid-community';
-import { saveAs } from 'file-saver';  // Make sure you have file-saver installed
-import { ViewEncapsulation } from '@angular/core';
+import { saveAs } from 'file-saver';
+
 @Component({
   selector: 'app-invoice',
   standalone: false,
   templateUrl: './invoice.component.html',
   styleUrls: ['./invoice.component.scss'],
-   encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None
 })
 export class InvoiceComponent implements OnInit {
   rowData: any[] = [];
@@ -16,6 +16,8 @@ export class InvoiceComponent implements OnInit {
   selectedItems: any[] = [];
   showDetailPopup: boolean = false;
   popupTitle: string = 'Items for invoice';
+  showInvoiceGif: boolean = false;
+  showDownloadButton: boolean = true;
 
   invoiceColumnDefs: ColDef[] = [
     { headerName: 'Invoice No', field: 'vbeln' },
@@ -43,7 +45,7 @@ export class InvoiceComponent implements OnInit {
     headerClass: 'custom-header'
   };
 
-  constructor(private cuService: CustomerService) {}  // Updated service
+  constructor(private cuService: CustomerService) {}
 
   ngOnInit(): void {
     this.fetchCustomerInvoices();
@@ -76,11 +78,12 @@ export class InvoiceComponent implements OnInit {
     });
   }
 
-  onRowClicked(event: any) {
-    this.selectedItems = event.data.items;
-    this.selectedRow = event.data;
-    this.showDetailPopup = true;
-  }
+onRowClicked(row: any) {
+  this.selectedRow = row;
+  this.selectedItems = row.items || [];
+  this.showDetailPopup = true;
+}
+
 
   closeDetailPopup() {
     this.showDetailPopup = false;
@@ -92,7 +95,7 @@ export class InvoiceComponent implements OnInit {
       return;
     }
 
-    this.cuService.downloadInvoicePDF(this.selectedRow.vbeln).subscribe({  // Updated service
+    this.cuService.downloadInvoicePDF(this.selectedRow.vbeln).subscribe({
       next: (blob) => {
         const fileName = `Invoice_${this.selectedRow.vbeln}.pdf`;
         saveAs(blob, fileName);
@@ -102,5 +105,9 @@ export class InvoiceComponent implements OnInit {
         alert('Failed to download invoice PDF.');
       }
     });
+  }
+
+  toggleDownloadButton() {
+    this.showDownloadButton = !this.showDownloadButton;
   }
 }

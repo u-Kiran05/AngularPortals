@@ -1,7 +1,15 @@
-import { Component, Input, Output, EventEmitter, HostListener, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  HostListener,
+  OnInit
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ViewEncapsulation } from '@angular/core';
+
 export interface MenuItem {
   icon: string;
   title: string;
@@ -14,7 +22,6 @@ export interface MenuItem {
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
   encapsulation: ViewEncapsulation.None
-
 })
 export class LayoutComponent implements OnInit {
   @Input() headerTitle: string = 'ERP Dashboard';
@@ -26,12 +33,27 @@ export class LayoutComponent implements OnInit {
   isCollapsed = false;
   isDarkMode = false;
   showProfileCard = false;
-  selectedMenu: string = ''; // Added for selection effect
+  selectedMenu: string = '';
 
   constructor(public authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.selectedMenu = this.router.url;  // Initialize from URL
+    this.selectedMenu = this.router.url;
+
+    // ✅ Load from sessionStorage (scoped per tab) for dark mode
+    const savedMode = sessionStorage.getItem('darkMode');
+    this.isDarkMode = savedMode === 'true';
+
+    if (this.isDarkMode) {
+      document.body.classList.add('dark-mode');
+    }
+
+    // ❗ Auto-disable dark mode if not logged in
+    if (!this.authService.isLoggedIn()) {
+      this.isDarkMode = false;
+      sessionStorage.removeItem('darkMode');
+      document.body.classList.remove('dark-mode');
+    }
   }
 
   toggleSidebar(): void {
@@ -40,6 +62,13 @@ export class LayoutComponent implements OnInit {
 
   toggleDarkMode(): void {
     this.isDarkMode = !this.isDarkMode;
+    sessionStorage.setItem('darkMode', String(this.isDarkMode));
+
+    if (this.isDarkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
   }
 
   toggleProfileCard(): void {
@@ -48,11 +77,17 @@ export class LayoutComponent implements OnInit {
 
   handleLogout(): void {
     this.authService.clearUserInfo();
+
+    // 🔁 Clear dark mode as well
+    sessionStorage.removeItem('darkMode');
+    document.body.classList.remove('dark-mode');
+    this.isDarkMode = false;
+
     this.router.navigate(['/login']);
   }
 
   onMenuClick(link: string): void {
-    this.selectedMenu = link;  // Track selected menu item
+    this.selectedMenu = link;
     this.menuClick.emit(link);
     this.router.navigate([link]);
   }
@@ -60,7 +95,8 @@ export class LayoutComponent implements OnInit {
   @HostListener('document:click', ['$event'])
   onClickOutside(event: MouseEvent): void {
     const target = event.target as HTMLElement;
-    const insideCard = target.closest('app-profile-card') || target.closest('button[mat-icon-button]');
+    const insideCard =
+      target.closest('app-profile-card') || target.closest('button[mat-icon-button]');
     if (!insideCard) this.showProfileCard = false;
   }
 }

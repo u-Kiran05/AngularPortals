@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { callSapService } = require("D:\\PortalProject\\backend\\utils\\parser.js");
+const { callSapService } = require("../../utils/parser");
 
 router.post('/sales', async (req, res) => {
   const { customerId } = req.body;

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { callSapService } = require("D:\\PortalProject\\backend\\utils\\parser.js");
+const { callSapService } = require("../../utils/parser");
 
 router.post('/invoice/download', async (req, res) => {
   debugger; // Added debugger statement to pause execution for inspection
@@ -40,7 +40,7 @@ router.post('/invoice/download', async (req, res) => {
 
     const pdfBuffer = Buffer.from(pdfBase64, 'base64');
     res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', `attachment; filename=Invoice_${vbeln}.pdf`);
+    res.setHeader('Content-Disposition', `attachment; filename=CustomerInvoice_${vbeln}.pdf`);
     res.send(pdfBuffer);
 
   } catch (error) {

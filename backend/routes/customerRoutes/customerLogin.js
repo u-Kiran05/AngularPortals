@@ -1,12 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const { callSapService } = require("D:\\PortalProject\\backend\\utils\\parser.js");
-//const redisClient = require('D:\\PortalProject\\backend\\utils\\redisClient.js');
+const jwt = require('jsonwebtoken');
+const { callSapService } = require("../../utils/parser");
 
 router.post('/login', async (req, res) => {
   const { customerId, password } = req.body;
 
+  console.log('[CustomerLogin] Login attempt received');
+  console.log(`[CustomerLogin] Input - ID: ${customerId}, Password: ${'*'.repeat(password.length)}`);
+
   if (!customerId || !password) {
+    console.log('[CustomerLogin] Missing credentials');
     return res.status(400).json({ success: false, message: 'Customer ID and password are required.' });
   }
 
@@ -23,6 +27,7 @@ router.post('/login', async (req, res) => {
     </soap-env:Envelope>`;
 
   try {
+    console.log('[CustomerLogin] Sending request to SAP...');
     const rfcResponse = await callSapService({
       url: process.env.SAP_CLOGIN_URL?.trim(),
       soapEnvelope,
@@ -33,37 +38,29 @@ router.post('/login', async (req, res) => {
     const message = rfcResponse.E_MESSAGE?.[0] || 'Unknown';
     const valid = rfcResponse.E_VALID?.[0] === 'Y';
 
+    console.log('[CustomerLogin] SAP Response:', { E_VALID: rfcResponse.E_VALID, E_MESSAGE: message });
+
     if (valid) {
-      const sessionData = {
-        id: customerId,
-        loginTime: new Date()
-      };
+      const token = jwt.sign(
+        { id: customerId, role: 'Customer' },
+        process.env.JWT_SECRET,
+        { expiresIn: '1h' }
+      );
 
-      /*req.session.customer = sessionData;
+      console.log('[CustomerLogin] Login successful. Token generated.');
 
-      try {
-        await redisClient.setEx(`session:${customerId}`, 3600, JSON.stringify(sessionData));
-        console.log(`Redis setEx success for session:${customerId}`);
-      } catch (redisError) {
-        console.error('Redis setEx error:', redisError.message);
-        return res.status(500).json({
-          success: false,
-          message: 'Failed to store session in Redis',
-          error: redisError.message
-        });
-      }
-
-      // Debug session store
-      console.log('Session data set:', req.session.customer);
-      console.log('Session ID:', req.sessionID);*/
-
-      return res.json({ success: true, message });
+      return res.json({
+        success: true,
+        message,
+        token
+      });
     } else {
+      console.log('[CustomerLogin] SAP validation failed:', message);
       return res.json({ success: false, message });
     }
 
   } catch (error) {
-    console.error('LOGIN ERROR:', error.message);
+    console.log('[CustomerLogin] LOGIN ERROR:', error.message);
     res.status(500).json({
       success: false,
       message: 'SAP call failed',

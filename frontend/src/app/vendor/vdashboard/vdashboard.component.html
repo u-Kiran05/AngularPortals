@@ -1,16 +1,33 @@
-
 <div class="dashboard-grid">
-    <!-- Row 1: Stat Cards -->
-    <div class="skeleton card small"></div>
-    <div class="skeleton card small"></div>
-    <div class="skeleton card small"></div>
-    <div class="skeleton card small"></div>
-
-    <!-- Row 2: Line Chart and Bar Chart -->
-    <div class="skeleton card wide"></div>
-    <div class="skeleton card small tall"></div>
-
-    <!-- Row 3: Table, Donut Chart, Subscribers -->
-    <div class="skeleton card medium"></div>
-    <div class="skeleton card medium"></div>
+  <!-- KPI Row -->
+  <div class="kpi-row">
+    <div class="card kpi-card"><div id="total-spend"></div></div>
+    <div class="card kpi-card"><div id="total-po"></div></div>
+    <div class="card kpi-card"><div id="Average Spend per PO"></div></div>
+    <div class="card kpi-card"><div id="aging-days"></div></div>
   </div>
+
+  <!-- Chart Row -->
+  <div class="chart-row">
+    <div class="chart-card">
+      <canvas id="credit-debit-chart"></canvas>
+    </div>
+    <div class="chart-card">
+      <canvas id="invoice-stats-chart"></canvas> 
+    </div>
+  </div>
+
+  <!-- Chart Row -->
+  <div class="chart-row">
+    <div class="chart-card">
+      <canvas id="avg-spend-invoice-chart" style="width: 100%; height: 180px;"></canvas>
+
+
+    </div>
+    <div class="chart-card">
+      <canvas id="spend-distribution-chart"></canvas> 
+    </div>
+  </div>
+
+  <!-- Chart Row -->
+
