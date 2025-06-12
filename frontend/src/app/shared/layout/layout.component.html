@@ -1,0 +1,60 @@
+<div class="layout-container" [ngClass]="{ 'dark-mode': isDarkMode, 'collapsed': isCollapsed }">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <button mat-icon-button (click)="toggleSidebar()">
+        <mat-icon>{{ isCollapsed ? 'menu' : 'menu_open' }}</mat-icon>
+      </button>
+      <span *ngIf="!isCollapsed" class="sidebar-title">Menu</span>
+    </div>
+
+    <div class="sidebar-body">
+      <ul class="menu-top">
+        <li *ngFor="let item of menuItems">
+          <a 
+            (click)="onMenuClick(item.link)" 
+            [routerLink]="item.link" 
+            routerLinkActive="active"
+            [ngClass]="{'selected': selectedMenu === item.link}">
+            <mat-icon>{{ item.icon }}</mat-icon>
+            <span *ngIf="!isCollapsed">{{ item.title }}</span>
+          </a>
+        </li>
+      </ul>
+
+      <ul class="menu-bottom">
+        <li>
+          <a (click)="handleLogout()" class="logout-link">
+            <mat-icon>{{ logoutItem.icon }}</mat-icon>
+            <span *ngIf="!isCollapsed">{{ logoutItem.title }}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- Main Panel -->
+  <div class="main-panel">
+    <header class="header-bar">
+      <div class="header-spacer"></div>
+      <h2 class="header-title">{{ headerTitle }}</h2>
+
+      <div class="header-actions">
+        <button mat-icon-button (click)="toggleDarkMode()">
+          <mat-icon>{{ isDarkMode ? 'dark_mode' : 'light_mode' }}</mat-icon>
+        </button>
+
+        <button mat-icon-button (click)="toggleProfileCard()">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+      </div>
+
+
+      <app-profile [showProfileCard]="showProfileCard"></app-profile>
+    </header>
+
+    <main class="content">
+      <ng-content></ng-content>
+    </main>
+  </div>
+</div>

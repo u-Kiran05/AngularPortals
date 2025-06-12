@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="header-line">
+    <h2>
+      Customer
+      <span class="segmented-button">
+        <button [class.active]="selectedType === 'credit'" (click)="selectType('credit')">
+          <i class="material-icons">credit_card</i> Credit
+        </button>
+        <button [class.active]="selectedType === 'debit'" (click)="selectType('debit')">
+          <i class="material-icons">account_balance</i> Debit
+        </button>
+      </span>
+      Viewer
+    </h2>
+  </div>
+  <br>
+  
+  <ag-grid-angular
+    class="ag-theme-alpine"
+    style="width: 100%; height: 450px;"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    [defaultColDef]="{ flex: 1, resizable: true, sortable: true, filter: true }">
+  </ag-grid-angular>
+</div>

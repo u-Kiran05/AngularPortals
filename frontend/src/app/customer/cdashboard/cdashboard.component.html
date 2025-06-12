@@ -1,0 +1,49 @@
+<div class="dashboard-grid">
+  <!-- KPI Row -->
+  <div class="kpi-row">
+    <div class="card kpi-card">
+      <div id="available-credit">
+        -9999.00
+        <p>Available Credit</p>
+      </div>
+    </div>
+    <div class="card kpi-card">
+      <div id="total-orders">
+        99
+        <p>Total Orders</p>
+      </div>
+    </div>
+    <div class="card kpi-card">
+      <div id="open-inquiries">
+        99
+        <p>Pending Deliveries</p>
+      </div>
+    </div>
+    <div class="card kpi-card">
+      <div id="total-payments">
+        -99 days
+        <p>Average Aging Days</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart Row (Top 5 Products and Payments vs Outstanding) -->
+  <div class="chart-row">
+    <div class="chart-card">
+      <canvas id="top-products-chart"></canvas>
+    </div>
+    <div class="chart-card">
+      <canvas id="payments-outstanding-chart"></canvas>
+    </div>
+  </div>
+
+  <!-- Chart Row (Aging Summary and Delivery Quantity) -->
+  <div class="table-chart-row">
+    <div class="chart-card">
+      <canvas id="aging-summary-chart"></canvas>
+    </div>
+    <div class="chart-card">
+      <canvas id="delivery-quantity-chart"></canvas>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+.container {
+  
+ 
+  padding: 10px;
+  background-color: transparent;
+ 
+
+    
+  }
+
+
+  .header-line {
+    display: flex;
+    align-items: center;
+    gap: 12px; // More comfortable spacing between text and selector
+
+    h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-color, #333); // Use global text color variable
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0;
+    }
+
+    .segmented-button {
+      display: inline-flex;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border-color, #ccc);
+      margin-left: 12px;
+
+      button {
+        flex: 1;
+        padding: 8px 16px;
+        border: none;
+        background-color: var(--button-bg, #f5f5f5);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 16px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        color: var(--text-color, #333);
+
+        i.material-icons {
+          font-size: 20px;
+        }
+
+        &:hover {
+          background-color: var(--hover-bg, rgb(232, 182, 180));
+        }
+
+        &.active {
+          background-color: var(--primary-color, rgb(159, 40, 37));
+          color: var(--primary-contrast, #fff);
+        }
+      }
+
+      button:first-child {
+        border-radius: 20px 0 0 20px;
+      }
+
+      button:last-child {
+        border-radius: 0 20px 20px 0;
+      }
+    }
+  }
+
+
+
+ .ag-header {
+      background-color: rgb(255, 240, 235) !important;
+    }

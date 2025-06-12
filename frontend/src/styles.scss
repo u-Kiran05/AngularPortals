@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI';
+  background-color: transparent; 
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+:host {
+  display: block;
+  height: 100vh;
+  position: relative;
+}
+
+
+@import "ag-grid-community/styles/ag-theme-alpine.css";
+

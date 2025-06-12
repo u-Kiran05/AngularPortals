@@ -1,0 +1,71 @@
+<!-- Header with Help Icon -->
+<div class="header-row" style="display: flex; align-items: center; justify-content: space-between;">
+  <h2 style="margin: 0;">{{ popupTitle }}</h2>
+
+  <mat-icon
+    *ngIf="enableItemPopup"
+    style="cursor: pointer; margin-left: 10px;"
+    class="help-icon"
+    (click)="toggleGif()">help</mat-icon>
+</div>
+
+<!-- Help GIF Floating Window -->
+<div *ngIf="enableItemPopup && showGif"
+     style="position: absolute; top: 50px; right: 20px; z-index: 10;
+            background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.3); width: 420px;">
+  <img src="assets/images/ui1.gif" alt="Help GIF"
+       style="width: 100%; height: auto; border-radius: 5px;" />
+</div>
+
+<br>
+
+<!-- Main Table -->
+<ag-grid-angular
+  class="ag-theme-alpine"
+  [rowData]="rowData"
+  [columnDefs]="columnDefs"
+  [defaultColDef]="defaultColDef"
+  rowSelection="single"
+  (rowDoubleClicked)="onRowClicked($event)"
+  style="width: 100%; height: 450px;">
+</ag-grid-angular>
+
+<!-- Popup Items Table -->
+<div *ngIf="enableItemPopup && showDetailPopup" class="popup-overlay">
+  <div class="popup-content">
+    <div class="popup-header">
+      <h3 class="h3">
+        Items for {{ formatTitle(popupTitle) }}
+        <span *ngIf="selectedRow">
+          #{{ selectedRow?.invoiceNo || selectedRow?.vbeln || selectedRow?.ebeln || selectedRow?.belnr||'N/A' }}
+        </span>
+      </h3>
+
+      <div class="header-buttons">
+        <!-- Download Button -->
+       <button *ngIf="enableDownload" 
+                class="download-btn"
+                title="Download PDF"
+                (click)="triggerDownload()">
+          <span class="material-icons">download</span>
+        </button>
+
+        <!-- Close Button -->
+        <button class="close-btn" (click)="closeDetailPopup()" title="Close">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+    </div>
+
+    <br>
+
+    <!-- Item Grid -->
+    <ag-grid-angular
+      class="ag-theme-alpine"
+      [rowData]="selectedItems"
+      [columnDefs]="itemColumnDefs"
+      [defaultColDef]="defaultColDef"
+      style="width: 100%; height: 300px;">
+    </ag-grid-angular>
+  </div>
+</div>

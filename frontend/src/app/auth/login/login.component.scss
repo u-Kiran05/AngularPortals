@@ -1,0 +1,123 @@
+.card-container {
+  display: flex;
+  max-width: 900px;
+  margin: 60px auto;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.image-section {
+  flex: 1;
+  background: rgb(255, 240, 235); /* Soft light contrasting color */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+
+  img {
+    width: 100%;
+    max-width: 600px;
+    object-fit: contain;
+  }
+}
+
+
+.form-section {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #fafafa;
+
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(159, 40, 37); /* Updated primary color */
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .user-type-selector {
+    margin-bottom: 24px;
+
+    .user-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+
+      .user-card {
+        position: relative;
+        flex: 1;
+        background: rgb(243, 214, 213); /* Light variant of primary color */
+        border: 2px solid transparent;
+        border-radius: 8px;
+        padding: 12px;
+        margin: 0 4px;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.3s;
+
+        span {
+          display: block;
+        }
+
+        &.active {
+          border-color: rgb(159, 40, 37); /* Updated primary color */
+          background: rgb(232, 182, 180); /* Slightly deeper light variant */
+        }
+
+        .tick {
+          position: absolute;
+          bottom: -9px;
+          right: -9px;
+          font-size: 18px;
+          color: green;
+        }
+      }
+    }
+
+    .welcome-text {
+      text-align: center;
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    input {
+      margin-bottom: 20px;
+      padding: 12px 16px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.3s;
+
+      &:focus {
+        border-color: rgb(159, 40, 37); /* Updated primary color */
+      }
+    }
+
+    .login-btn {
+      padding: 12px;
+      font-size: 16px;
+      background-color: rgb(159, 40, 37); /* Updated primary color */
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: rgb(119, 30, 28); /* Darker tone for hover */
+      }
+    }
+  }
+}

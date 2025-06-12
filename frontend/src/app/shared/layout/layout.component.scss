@@ -1,0 +1,515 @@
+  /* Layout Container */
+  .layout-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+  }
+
+  .layout-container.collapsed .sidebar {
+    width: 77px;
+  }
+
+  .sidebar {
+    width: 240px;
+    height: 100vh;
+    background-color: rgb(243, 214, 213);
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: width 0.3s ease, background-color 0.3s ease;
+  }
+
+  .sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .sidebar-title {
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .sidebar-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .menu-top,
+  .menu-bottom {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .menu-top {
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .menu-bottom {
+    margin-bottom: 1rem;
+  }
+
+  .menu-top li,
+  .menu-bottom li {
+    padding: 0.5rem 1rem;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    border-radius: 6px;
+    color: inherit;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease, border-left 0.3s ease;
+    border-left: 4px solid transparent;
+  }
+
+  a:hover {
+    background-color: rgb(232, 182, 180);
+  }
+
+  a.selected {
+    background-color: rgb(232, 182, 180);
+    color: rgb(159, 40, 37);
+    transform: scale(1.05);
+    border-left: 4px solid rgb(159, 40, 37);
+  }
+
+  a.selected mat-icon {
+    color: rgb(159, 40, 37);
+  }
+
+  .logout-link {
+    color: rgb(159, 40, 37);
+  }
+
+  .main-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .header-bar {
+    height: 74px;
+    background-color: rgb(159, 40, 37);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+  }
+
+  .header-title {
+    margin: 0 auto;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .content {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    background-color: #f0eeee;
+  }
+
+  /* DARK MODE */
+  .dark-mode {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+  }
+
+  .dark-mode .sidebar {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+  }
+
+  .dark-mode .sidebar a {
+    color: #e0e0e0;
+  }
+
+  .dark-mode .sidebar a:hover {
+    background-color: #3a3a3a;
+  }
+
+  .dark-mode .sidebar a.selected {
+    background-color: #3a3a3a;
+    color: #ff6b6b;
+    border-left: 4px solid #ff6b6b;
+  }
+
+  .dark-mode .sidebar a.selected mat-icon {
+    color: #ff6b6b;
+  }
+
+  .dark-mode .logout-link {
+    color: #ff6b6b;
+  }
+
+  .dark-mode .header-bar {
+    background-color: #222;
+    color: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .dark-mode .header-actions mat-icon {
+    color: #fff;
+  }
+
+  .dark-mode .content {
+    background-color: #1a1a1a;
+    color: #000000;
+  }
+
+  .dark-mode .content h1,
+  .dark-mode .content h2,
+  .dark-mode .content h3,
+  .dark-mode .content h4,
+  .dark-mode .content h5,
+  .dark-mode .content h6 {
+    color: #fff;
+  }
+
+  /* Dashboard Grid Dark Mode */
+  .dark-mode .dashboard-grid {
+    background-color: #1a1a1a;
+  }
+
+  .dark-mode .dashboard-grid .kpi-card {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .dark-mode .dashboard-grid .kpi-card p {
+    color: #b0b0b0;
+  }
+
+  .dark-mode .dashboard-grid .chart-card {
+    background-color: #2d2d2d;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .dark-mode .card,
+  .dark-mode .chart-card {
+    background-color: #2d2d2d;
+    border-color: #3a3a3a;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  /* General Popup Styling - Only for components that don't have their own specific popup styles */
+  .popup-overlay:not(.invoice-container .popup-overlay) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .popup-content:not(.invoice-container .popup-content) {
+    background: #fff;
+    padding: 2rem; /* Reduced from 5rem to be more reasonable */
+    border-radius: 8px;
+    width: 80%;
+    max-width: 800px;
+    position: relative;
+  }
+
+  .dark-mode .popup-content:not(.invoice-container .popup-content) {
+    background: #2d2d2d;
+  }
+
+  /* Only apply h3 styles to non-invoice popups */
+  .popup-content:not(.invoice-container .popup-content) h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+  
+    color: #333;
+  }
+
+  .dark-mode .popup-content:not(.invoice-container .popup-content) h3 {
+    color: #fff;
+  }
+
+  /* Only apply close button absolute positioning to non-invoice popups */
+  .popup-content:not(.invoice-container .popup-content) .close-btn {
+    
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .popup-content:not(.invoice-container .popup-content) .close-btn .material-icons {
+    color: #333;
+  }
+
+  .dark-mode .popup-content:not(.invoice-container .popup-content) .close-btn .material-icons {
+    color: #e0e0e0;
+  }
+
+  /* Form elements in dark mode */
+  .dark-mode .form-control {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+    border-color: #3a3a3a;
+  }
+
+  .dark-mode .form-control:focus {
+    border-color: #ff6b6b;
+    box-shadow: 0 0 0 0.2rem rgba(255, 107, 107, 0.25);
+  }
+
+  /* Buttons in dark mode */
+  .dark-mode .btn-primary {
+    background-color: #ff6b6b;
+    border-color: #ff6b6b;
+  }
+
+  .dark-mode .btn-primary:hover {
+    background-color: #ff5252;
+    border-color: #ff5252;
+  }
+
+  /* Cards in dark mode */
+  /*ag table*/
+  .dark-mode .ag-filter-body-wrapper {
+    background-color: #fff0eb !important;
+    color: #000000 !important;
+  }
+  .dark-mode .ag-wrapper {
+    background-color: #fff0eb !important;
+    color: #000000 !important;
+  }
+  .dark-mode .ag-picker-field-wrapper {
+    background-color: #fff0eb !important;
+    color: #000000 !important;
+  }
+  .dark-mode .ag-picker-collapsed {
+    background-color: #fff0eb !important;
+    color: #000000 !important;
+  }
+  .dark-mode .ag-input-field-input {
+    background-color: #fff0eb !important;
+    color: #000000 !important;
+  }
+  .dark-mode .ag-text-field-input {
+    background-color: #fff0eb !important;
+    color: #000000 !important;
+  }
+  .dark-mode .ag-filter-to {
+    background-color: #fff0eb !important;
+    color: #000000 !important;
+  }
+  .dark-mode .ag-filter-date-to {
+    background-color: #fff0eb !important;
+    color: #000000 !important;
+  }
+  .dark-mode .ag-hidden {
+    background-color: #fff0eb !important;
+    color: #000000 !important;
+  }
+  
+  .dark-mode .ag-header {
+    background-color: #fff0eb !important;
+    color: #000000 !important;
+  }
+  .dark-mode .ag-viewport{
+    background-color: #3a3a3a !important;
+  }
+  .dark-mode  .ag-cell {
+    background-color: #3a3a3a !important;
+    color: #e0e0e0 !important;
+  }
+  .dark-mode .ag-body-vertical-scroll-container {
+    background-color: #3a3a3a !important;
+    color: #e0e0e0 !important;
+  }
+  /*ag table ends here*/
+  .dark-mode .card-header {
+    background-color: #222;
+    border-bottom-color: #3a3a3a;
+    color: #fff;
+  }
+  /* Dark mode styling for invoice popup */
+  .dark-mode .invoice-container .popup-content {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+  }
+
+  .dark-mode .invoice-container .popup-header {
+    border-bottom-color: #3a3a3a;
+  }
+
+  .dark-mode .invoice-container .popup-header h3 {
+    color: #fff;
+  }
+
+  .dark-mode .invoice-container .download-btn,
+  .dark-mode .invoice-container .close-btn {
+    color: #e0e0e0;
+  }
+
+  .dark-mode .invoice-container .download-btn:hover
+  {
+    color: #ff6b6b;
+  }
+
+  .dark-mode .invoice-container .ag-theme-alpine .ag-header {
+    background-color: #3a3a3a !important;
+    color: #e0e0e0 !important;
+  }
+
+  .dark-mode .invoice-container .ag-theme-alpine .ag-cell {
+    background-color: #2d2d2d !important;
+    color: #e0e0e0 !important;
+  }
+  /*dark mode profile*/
+  .dark-mode .profile-card {
+    background-color: #2d2d2d !important;
+    color: #e0e0e0 !important;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .dark-mode .profile-header {
+    color: #e0e0e0 !important;
+  }
+
+  .dark-mode .profile-header h3 span {
+    color: #fff !important;
+  }
+
+  .dark-mode .profile-info p span {
+    color: #e0e0e0 !important;
+  }
+  .dark-mode .profile-header small {
+    color: #e0e0e0 !important;
+  }
+  .dark-mode .profile-info mat-icon {
+    color: #ff6b6b !important;
+  }
+
+  /*dark mode profile ends here*/
+
+
+  /* Dark mode styling for insights modal */
+  .dark-mode .insights-modal {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .dark-mode .insights-content {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .dark-mode .insights-header {
+    border-bottom: 2px solid #3a3a3a;
+  }
+
+  .dark-mode .insights-header h3,
+  .dark-mode .insights-header .material-icons {
+    color: #fff;
+  }
+
+  .dark-mode .currency-picker span {
+    color: #e0e0e0;
+    background-color: #3a3a3a;
+    border-radius: 4px;
+    padding: 4px 8px;
+    margin: 0 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .dark-mode .currency-picker span.active {
+    background-color: #ff6b6b;
+    color: #fff;
+  }
+
+  .dark-mode .charts-container canvas {
+    background-color: #2d2d2d;
+  }
+  /* Dark mode styling for insights modal ends here*/
+
+
+  //help functions
+  .dark-mode .inquiry-container .help-icon {
+    color: #ffffff !important;
+  }
+  .dark-mode .inquiry-container .help-icon:hover {
+    color: #ff6b6b !important;
+    transform: scale(1.1);
+    transition: all 0.2s ease;
+  }
+  .dark-mode .sales-container .help-icon {
+    color: #ffffff !important;
+  }
+  .dark-mode .sales-container .help-icon:hover {
+    color: #ff6b6b !important;
+    transform: scale(1.1);
+    transition: all 0.2s ease;
+  }
+  .dark-mode .delivery-container .help-icon {
+    color: #ffffff !important;
+  }
+  .dark-mode .delivery-container .help-icon:hover {
+    color: #ff6b6b !important;
+    transform: scale(1.1);
+    transition: all 0.2s ease;
+  }
+  .dark-mode .invoice-container .help-icon {
+    color: #ffffff !important;
+  }
+  .dark-mode .invoice-container .help-icon:hover {
+    color: #ff6b6b !important;
+    transform: scale(1.1);
+    transition: all 0.2s ease;
+  }
+  .dark-mode .vpurchase-container .help-icon {
+    color: #ffffff !important;
+  }
+  .dark-mode .vpurchase-container .help-icon:hover {
+    color: #ff6b6b !important;
+    transform: scale(1.1);
+    transition: all 0.2s ease;
+  }
+  .dark-mode .vquotation-container .help-icon {
+    color: #ffffff !important;
+  }
+
+  .dark-mode .vquotation-container .help-icon:hover {
+    color: #ff6b6b !important;
+    transform: scale(1.1);
+    transition: all 0.2s ease;
+  }
+
+  //help functions ends here
