@@ -45,3 +45,56 @@ Thumbs.db
 ../../.vscode
 ./angular
 
+# Root
+node_modules/
+*.log
+.env
+*.DS_Store
+
+# Ignore compiled output
+dist/
+build/
+tmp/
+temp/
+
+# OS & Editor
+.vscode/
+.idea/
+*.swp
+
+# Dependency directories
+**/node_modules/
+
+# Angular (frontend)
+frontend/.angular/
+frontend/.cache/
+frontend/.output/
+frontend/dist/
+frontend/coverage/
+frontend/src/**/*.js
+frontend/src/**/*.js.map
+
+# Backend
+backend/node_modules/
+backend/*.env
+backend/*.log
+
+# Docker
+docker/*.log
+docker/tmp/
+docker/.env
+
+# Ignore test coverage
+coverage/
+*.lcov
+.nyc_output/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Misc
+*.tgz
+*.gz
+*.zip

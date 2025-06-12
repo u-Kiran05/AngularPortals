@@ -1,0 +1,231 @@
+.
+├── dir.txt
+├── .vscode
+│   └── settings.json
+├── backend
+│   ├── .env
+│   ├── middleware
+│   │   └── verifyToken.js
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── routes
+│   │   ├── customerRoutes
+│   │   │   ├── customerAging.js
+│   │   │   ├── customerBI.js
+│   │   │   ├── customerCandD.js
+│   │   │   ├── customerDelivery.js
+│   │   │   ├── customerInquiry.js
+│   │   │   ├── customerInvoice.js
+│   │   │   ├── customerInvoicePDF.js
+│   │   │   ├── customerLogin.js
+│   │   │   ├── customerOvasales.js
+│   │   │   ├── customerProfile.js
+│   │   │   └── customerSales.js
+│   │   ├── employeeRoutes
+│   │   │   └── employeeLogin.js
+│   │   └── vendorRoutes
+│   │       ├── vendorAging.js
+│   │       ├── vendorBI.js
+│   │       ├── vendorCandD.js
+│   │       ├── vendorGoods.js
+│   │       ├── vendorInvoice.js
+│   │       ├── vendorInvoicePdf.js
+│   │       ├── vendorLogin.js
+│   │       ├── vendorProfile.js
+│   │       ├── vendorPurchase.js
+│   │       └── vendorQuotation.js
+│   ├── server.js
+│   └── utils
+│       ├── parser.js
+│       └── redisClient.js
+├── docker
+│   └── docker-compose.yml
+└── frontend
+    ├── .dockerignore
+    ├── .editorconfig
+    ├── .gitignore
+    ├── .vscode
+    │   ├── extensions.json
+    │   ├── launch.json
+    │   └── tasks.json
+    ├── Dockerfile
+    ├── README.md
+    ├── angular.json
+    ├── default.conf
+    ├── environment
+    │   ├── environment.prod.ts
+    │   └── environment.ts
+    ├── karma.conf.js
+    ├── package-lock.json
+    ├── package.json
+    ├── public
+    │   ├── assets
+    │   │   └── images
+    │   │       ├── kaar-logo.png
+    │   │       ├── kaar-tech-logo.jpg
+    │   │       └── ui1.gif
+    │   └── icons
+    │       ├── app_icon.ico
+    │       └── favicon.ico
+    ├── src
+    │   ├── app
+    │   │   ├── app.component.html
+    │   │   ├── app.component.scss
+    │   │   ├── app.component.spec.ts
+    │   │   ├── app.component.ts
+    │   │   ├── app.module.ts
+    │   │   ├── app.routes.ts
+    │   │   ├── auth
+    │   │   │   └── login
+    │   │   │       ├── login.component.html
+    │   │   │       ├── login.component.scss
+    │   │   │       ├── login.component.spec.ts
+    │   │   │       └── login.component.ts
+    │   │   ├── customer
+    │   │   │   ├── cdashboard
+    │   │   │   │   ├── cdashboard.component.html
+    │   │   │   │   ├── cdashboard.component.scss
+    │   │   │   │   ├── cdashboard.component.spec.ts
+    │   │   │   │   └── cdashboard.component.ts
+    │   │   │   ├── credit
+    │   │   │   │   ├── credit.component.html
+    │   │   │   │   ├── credit.component.scss
+    │   │   │   │   ├── credit.component.spec.ts
+    │   │   │   │   └── credit.component.ts
+    │   │   │   ├── customer.component.html
+    │   │   │   ├── customer.component.scss
+    │   │   │   ├── customer.component.spec.ts
+    │   │   │   ├── customer.component.ts
+    │   │   │   ├── customer.module.ts
+    │   │   │   ├── delivery
+    │   │   │   │   ├── delivery.component.html
+    │   │   │   │   ├── delivery.component.scss
+    │   │   │   │   ├── delivery.component.spec.ts
+    │   │   │   │   └── delivery.component.ts
+    │   │   │   ├── inquiry
+    │   │   │   │   ├── inquiry.component.html
+    │   │   │   │   ├── inquiry.component.scss
+    │   │   │   │   ├── inquiry.component.spec.ts
+    │   │   │   │   └── inquiry.component.ts
+    │   │   │   ├── invoice
+    │   │   │   │   ├── invoice.component.html
+    │   │   │   │   ├── invoice.component.scss
+    │   │   │   │   ├── invoice.component.spec.ts
+    │   │   │   │   └── invoice.component.ts
+    │   │   │   ├── ovsales
+    │   │   │   │   ├── ovsales.component.html
+    │   │   │   │   ├── ovsales.component.scss
+    │   │   │   │   ├── ovsales.component.spec.ts
+    │   │   │   │   └── ovsales.component.ts
+    │   │   │   ├── payment
+    │   │   │   │   ├── payment.component.html
+    │   │   │   │   ├── payment.component.scss
+    │   │   │   │   ├── payment.component.spec.ts
+    │   │   │   │   └── payment.component.ts
+    │   │   │   └── sales
+    │   │   │       ├── sales.component.html
+    │   │   │       ├── sales.component.scss
+    │   │   │       ├── sales.component.spec.ts
+    │   │   │       └── sales.component.ts
+    │   │   ├── employee
+    │   │   │   ├── edashboard
+    │   │   │   │   ├── edashboard.component.html
+    │   │   │   │   ├── edashboard.component.scss
+    │   │   │   │   ├── edashboard.component.spec.ts
+    │   │   │   │   └── edashboard.component.ts
+    │   │   │   ├── employee.component.html
+    │   │   │   ├── employee.component.scss
+    │   │   │   ├── employee.component.spec.ts
+    │   │   │   ├── employee.component.ts
+    │   │   │   └── employee.module.ts
+    │   │   ├── interceptors
+    │   │   │   ├── token.interceptor.spec.ts
+    │   │   │   └── token.interceptor.ts
+    │   │   ├── services
+    │   │   │   ├── auth.service.spec.ts
+    │   │   │   ├── auth.service.ts
+    │   │   │   ├── authg.guard.spec.ts
+    │   │   │   ├── authg.guard.ts
+    │   │   │   ├── customer
+    │   │   │   │   ├── customer.service.spec.ts
+    │   │   │   │   └── customer.service.ts
+    │   │   │   ├── employee
+    │   │   │   │   ├── employee.service.spec.ts
+    │   │   │   │   └── employee.service.ts
+    │   │   │   └── vendor
+    │   │   │       ├── vendor.service.spec.ts
+    │   │   │       └── vendor.service.ts
+    │   │   ├── shared
+    │   │   │   ├── ag-table
+    │   │   │   │   ├── ag-table.component.html
+    │   │   │   │   ├── ag-table.component.scss
+    │   │   │   │   ├── ag-table.component.spec.ts
+    │   │   │   │   └── ag-table.component.ts
+    │   │   │   ├── layout
+    │   │   │   │   ├── layout.component.html
+    │   │   │   │   ├── layout.component.scss
+    │   │   │   │   ├── layout.component.spec.ts
+    │   │   │   │   └── layout.component.ts
+    │   │   │   ├── profile
+    │   │   │   │   ├── profile.component.html
+    │   │   │   │   ├── profile.component.scss
+    │   │   │   │   ├── profile.component.spec.ts
+    │   │   │   │   └── profile.component.ts
+    │   │   │   ├── shared.module.ts
+    │   │   │   └── tablewith-items
+    │   │   │       ├── tablewith-items.component.html
+    │   │   │       ├── tablewith-items.component.scss
+    │   │   │       ├── tablewith-items.component.spec.ts
+    │   │   │       └── tablewith-items.component.ts
+    │   │   └── vendor
+    │   │       ├── vaging
+    │   │       │   ├── vaging.component.html
+    │   │       │   ├── vaging.component.scss
+    │   │       │   ├── vaging.component.spec.ts
+    │   │       │   └── vaging.component.ts
+    │   │       ├── vcredit
+    │   │       │   ├── vcredit.component.html
+    │   │       │   ├── vcredit.component.scss
+    │   │       │   ├── vcredit.component.spec.ts
+    │   │       │   └── vcredit.component.ts
+    │   │       ├── vdashboard
+    │   │       │   ├── vdashboard.component.html
+    │   │       │   ├── vdashboard.component.scss
+    │   │       │   ├── vdashboard.component.spec.ts
+    │   │       │   └── vdashboard.component.ts
+    │   │       ├── vendor.component.html
+    │   │       ├── vendor.component.scss
+    │   │       ├── vendor.component.spec.ts
+    │   │       ├── vendor.component.ts
+    │   │       ├── vendor.module.ts
+    │   │       ├── vfinance
+    │   │       │   ├── vfinance.component.html
+    │   │       │   ├── vfinance.component.scss
+    │   │       │   ├── vfinance.component.spec.ts
+    │   │       │   └── vfinance.component.ts
+    │   │       ├── vgoods
+    │   │       │   ├── vgoods.component.html
+    │   │       │   ├── vgoods.component.scss
+    │   │       │   ├── vgoods.component.spec.ts
+    │   │       │   └── vgoods.component.ts
+    │   │       ├── vinvoice
+    │   │       │   ├── vinvoice.component.html
+    │   │       │   ├── vinvoice.component.scss
+    │   │       │   ├── vinvoice.component.spec.ts
+    │   │       │   └── vinvoice.component.ts
+    │   │       ├── vpurchase
+    │   │       │   ├── vpurchase.component.html
+    │   │       │   ├── vpurchase.component.scss
+    │   │       │   ├── vpurchase.component.spec.ts
+    │   │       │   └── vpurchase.component.ts
+    │   │       └── vquotation
+    │   │           ├── vquotation.component.html
+    │   │           ├── vquotation.component.scss
+    │   │           ├── vquotation.component.spec.ts
+    │   │           └── vquotation.component.ts
+    │   ├── index.html
+    │   ├── main.ts
+    │   └── styles.scss
+    ├── tsconfig.app.json
+    ├── tsconfig.json
+    └── tsconfig.spec.json
