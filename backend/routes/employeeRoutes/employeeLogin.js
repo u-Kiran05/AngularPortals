@@ -6,11 +6,11 @@ const { callSapService } = require("../../utils/parser");
 router.post('/login', async (req, res) => {
   const { employeeId, password } = req.body;
 
-  console.log('[EmployeeLogin] Login attempt received');
-  console.log(`[EmployeeLogin] Input - ID: ${employeeId}, Password: ${'*'.repeat(password.length)}`);
+ // console.log('[EmployeeLogin] Login attempt received');
+ // console.log(`[EmployeeLogin] Input - ID: ${employeeId}, Password: ${'*'.repeat(password.length)}`);
 
   if (!employeeId || !password) {
-    console.log('[EmployeeLogin] Missing credentials');
+  //  console.log('[EmployeeLogin] Missing credentials');
     return res.status(400).json({ success: false, message: 'Employee ID and password are required.' });
   }
 
@@ -27,7 +27,7 @@ router.post('/login', async (req, res) => {
     </soap-env:Envelope>`;
 
   try {
-    console.log('[EmployeeLogin] Sending request to SAP...');
+//console.log('[EmployeeLogin] Sending request to SAP...');
     const rfcResponse = await callSapService({
       url: process.env.SAP_ELOGIN_URL?.trim(),
       soapEnvelope,
@@ -38,7 +38,7 @@ router.post('/login', async (req, res) => {
     const message = rfcResponse.E_MESSAGE?.[0] || 'Unknown';
     const valid = rfcResponse.E_VALID?.[0] === 'Y';
 
-    console.log('[EmployeeLogin] SAP Response:', { E_VALID: rfcResponse.E_VALID, E_MESSAGE: message });
+   // console.log('[EmployeeLogin] SAP Response:', { E_VALID: rfcResponse.E_VALID, E_MESSAGE: message });
 
     if (valid) {
       const token = jwt.sign(
@@ -47,19 +47,19 @@ router.post('/login', async (req, res) => {
         { expiresIn: '1h' }
       );
 
-      console.log('[EmployeeLogin] Login successful. Token generated.');
+    //  console.log('[EmployeeLogin] Login successful. Token generated.');
       return res.json({
         success: true,
         message,
         token
       });
     } else {
-      console.log('[EmployeeLogin] SAP validation failed:', message);
+     // console.log('[EmployeeLogin] SAP validation failed:', message);
       return res.json({ success: false, message });
     }
 
   } catch (error) {
-    console.log('[EmployeeLogin] LOGIN ERROR:', error.message);
+   // console.log('[EmployeeLogin] LOGIN ERROR:', error.message);
     res.status(500).json({
       success: false,
       message: 'SAP call failed',

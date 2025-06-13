@@ -36,10 +36,16 @@ const vendorBI=require('./routes/vendorRoutes/vendorBI');
 
 //Employee route imports
 const employeeLoginRoute=require('./routes/employeeRoutes/employeeLogin');
+const employeeProfileRoute = require('./routes/employeeRoutes/employeeProfile');
+const employeeLeaveRoute = require('./routes/employeeRoutes/employeeLeave');
 // Public login routes (no token needed)
 app.use('/api/customer', customerLoginRoute);
 app.use('/api/vendor', vendorLoginRoute);
 app.use('/api/employee', employeeLoginRoute);
+app.use('/api/employee', employeeLeaveRoute);
+
+//employee protected routes (requires role: employee)
+app.use('/api/employee', employeeProfileRoute);
 // Vendor protected routes (requires role: Vendor)
 app.use('/api/vendor', verifyToken('Vendor'), vendorProfileRoute);
 app.use('/api/vendor', verifyToken('Vendor'), vendorPurchase);

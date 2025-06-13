@@ -5,11 +5,12 @@
       <ng-container *ngIf="user?.role === 'Customer' && customerProfile">
         <h3><span>{{ customerProfile.name || 'N/A' }}</span></h3>
       </ng-container>
-
       <ng-container *ngIf="user?.role === 'Vendor' && vendorProfile">
         <h3><span>{{ vendorProfile.name || 'N/A' }}</span></h3>
       </ng-container>
-
+      <ng-container *ngIf="user?.role === 'Employee' && employeeProfile">
+        <h3><span>{{ employeeProfile.name || 'N/A' }}</span></h3>
+      </ng-container>
       <small>{{ user.role || 'Unknown' }}</small>
     </div>
   </div>
@@ -19,7 +20,7 @@
   <div class="profile-info">
     <p>
       <mat-icon>badge</mat-icon>
-      <span>ID: {{ user.id || vendorProfile?.lifnr || 'N/A' }}</span>
+      <span>ID: {{ user.id || vendorProfile?.lifnr || employeeProfile?.id || 'N/A' }}</span>
     </p>
 
     <!-- Customer Section -->
@@ -44,10 +45,45 @@
         <mat-icon>flag</mat-icon>
         <span>{{ vendorProfile.country || 'N/A' }} - {{ vendorProfile.postalCode || 'N/A' }}</span>
       </p>
-
       <p>
         <mat-icon>home</mat-icon>
         <span>Home No: {{ vendorProfile.addressNumber || 'N/A' }}</span>
+      </p>
+    </ng-container>
+
+    <!-- Employee Section -->
+    <ng-container *ngIf="user?.role === 'Employee' && employeeProfile">
+      <p>
+        <mat-icon>person</mat-icon>
+        <span>Gender: {{ employeeProfile.gender || 'N/A' }}</span>
+      </p>
+      <p>
+        <mat-icon>cake</mat-icon>
+        <span>DOB: {{ employeeProfile.dob || 'N/A' }}</span>
+      </p>
+      <p>
+        <mat-icon>public</mat-icon>
+        <span>Nationality: {{ employeeProfile.nationality || 'N/A' }}</span>
+      </p>
+      <p>
+        <mat-icon>mail</mat-icon>
+        <span>Email: {{ employeeProfile.email || 'N/A' }}</span>
+      </p>
+      <p>
+        <mat-icon>apartment</mat-icon>
+        <span>Company Code: {{ employeeProfile.companyCode || 'N/A' }}</span>
+      </p>
+      <p>
+        <mat-icon>location_city</mat-icon>
+        <span>City: {{ employeeProfile.city || 'N/A' }}</span>
+      </p>
+      <p>
+        <mat-icon>payments</mat-icon>
+        <span>Pay Scale: {{ employeeProfile.payScaleGroup || 'N/A' }}</span>
+      </p>
+      <p>
+        <mat-icon>account_balance_wallet</mat-icon>
+        <span>Basic Pay: ₹{{ employeeProfile.basicPay || 'N/A' }}</span>
       </p>
     </ng-container>
 

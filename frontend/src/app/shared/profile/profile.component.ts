@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { CustomerService } from '../../services/customer/customer.service';
 import { VendorService } from '../../services/vendor/vendor.service';
+import { EmployeeService } from '../../services/employee/employee.service';
 
 interface User {
   id?: string;
@@ -28,9 +29,27 @@ interface VendorProfile {
   addressNumber?: string;
 }
 
+interface EmployeeProfile {
+  id?: string;
+  name?: string;
+  gender?: string;
+  dob?: string;
+  nationality?: string;
+  email?: string;
+  companyCode?: string;
+  subArea?: string;
+  costCenter?: string;
+  position?: string;
+  job?: string;
+  payScaleGroup?: string;
+  basicPay?: string;
+  city?: string;
+  country?: string;
+}
+
 @Component({
   selector: 'app-profile',
-  standalone:false,
+  standalone: false,
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
   encapsulation: ViewEncapsulation.None
@@ -40,12 +59,14 @@ export class ProfileCardComponent implements OnInit {
   user: User | null = null;
   customerProfile: CustomerProfile | null = null;
   vendorProfile: VendorProfile | null = null;
+  employeeProfile: EmployeeProfile | null = null;
   profileName: string = 'Loading...';
 
   constructor(
     private authService: AuthService,
     private cuService: CustomerService,
-    private veService: VendorService
+    private veService: VendorService,
+    private emService: EmployeeService
   ) {}
 
   ngOnInit(): void {
@@ -54,7 +75,7 @@ export class ProfileCardComponent implements OnInit {
 
   private loadUserProfile(): void {
     this.user = this.authService.getUserInfo();
-    
+
     if (!this.user) {
       console.error('[ProfileCard] No user info available');
       this.profileName = 'Unknown User';
@@ -67,6 +88,8 @@ export class ProfileCardComponent implements OnInit {
       this.loadCustomerProfile();
     } else if (this.user.role === 'Vendor') {
       this.loadVendorProfile();
+    } else if (this.user.role === 'Employee') {
+      this.loadEmployeeProfile();
     }
   }
 
@@ -87,12 +110,6 @@ export class ProfileCardComponent implements OnInit {
 
   private loadVendorProfile(): void {
     console.log('[ProfileCard] Detected Vendor role');
-    if (!this.user?.id) {
-      console.error('[ProfileCard] Missing vendor ID in user info');
-      this.profileName = 'Invalid Vendor Profile';
-      return;
-    }
-
     this.veService.getVendorProfile().subscribe({
       next: (profile) => {
         this.vendorProfile = profile;
@@ -101,6 +118,21 @@ export class ProfileCardComponent implements OnInit {
       },
       error: (err) => {
         console.error('[ProfileCard] Error fetching vendor profile:', err);
+        this.profileName = 'Error loading profile';
+      }
+    });
+  }
+
+  private loadEmployeeProfile(): void {
+    console.log('[ProfileCard] Detected Employee role');
+    this.emService.getEmployeeProfile().subscribe({
+      next: (profile) => {
+        this.employeeProfile = profile;
+        this.profileName = profile.name || 'Unknown Employee';
+        console.log('[ProfileCard] Employee profile fetched:', profile);
+      },
+      error: (err) => {
+        console.error('[ProfileCard] Error fetching employee profile:', err);
         this.profileName = 'Error loading profile';
       }
     });

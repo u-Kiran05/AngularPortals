@@ -24,4 +24,16 @@ export class EmployeeService {
       password
     });
   }
+
+  getEmployeeProfile(): Observable<any> {
+    return this.http.post<any>('http://localhost:3000/api/employee/eprofile', {
+      employeeId: this.employeeId
+    });
+  }
+
+  getEmployeeLeave(): Observable<any> {
+    return this.http.post<any>('http://localhost:3000/api/employee/eleave', {
+      employeeId: this.employeeId
+    });
+  }
 }

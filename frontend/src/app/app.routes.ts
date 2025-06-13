@@ -27,6 +27,7 @@ import { VgoodsComponent } from './vendor/vgoods/vgoods.component';
 import { VinvoiceComponent } from './vendor/vinvoice/vinvoice.component';
 import { VagingComponent } from './vendor/vaging/vaging.component';
 import { VcreditComponent } from './vendor/vcredit/vcredit.component';
+import { EleaveComponent } from './employee/eleave/eleave.component';
 
 
 export const routes: Routes = [
@@ -65,7 +66,7 @@ export const routes: Routes = [
     data: { role: 'Employee' },
     children:[
       { path: 'edashboard', component:EdashboardComponent},
-      
+      {path:'eleave',component:EleaveComponent},
       { path: '', redirectTo: 'edashboard', pathMatch: 'full' }
     ]
    },
