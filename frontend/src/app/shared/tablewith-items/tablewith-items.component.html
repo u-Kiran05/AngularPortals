@@ -10,12 +10,24 @@
 </div>
 
 <!-- Help GIF Floating Window -->
+<!-- Help GIF Floating Window -->
 <div *ngIf="enableItemPopup && showGif"
      style="position: absolute; top: 50px; right: 20px; z-index: 10;
-            background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.3); width: 420px;">
+            background: white; padding: 12px 16px; border-radius: 8px; 
+            box-shadow: 0 2px 12px rgba(0,0,0,0.25); width: 420px; font-family: 'Roboto', sans-serif;">
+  
+  <!-- Instruction Text with Icons -->
+  <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 10px;">
+    <span class="material-icons" style="font-size: 20px; color: #333;">mouse</span>
+    <span class="material-icons" style="font-size: 20px; color: #333;">mouse</span>
+    <span style="font-size: 15px; color: #333;">Double-click on a row to view item details</span>
+  </div>
+
+  <!-- GIF Image -->
   <img src="assets/images/ui1.gif" alt="Help GIF"
-       style="width: 100%; height: auto; border-radius: 5px;" />
+       style="width: 100%; height: auto; border-radius: 6px;" />
 </div>
+
 
 <br>
 

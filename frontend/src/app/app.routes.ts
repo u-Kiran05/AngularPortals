@@ -28,6 +28,7 @@ import { VinvoiceComponent } from './vendor/vinvoice/vinvoice.component';
 import { VagingComponent } from './vendor/vaging/vaging.component';
 import { VcreditComponent } from './vendor/vcredit/vcredit.component';
 import { EleaveComponent } from './employee/eleave/eleave.component';
+import { EpayComponent } from './employee/epay/epay.component';
 
 
 export const routes: Routes = [
@@ -67,6 +68,7 @@ export const routes: Routes = [
     children:[
       { path: 'edashboard', component:EdashboardComponent},
       {path:'eleave',component:EleaveComponent},
+      {path:'epay',component:EpayComponent},
       { path: '', redirectTo: 'edashboard', pathMatch: 'full' }
     ]
    },

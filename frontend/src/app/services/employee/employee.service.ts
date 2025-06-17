@@ -36,4 +36,17 @@ export class EmployeeService {
       employeeId: this.employeeId
     });
   }
+
+  getEmployeePayslip(): Observable<any> {
+  return this.http.post<any>('http://localhost:3000/api/employee/payslip', {
+    employeeId: this.employeeId
+  });
+}
+
+downloadPayslipPDF(): Observable<Blob> {
+  return this.http.post('http://localhost:3000/api/employee/payslip/download', {
+    employeeId: this.employeeId
+  }, { responseType: 'blob' });
+}
+
 }

@@ -1,0 +1,30 @@
+<div class="payslip-container">
+  <div class="payslip-card">
+    <h2 class="payslip-title">
+      Payslip for {{ headerData.empFirstName }} {{ headerData.empLastName }}
+    </h2>
+
+    <div class="employee-details">
+      <div class="employee-field">Employee ID : <span class="field-value">{{ headerData.empId }}</span></div>
+       <div class="employee-field">Organization Code : <span class="field-value">{{ headerData.orgKey }} </span></div>
+      <div class="employee-field">Utilization Level : <span class="field-value">{{ headerData.utilizationLevel }} </span></div>
+      <div class="employee-field">Pay Scale Type : <span class="field-value">{{ headerData.payScaleType }} </span></div>
+      <div class="employee-field">Pay Scale Group : <span class="field-value">{{ headerData.payScaleGroup }} </span></div>
+      <div class="employee-field">Currency Type : <span class="field-value">{{ headerData.currency }} </span></div>
+
+    </div>
+
+    <h3 class="section-heading">Pay Components</h3>
+    <div class="component-list">
+      <div class="component-entry" *ngFor="let item of itemList">
+        • {{ item.wageType }} - {{ item.wageDesc }} : {{ item.amount }} {{ item.currency }}
+      </div>
+    </div>
+
+    <div class="payslip-actions">
+      <input type="email" class="email-input" placeholder="Email" [(ngModel)]="emailAddress" />
+      <button class="send-button" (click)="sendEmail()">Send Mail</button>
+      <button class="download-button" (click)="downloadPDF()">Download PDF</button>
+    </div>
+  </div>
+</div>

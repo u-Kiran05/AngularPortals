@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class EmployeeComponent {
 menuItems = [
     { icon: 'home', title: 'Home', link: '/employee/edashboard' },
-    { icon: 'receipt_long', title: 'payslip', link: '/employee/payslip' },
+    { icon: 'receipt_long', title: 'payslip', link: '/employee/epay' },
     { icon: 'event_note', title: 'Leaves', link: '/employee/eleave' },
     
   ];

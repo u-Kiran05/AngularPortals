@@ -513,3 +513,64 @@
   }
 
   //help functions ends here
+
+/* Dark mode styling for Payslip Component */
+.dark-mode .payslip-card {
+  background-color: #2d2d2d;
+  color: #e0e0e0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .payslip-title {
+  color: #ffffff;
+}
+
+.dark-mode .employee-details {
+  background-color: #3a3a3a;
+}
+
+.dark-mode .employee-field {
+  color: #e0e0e0;
+}
+
+.dark-mode .field-value {
+  color: #ff6b6b;
+}
+
+.dark-mode .section-heading {
+  color: #ffffff;
+}
+
+.dark-mode .component-list {
+  background-color: transparent;
+}
+
+.dark-mode .component-entry {
+  background-color: #444;
+  color: #f1f1f1;
+}
+
+.dark-mode .email-input {
+  background-color: #3a3a3a;
+  border-color: #555;
+  color: #fff;
+}
+
+.dark-mode .email-input::placeholder {
+  color: #aaa;
+}
+
+.dark-mode .send-button {
+  background-color: #ff6b6b;
+  color: #ffffff;
+}
+
+.dark-mode .download-button {
+  background-color: #6ab0f3;
+  color: #ffffff;
+}
+
+.dark-mode .send-button:hover,
+.dark-mode .download-button:hover {
+  background-color: #ff5252;
+}
