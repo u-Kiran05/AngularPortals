@@ -48,5 +48,12 @@ downloadPayslipPDF(): Observable<Blob> {
     employeeId: this.employeeId
   }, { responseType: 'blob' });
 }
+sendPayslipEmail(to: string): Observable<any> {
+  return this.http.post<any>('http://localhost:3000/api/employee/sendemail', {
+    employeeId: this.employeeId,
+    to
+  });
+}
+
 
 }

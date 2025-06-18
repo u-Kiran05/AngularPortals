@@ -59,6 +59,18 @@ chosenMonthHandler(normalizedMonth: Date, datepicker: any) {
 }
 
   sendEmail() {
-   
+  if (!this.emailAddress || !this.emailAddress.includes('@')) {
+    alert('Please enter a valid email address.');
+    return;
   }
+
+  this.employeeService.sendPayslipEmail(this.emailAddress).subscribe({
+    next: () => alert('Payslip emailed successfully!'),
+    error: err => {
+      console.error(err);
+      alert('Failed to send payslip. Please try again.');
+    }
+  });
+}
+
 }
