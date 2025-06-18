@@ -1,16 +1,55 @@
-
 <div class="dashboard-grid">
-    <!-- Row 1: Stat Cards -->
-    <div class="skeleton card small"></div>
-    <div class="skeleton card small"></div>
-    <div class="skeleton card small"></div>
-    <div class="skeleton card small"></div>
 
-    <!-- Row 2: Line Chart and Bar Chart -->
-    <div class="skeleton card wide"></div>
-    <div class="skeleton card small tall"></div>
-
-    <!-- Row 3: Table, Donut Chart, Subscribers -->
-    <div class="skeleton card medium"></div>
-    <div class="skeleton card medium"></div>
+  <!-- KPI Row -->
+  <div class="kpi-row">
+    <div class="card kpi-card">
+      <div id="working-hours">
+        {{ kpi?.aworkinghrs || 0 }}
+        <p>Annual Working Hours</p>
+      </div>
+    </div>
+    <div class="card kpi-card">
+      <div id="annual-salary">
+        ₹{{ kpi?.asalary || 0 }}
+        <p>Annual Salary</p>
+      </div>
+    </div>
+    <div class="card kpi-card">
+      <div id="leave-balance">
+        {{ kpi?.leaves || 0 }}
+        <p>Total Leaves</p>
+      </div>
+    </div>
+    <div class="card kpi-card">
+      <div id="tenure">
+        {{ kpi?.tenure_years || 0 }} yrs
+        <p>Tenure</p>
+      </div>
+    </div>
   </div>
+
+  <!-- Charts Row -->
+  <div class="chart-row">
+    <div class="chart-card">
+      <h4>Monthly Attendance</h4>
+      <canvas id="attendance-line-chart"></canvas>
+    </div>
+    <div class="chart-card">
+      <h4>Leave Types</h4>
+      <canvas id="leave-type-bar-chart"></canvas>
+    </div>
+  </div>
+
+  <!-- Additional Charts Row -->
+  <div class="table-chart-row">
+    <div class="chart-card">
+      <h4>Leave Summary</h4>
+      <canvas id="leave-summary-donut"></canvas>
+    </div>
+    <div class="chart-card">
+      <h4>Project Hours</h4>
+      <canvas id="project-hours-chart"></canvas>
+    </div>
+  </div>
+
+</div>

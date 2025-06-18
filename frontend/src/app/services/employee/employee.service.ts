@@ -54,6 +54,11 @@ sendPayslipEmail(to: string): Observable<any> {
     to
   });
 }
+getEmployeeKPI(): Observable<any> {
+  return this.http.post<any>('http://localhost:3000/api/employee/ekpi', {
+    employeeId: this.employeeId
+  });
+}
 
 
 }
