@@ -121,3 +121,29 @@
     }
   }
 }
+
+.success-snackbar {
+  background-color: #43a047;
+  color: white !important;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(67, 160, 71, 0.25);
+}
+
+
+/* Error Snackbar */
+.error-snackbar {
+  background-color: #e53935 ;
+  color: white !important;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+
+
+.mat-button-wrapper {
+  color: #fff;
+  font-weight: 500;
+}

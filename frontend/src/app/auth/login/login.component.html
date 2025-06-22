@@ -9,19 +9,39 @@
   <div class="form-section">
     <h2>Welcome to ERP portal</h2>
     <br />
+
+    <!-- User Role Selection -->
     <div class="user-type-selector">
       <div class="user-buttons">
-        <div class="user-card" [class.active]="selectedUser === 'Customer'" (click)="setUser('Customer')">
+        <div
+          class="user-card"
+          [class.active]="selectedUser === 'Customer'"
+          (click)="setUser('Customer')"
+          tabindex="0"
+          aria-label="Customer Login Option"
+        >
           <span class="material-icons">person</span>
           <span>Customer</span>
           <span class="material-icons tick" *ngIf="selectedUser === 'Customer'">check_circle</span>
         </div>
-        <div class="user-card" [class.active]="selectedUser === 'Vendor'" (click)="setUser('Vendor')">
+        <div
+          class="user-card"
+          [class.active]="selectedUser === 'Vendor'"
+          (click)="setUser('Vendor')"
+          tabindex="0"
+          aria-label="Vendor Login Option"
+        >
           <span class="material-icons">storefront</span>
           <span>Vendor</span>
           <span class="material-icons tick" *ngIf="selectedUser === 'Vendor'">check_circle</span>
         </div>
-        <div class="user-card" [class.active]="selectedUser === 'Employee'" (click)="setUser('Employee')">
+        <div
+          class="user-card"
+          [class.active]="selectedUser === 'Employee'"
+          (click)="setUser('Employee')"
+          tabindex="0"
+          aria-label="Employee Login Option"
+        >
           <span class="material-icons">badge</span>
           <span>Employee</span>
           <span class="material-icons tick" *ngIf="selectedUser === 'Employee'">check_circle</span>
@@ -31,10 +51,28 @@
     </div>
 
     <!-- Login Form -->
-    <form (ngSubmit)="onLogin()">
-      <input type="text" placeholder="UserID" [(ngModel)]="username" name="username" required />
-      <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
-      <button type="submit" class="login-btn">Login</button>
+    <form (ngSubmit)="onLogin()" #loginForm="ngForm" autocomplete="off">
+      <input
+        type="text"
+        placeholder="User ID*"
+        [(ngModel)]="username"
+        name="username"
+        required
+        #userId="ngModel"
+      />
+      
+
+      <input
+        type="password"
+        placeholder="Password*"
+        [(ngModel)]="password"
+        name="password"
+        required
+        #userPass="ngModel"
+      />
+        
+
+      <button type="submit" class="login-btn" [disabled]="loginForm.invalid">Login</button>
     </form>
   </div>
 </div>
