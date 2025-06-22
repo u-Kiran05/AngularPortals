@@ -11,6 +11,7 @@ import { TablewithItemsComponent } from './tablewith-items/tablewith-items.compo
 import { AgGridModule } from 'ag-grid-angular';
 import { ModuleRegistry, AllCommunityModule } from 'ag-grid-community';
 import { AgTableComponent } from './ag-table/ag-table.component';
+
 ModuleRegistry.registerModules([ AllCommunityModule ]);
 @NgModule({
   declarations: [

@@ -11,24 +11,32 @@
     <div class="sidebar-body">
       <ul class="menu-top">
         <li *ngFor="let item of menuItems">
-          <a 
-            (click)="onMenuClick(item.link)" 
-            [routerLink]="item.link" 
-            routerLinkActive="active"
-            [ngClass]="{'selected': selectedMenu === item.link}">
-            <mat-icon>{{ item.icon }}</mat-icon>
-            <span *ngIf="!isCollapsed">{{ item.title }}</span>
-          </a>
-        </li>
+  <a 
+    (click)="onMenuClick(item.link)" 
+    [routerLink]="item.link" 
+    routerLinkActive="active"
+    [matTooltip]="isCollapsed ? item.title : ''"
+    matTooltipPosition="right"
+    [ngClass]="{'selected': selectedMenu === item.link}">
+    <mat-icon>{{ item.icon }}</mat-icon>
+    <span *ngIf="!isCollapsed">{{ item.title }}</span>
+  </a>
+</li>
+
       </ul>
 
       <ul class="menu-bottom">
         <li>
-          <a (click)="handleLogout()" class="logout-link">
-            <mat-icon>{{ logoutItem.icon }}</mat-icon>
-            <span *ngIf="!isCollapsed">{{ logoutItem.title }}</span>
-          </a>
-        </li>
+  <a 
+    (click)="handleLogout()" 
+    class="logout-link"
+    [matTooltip]="isCollapsed ? logoutItem.title : ''"
+    matTooltipPosition="right">
+    <mat-icon>{{ logoutItem.icon }}</mat-icon>
+    <span *ngIf="!isCollapsed">{{ logoutItem.title }}</span>
+  </a>
+</li>
+
       </ul>
     </div>
   </aside>

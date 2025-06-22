@@ -5,6 +5,36 @@
     width: 100%;
   }
 
+
+.mdc-tooltip {
+  background-color: #000 !important;
+  color: #fff !important;
+  font-size: 13px !important;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  max-width: unset;
+  z-index: 1000;
+  position: relative !important;
+}
+
+.mdc-tooltip--shown::after {
+  content: "";
+  position: absolute;
+  left: -8px; /* Adjusted to position arrowhead correctly */
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg); /* Rotate to form arrowhead */
+  width: 8px; /* Size of the arrowhead */
+  height: 8px;
+  background-color: #000; /* Match tooltip background */
+  pointer-events: none;
+}
+
+.layout-container.collapsed .mdc-tooltip--shown::after {
+  left: -6px;
+}
+
   .layout-container.collapsed .sidebar {
     width: 77px;
   }

@@ -9,7 +9,6 @@ import {
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ViewEncapsulation } from '@angular/core';
-
 export interface MenuItem {
   icon: string;
   title: string;
@@ -40,7 +39,7 @@ export class LayoutComponent implements OnInit {
   ngOnInit(): void {
     this.selectedMenu = this.router.url;
 
-    // ✅ Load from sessionStorage (scoped per tab) for dark mode
+   
     const savedMode = sessionStorage.getItem('darkMode');
     this.isDarkMode = savedMode === 'true';
 
@@ -48,7 +47,7 @@ export class LayoutComponent implements OnInit {
       document.body.classList.add('dark-mode');
     }
 
-    // ❗ Auto-disable dark mode if not logged in
+
     if (!this.authService.isLoggedIn()) {
       this.isDarkMode = false;
       sessionStorage.removeItem('darkMode');
@@ -78,7 +77,7 @@ export class LayoutComponent implements OnInit {
   handleLogout(): void {
     this.authService.clearUserInfo();
 
-    // 🔁 Clear dark mode as well
+ 
     sessionStorage.removeItem('darkMode');
     document.body.classList.remove('dark-mode');
     this.isDarkMode = false;
