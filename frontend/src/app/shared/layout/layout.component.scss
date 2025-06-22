@@ -30,6 +30,22 @@
   background-color: #000; /* Match tooltip background */
   pointer-events: none;
 }
+.sap-up {
+  color: #00c853; // Green
+}
+
+.sap-down {
+  color: #d50000; // Red
+}
+.sap-up,
+.dark-mode .sap-up {
+  color: #00c853 !important; // Bright green
+}
+
+.sap-down,
+.dark-mode .sap-down {
+  color: #d50000 !important; // Bright red
+}
 
 .layout-container.collapsed .mdc-tooltip--shown::after {
   left: -6px;

@@ -48,6 +48,11 @@
       <h2 class="header-title">{{ headerTitle }}</h2>
 
       <div class="header-actions">
+        <button mat-icon-button matTooltip="SAP Status" disableRipple>
+          <mat-icon [ngClass]="sapStatusUp ? 'sap-up' : 'sap-down'">
+  {{ sapStatusUp ? 'cloud_done' : 'cloud_off' }}
+</mat-icon>
+        </button>
         <button mat-icon-button (click)="toggleDarkMode()">
           <mat-icon>{{ isDarkMode ? 'dark_mode' : 'light_mode' }}</mat-icon>
         </button>

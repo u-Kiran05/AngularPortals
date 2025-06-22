@@ -122,27 +122,27 @@
   }
 }
 
+/* Success Snackbar */
 .success-snackbar {
-  background-color: #43a047;
-  color: white !important;
+  background-color: #0ebe34; /* fixed direct green hex */
+  color: #fff !important;
   font-weight: 600;
   font-size: 14px;
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(67, 160, 71, 0.25);
-}
 
+  box-shadow: 0 2px 7px rgba(14, 190, 52, 0.3);
+}
 
 /* Error Snackbar */
 .error-snackbar {
-  background-color: #e53935 ;
-  color: white !important;
+  background-color: #e53935;
+  color: #fff !important;
   font-weight: 600;
   font-size: 14px;
-  border-radius: 6px;
+
+  box-shadow: 0 2px 7px rgba(229, 57, 53, 0.3);
 }
 
-
-
+/* Snackbar button wrapper (if button ever needed) */
 .mat-button-wrapper {
   color: #fff;
   font-weight: 500;

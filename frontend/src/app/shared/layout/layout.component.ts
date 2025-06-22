@@ -4,11 +4,15 @@ import {
   Output,
   EventEmitter,
   HostListener,
-  OnInit
+  OnInit,
+  OnDestroy
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ViewEncapsulation } from '@angular/core';
+import { interval, Subscription } from 'rxjs';
+import { SapStatusService, SapStatus } from '../../services/sap-status.service';
+
 export interface MenuItem {
   icon: string;
   title: string;
@@ -22,7 +26,7 @@ export interface MenuItem {
   styleUrls: ['./layout.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent implements OnInit, OnDestroy {
   @Input() headerTitle: string = 'ERP Dashboard';
   @Input() menuItems: MenuItem[] = [];
   @Output() menuClick = new EventEmitter<string>();
@@ -34,12 +38,18 @@ export class LayoutComponent implements OnInit {
   showProfileCard = false;
   selectedMenu: string = '';
 
-  constructor(public authService: AuthService, private router: Router) {}
+  sapStatusUp: boolean = false;
+  private sapStatusSubscription!: Subscription;
+
+  constructor(
+    public authService: AuthService,
+    private router: Router,
+    private sapStatusService: SapStatusService
+  ) {}
 
   ngOnInit(): void {
     this.selectedMenu = this.router.url;
 
-   
     const savedMode = sessionStorage.getItem('darkMode');
     this.isDarkMode = savedMode === 'true';
 
@@ -47,11 +57,35 @@ export class LayoutComponent implements OnInit {
       document.body.classList.add('dark-mode');
     }
 
-
     if (!this.authService.isLoggedIn()) {
       this.isDarkMode = false;
       sessionStorage.removeItem('darkMode');
       document.body.classList.remove('dark-mode');
+    }
+
+    // 🔄 Initial SAP status check
+    this.checkSAPStatus();
+
+    // 🔁 Auto-refresh SAP status every 10 seconds
+    this.sapStatusSubscription = interval(10000).subscribe(() => {
+      this.checkSAPStatus();
+    });
+  }
+
+  checkSAPStatus(): void {
+    this.sapStatusService.getStatus().subscribe({
+      next: (status: SapStatus) => {
+        this.sapStatusUp = status.up;
+      },
+      error: () => {
+        this.sapStatusUp = false;
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.sapStatusSubscription) {
+      this.sapStatusSubscription.unsubscribe();
     }
   }
 
@@ -76,12 +110,9 @@ export class LayoutComponent implements OnInit {
 
   handleLogout(): void {
     this.authService.clearUserInfo();
-
- 
     sessionStorage.removeItem('darkMode');
     document.body.classList.remove('dark-mode');
     this.isDarkMode = false;
-
     this.router.navigate(['/login']);
   }
 

@@ -32,7 +32,7 @@ export class LoginComponent {
   }
 
   showMessage(message: string, type: 'success' | 'error') {
-    this.snackBar.open(message, 'Close', {
+    this.snackBar.open(message, '', {
       duration: 4000,
       panelClass: [`${type}-snackbar`]
     });
@@ -40,7 +40,7 @@ export class LoginComponent {
 
   onLogin() {
     if (!this.selectedUser || !this.username || !this.password) {
-      this.showMessage('Please select user type and fill in all fields.', 'error');
+      this.showMessage('Fill all ', 'error');
       return;
     }
 
@@ -57,7 +57,7 @@ export class LoginComponent {
               lastLogin: new Date().toISOString(),
               token: res.token
             });
-          //  this.showMessage('Customer login successful!', 'success');
+          this.showMessage('Customer login successful!','success');
             this.router.navigate(['/customer']);
           } else {
             this.showMessage('Invalid Customer ID or Password.', 'error');
@@ -79,7 +79,7 @@ export class LoginComponent {
               lastLogin: new Date().toISOString(),
               token: res.token
             });
-          //  this.showMessage('Vendor login successful!', 'success');
+          this.showMessage('Vendor login successful!', 'success');
             this.router.navigate(['/vendor']);
           } else {
             this.showMessage('Invalid Vendor ID or Password.', 'error');
@@ -101,7 +101,7 @@ export class LoginComponent {
               lastLogin: new Date().toISOString(),
               token: res.token
             });
-          //  this.showMessage('Employee login successful!', 'success');
+          this.showMessage('Employee login successful!', 'success');
             this.router.navigate(['/employee']);
           } else {
             this.showMessage('Invalid Employee ID or Password.', 'error');
