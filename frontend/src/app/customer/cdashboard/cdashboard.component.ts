@@ -17,19 +17,19 @@ export class CdashboardComponent implements OnInit {
     this.cuService.getCustomerBI().subscribe((response) => {
       const data = response?.data || {};
 
-      // 1️⃣ KPIs
+
       this.populateKPIs(data);
 
-      // 2️⃣ Top 5 Products by Revenue
+
       this.createTopProductsChart(data.salesItems || []);
 
-      // 3️⃣ Payments vs Outstanding
+
       this.createPaymentsOutstandingChart(data.payments || [], data.invoiceHeader || []);
 
-      // 4️⃣ Delivery Quantity by Product
+
       this.createDeliveryQuantityChart(data.deliveryItems || []);
 
-      // 5️⃣ Aging Summary
+
       this.createAgingSummaryChart(data.aging || []);
     });
   }
@@ -87,7 +87,7 @@ export class CdashboardComponent implements OnInit {
         indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
-        plugins: { title: { display: true, text: 'Top 5 Products by Revenue' }, legend: { display: false } }
+        plugins: { title: { display: true, text: 'Top 5 Products by Price' }, legend: { display: false } }
       }
     });
   }
@@ -127,7 +127,7 @@ export class CdashboardComponent implements OnInit {
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: { title: { display: true, text: 'Delivery Quantity by Product' }, legend: { display: false } }
+        plugins: { title: { display: true, text: 'Quantity (KG) delivered by Product' }, legend: { display: false } }
       }
     });
   }

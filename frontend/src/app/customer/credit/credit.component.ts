@@ -11,7 +11,7 @@ import { ViewEncapsulation } from '@angular/core';
    encapsulation: ViewEncapsulation.None
 })
 export class CreditComponent implements OnInit {
-  selectedType: string = 'credit';  // Default selection
+  selectedType: string = 'credit';  
   rowData: any[] = [];
   creditData: any[] = [];
   debitData: any[] = [];
@@ -40,7 +40,7 @@ export class CreditComponent implements OnInit {
     headerClass: 'custom-header'
   };
 
-  constructor(private cuService: CustomerService) {}  // Kept as cuService
+  constructor(private cuService: CustomerService) {}  
 
   ngOnInit() {
     this.fetchCustomerCandD();

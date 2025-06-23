@@ -4,45 +4,32 @@
     height: 100vh;
     width: 100%;
   }
-
-
+/* Base tooltip styling */
 .mdc-tooltip {
   background-color: #000 !important;
   color: #fff !important;
   font-size: 13px !important;
-  font-weight: 600;
-  padding: 6px 12px;
-  border-radius: 6px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  max-width: unset;
-  z-index: 1000;
+  font-weight: 600 !important;
+  padding: 8px 12px !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
   position: relative !important;
 }
 
-.mdc-tooltip--shown::after {
-  content: "";
-  position: absolute;
-  left: -8px; /* Adjusted to position arrowhead correctly */
-  top: 50%;
-  transform: translateY(-50%) rotate(45deg); /* Rotate to form arrowhead */
-  width: 8px; /* Size of the arrowhead */
-  height: 8px;
-  background-color: #000; /* Match tooltip background */
-  pointer-events: none;
-}
+
 .sap-up {
-  color: #00c853; // Green
+  color: white; // Green
 }
 
 .sap-down {
-  color: #d50000; // Red
+  color: white; 
 }
-.sap-up,
+
 .dark-mode .sap-up {
   color: #00c853 !important; // Bright green
 }
 
-.sap-down,
+
 .dark-mode .sap-down {
   color: #d50000 !important; // Bright red
 }
@@ -560,6 +547,8 @@
 
   //help functions ends here
 
+
+  
 /* Dark mode styling for Payslip Component */
 .dark-mode .payslip-card {
   background-color: #2d2d2d;

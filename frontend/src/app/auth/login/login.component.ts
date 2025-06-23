@@ -32,7 +32,7 @@ export class LoginComponent {
   }
 
   showMessage(message: string, type: 'success' | 'error') {
-    this.snackBar.open(message, '', {
+    this.snackBar.open(message, 'ok', {
       duration: 4000,
       panelClass: [`${type}-snackbar`]
     });
@@ -79,7 +79,7 @@ export class LoginComponent {
               lastLogin: new Date().toISOString(),
               token: res.token
             });
-          this.showMessage('Vendor login successful!', 'success');
+          //this.showMessage('Vendor login successful!', 'success');
             this.router.navigate(['/vendor']);
           } else {
             this.showMessage('Invalid Vendor ID or Password.', 'error');

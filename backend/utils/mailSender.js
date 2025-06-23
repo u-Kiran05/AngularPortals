@@ -86,25 +86,22 @@ router.post('/sendemail', async (req, res) => {
         <td style="padding: 8px;">${fullName}</td>
       </tr>
       <tr>
-        <td style="padding: 8px;">Gross Pay</td>
-        <td style="padding: 8px;">${emp.GROSS_PAY?.[0] || '-'} ${emp.CURRENCY?.[0] || ''}</td>
+        <td style="padding: 8px;">Organization Code</td>
+        <td style="padding: 8px;">${emp.ORG_KEY?.[0]}</td>
       </tr>
       <tr>
-        <td style="padding: 8px;">Total Deductions</td>
-        <td style="padding: 8px;">${emp.TOTAL_DEDUCTIONS?.[0] || '-'} ${emp.CURRENCY?.[0] || ''}</td>
+        <td style="padding: 8px;">utilization Level</td>
+        <td style="padding: 8px;">${emp.UTILIZATION_LEVEL?.[0]  } </td>
       </tr>
       <tr>
-        <td style="padding: 8px;">Net Pay</td>
-        <td style="padding: 8px; font-weight: bold;">${emp.NET_PAY?.[0] || '-'} ${emp.CURRENCY?.[0] || ''}</td>
+        <td style="padding: 8px;">Pay Scale Group</td>
+        <td style="padding: 8px;">${emp.PAY_SCALE_GROUP?.[0] }</td>
       </tr>
       <tr>
         <td style="padding: 8px;">Pay Scale Type</td>
         <td style="padding: 8px;">${emp.PAY_SCALE_TYPE?.[0] || '-'}</td>
       </tr>
-      <tr>
-        <td style="padding: 8px;">Utilization Level</td>
-        <td style="padding: 8px;">${emp.UTILIZATION_LEVEL?.[0] || '-'}</td>
-      </tr>
+     
     </table>
 
     <p style="margin-top: 20px;">If you have any questions regarding your payslip, please contact the HR department.</p>

@@ -12,7 +12,8 @@ import { AuthService } from '../../services/auth.service';
 import { ViewEncapsulation } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import { SapStatusService, SapStatus } from '../../services/sap-status.service';
-
+import { TooltipPosition } from '@angular/material/tooltip';
+import { FormControl } from '@angular/forms';
 export interface MenuItem {
   icon: string;
   title: string;
@@ -30,6 +31,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
   @Input() headerTitle: string = 'ERP Dashboard';
   @Input() menuItems: MenuItem[] = [];
   @Output() menuClick = new EventEmitter<string>();
+
+  // Tooltip position
+  positionOptions: TooltipPosition[] = ['below', 'above', 'left', 'right'];
+  tooltipPosition = new FormControl(this.positionOptions[0]);
 
   logoutItem: MenuItem = { icon: 'logout', title: 'Logout', link: '/logout' };
 
@@ -63,10 +68,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
       document.body.classList.remove('dark-mode');
     }
 
-    // 🔄 Initial SAP status check
     this.checkSAPStatus();
 
-    // 🔁 Auto-refresh SAP status every 10 seconds
     this.sapStatusSubscription = interval(10000).subscribe(() => {
       this.checkSAPStatus();
     });

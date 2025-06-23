@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const cron = require('node-cron');
+//const cron = require('node-cron');
 const verifyToken = require('./middleware/verifyToken');
 const { checkSAPHealth, getSAPStatus } = require('./utils/sapHealthChecker');
 
@@ -16,7 +16,11 @@ app.use(express.json());
 // Run initial check
 checkSAPHealth();
 // Schedule SAP health check every minute
-cron.schedule('* * * * *', checkSAPHealth);
+//cron.schedule('* * * * *', checkSAPHealth); <= efficiency venum na use this
+
+// Poll SAP health every 5 seconds for faster frontend updates
+setInterval(checkSAPHealth, 5000);
+
 // Public API to fetch current SAP status
 app.get('/api/sap-status', (req, res) => {
   res.json(getSAPStatus());

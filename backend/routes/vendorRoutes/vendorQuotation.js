@@ -2,7 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const router = express.Router();
 
-const SAP_VRFQ_URL = process.env.SAP_VRFQ_URL; // e.g. /sap/opu/odata/sap/ZSEGW_MM_VENDORDETAILST_SRV/ZRFQHeaderSet
+const SAP_VRFQ_URL = process.env.SAP_VRFQ_URL; 
 const SAP_USERNAME = process.env.SAP_USERNAME;
 const SAP_PASSWORD = process.env.SAP_PASSWORD;
 

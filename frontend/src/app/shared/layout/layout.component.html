@@ -47,23 +47,31 @@
       <div class="header-spacer"></div>
       <h2 class="header-title">{{ headerTitle }}</h2>
 
-      <div class="header-actions">
-        <button mat-icon-button matTooltip="SAP Status" disableRipple>
+      <div class="header-actions" >
+        <!-- SAP Status -->
+        <button mat-icon-button matTooltip="SAP Status" 
+          disableRipple
+          matTooltipPosition="below">
           <mat-icon [ngClass]="sapStatusUp ? 'sap-up' : 'sap-down'">
-  {{ sapStatusUp ? 'cloud_done' : 'cloud_off' }}
-</mat-icon>
+            {{ sapStatusUp ? 'cloud_done' : 'cloud_off' }}
+          </mat-icon>
         </button>
-        <button mat-icon-button (click)="toggleDarkMode()">
+
+          <!-- Dark/white Mode -->
+        <button mat-icon-button matTooltip="Dark/white Mode" disableRipple
+          matTooltipPosition="below"
+          (click)="toggleDarkMode()">
           <mat-icon>{{ isDarkMode ? 'dark_mode' : 'light_mode' }}</mat-icon>
         </button>
 
-        <button mat-icon-button (click)="toggleProfileCard()">
+        <!-- Profile -->
+        <button mat-icon-button matTooltip="Profile" disableRipple
+          matTooltipPosition="below"
+          (click)="toggleProfileCard()">
           <mat-icon>account_circle</mat-icon>
         </button>
       </div>
-
-
-      <app-profile [showProfileCard]="showProfileCard"></app-profile>
+        <app-profile [showProfileCard]="showProfileCard"></app-profile>
     </header>
 
     <main class="content">

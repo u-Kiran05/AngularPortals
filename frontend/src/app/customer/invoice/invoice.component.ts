@@ -25,7 +25,7 @@ export class InvoiceComponent implements OnInit {
     { headerName: 'Net Value', field: 'netwr' },
     { headerName: 'Currency', field: 'waerk' },
     { headerName: 'Company Code', field: 'bukrs' },
-    { headerName: 'Created On', field: 'erdat' }
+   // { headerName: 'Created On', field: 'erdat' }
   ];
 
   itemColumnDefs: ColDef[] = [

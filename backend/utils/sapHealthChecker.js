@@ -16,7 +16,7 @@ async function checkSAPHealth() {
         username: process.env.SAP_USERNAME,
         password: process.env.SAP_PASSWORD
       },
-      timeout: 5000
+      timeout: 2500
     });
 
     const message = response?.data?.d?.results?.[0]?.Message || 'No message returned';
@@ -26,8 +26,7 @@ async function checkSAPHealth() {
       message,
       lastChecked: new Date().toISOString()
     };
-
-    console.log('SAP is up:', message);
+   // console.log('SAP is up:', message);
   } catch (error) {
     sapStatus = {
       up: false,
@@ -35,7 +34,7 @@ async function checkSAPHealth() {
       lastChecked: new Date().toISOString()
     };
 
-    console.error('SAP is down:', error.message);
+   // console.error('SAP is down:', error.message);
   }
 }
 

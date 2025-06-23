@@ -99,7 +99,7 @@ export class ProfileCardComponent implements OnInit {
       next: (profile) => {
         this.customerProfile = profile;
         this.profileName = profile.name || 'Unknown Customer';
-        console.log('[ProfileCard] Customer profile fetched:', profile);
+       // console.log('[ProfileCard] Customer profile fetched:', profile);
       },
       error: (err) => {
         console.error('[ProfileCard] Error fetching customer profile:', err);
@@ -114,7 +114,7 @@ export class ProfileCardComponent implements OnInit {
       next: (profile) => {
         this.vendorProfile = profile;
         this.profileName = profile.name || 'Unknown Vendor';
-        console.log('[ProfileCard] Vendor profile fetched:', profile);
+      //  console.log('[ProfileCard] Vendor profile fetched:', profile);
       },
       error: (err) => {
         console.error('[ProfileCard] Error fetching vendor profile:', err);
@@ -129,7 +129,7 @@ export class ProfileCardComponent implements OnInit {
       next: (profile) => {
         this.employeeProfile = profile;
         this.profileName = profile.name || 'Unknown Employee';
-        console.log('[ProfileCard] Employee profile fetched:', profile);
+      //  console.log('[ProfileCard] Employee profile fetched:', profile);
       },
       error: (err) => {
         console.error('[ProfileCard] Error fetching employee profile:', err);
