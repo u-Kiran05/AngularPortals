@@ -21,8 +21,9 @@ export class VagingComponent implements OnInit {
     { headerName: 'Gross Amount', field: 'wrbtr' },
     { headerName: 'Tax Amount', field: 'wmwst' },
     { headerName: 'Net Amount', field: 'netAmount' },
-    { headerName: 'Days Aging', field: 'daysAging' },
-    { headerName: 'Currency', field: 'waers' }
+
+    { headerName: 'Currency', field: 'waers' },
+        { headerName: 'Days Aging', field: 'daysAging' }
   ];
 
   defaultColDef: ColDef = {

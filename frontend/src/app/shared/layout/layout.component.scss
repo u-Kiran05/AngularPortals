@@ -451,6 +451,27 @@
 
   /*dark mode profile ends here*/
 
+  .dark-mode  .view-icon {
+  color: #ffffff;
+  font-size: 20px;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    color:#ff6b6b !important;
+    transform: scale(1.2);
+  }
+}
+
+.dark-mode .gif-help-popup {
+  background:#3a3a3a;
+  box-shadow: 0 2px 12px rgba(255, 255, 255, 0.15);
+}
+
+.dark-mode .gif-help-header .material-icons,
+.dark-mode .gif-help-header span {
+  color: #f3f4f6;
+}
+
 
   /* Dark mode styling for insights modal */
   .dark-mode .insights-modal {

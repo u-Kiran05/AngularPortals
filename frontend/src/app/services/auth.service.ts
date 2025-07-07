@@ -41,7 +41,10 @@ export class AuthService {
 
     this.userInfo = user;
   }
-
+getCurrentUserRole(): string {
+  const info = this.getUserInfo();
+  return info?.role?.toLowerCase() || this.getCurrentRoleFromPath();
+}
   getUserInfo(): any {
     if (!this.userInfo) {
       this.userInfo = this.loadUserFromStorage();

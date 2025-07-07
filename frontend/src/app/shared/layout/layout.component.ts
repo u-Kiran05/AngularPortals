@@ -8,12 +8,14 @@ import {
   OnDestroy
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
 import { ViewEncapsulation } from '@angular/core';
-import { interval, Subscription } from 'rxjs';
-import { SapStatusService, SapStatus } from '../../services/sap-status.service';
-import { TooltipPosition } from '@angular/material/tooltip';
 import { FormControl } from '@angular/forms';
+import { interval, Subscription } from 'rxjs';
+
+import { AuthService } from '../../services/auth.service';
+import { SapStatusService, SapStatus } from '../../services/sap-status.service';
+import { IntroService } from '../../services/intro.service';
+
 export interface MenuItem {
   icon: string;
   title: string;
@@ -32,24 +34,21 @@ export class LayoutComponent implements OnInit, OnDestroy {
   @Input() menuItems: MenuItem[] = [];
   @Output() menuClick = new EventEmitter<string>();
 
-  // Tooltip position
-  positionOptions: TooltipPosition[] = ['below', 'above', 'left', 'right'];
-  tooltipPosition = new FormControl(this.positionOptions[0]);
-
   logoutItem: MenuItem = { icon: 'logout', title: 'Logout', link: '/logout' };
 
   isCollapsed = false;
   isDarkMode = false;
   showProfileCard = false;
   selectedMenu: string = '';
-
   sapStatusUp: boolean = false;
+  tooltipPosition = new FormControl('below');
   private sapStatusSubscription!: Subscription;
 
   constructor(
     public authService: AuthService,
     private router: Router,
-    private sapStatusService: SapStatusService
+    private sapStatusService: SapStatusService,
+    private introService: IntroService 
   ) {}
 
   ngOnInit(): void {
@@ -57,10 +56,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
     const savedMode = sessionStorage.getItem('darkMode');
     this.isDarkMode = savedMode === 'true';
-
-    if (this.isDarkMode) {
-      document.body.classList.add('dark-mode');
-    }
+    if (this.isDarkMode) document.body.classList.add('dark-mode');
 
     if (!this.authService.isLoggedIn()) {
       this.isDarkMode = false;
@@ -69,27 +65,20 @@ export class LayoutComponent implements OnInit, OnDestroy {
     }
 
     this.checkSAPStatus();
+    this.sapStatusSubscription = interval(10000).subscribe(() => this.checkSAPStatus());
 
-    this.sapStatusSubscription = interval(10000).subscribe(() => {
-      this.checkSAPStatus();
-    });
+    const role = this.authService.getCurrentUserRole();
+    if (this.introService.shouldStartTutorial(role)) {
+      this.introService.start(role);
+      this.introService.markTutorialShown(role);
+    }
   }
 
   checkSAPStatus(): void {
     this.sapStatusService.getStatus().subscribe({
-      next: (status: SapStatus) => {
-        this.sapStatusUp = status.up;
-      },
-      error: () => {
-        this.sapStatusUp = false;
-      }
+      next: (status: SapStatus) => (this.sapStatusUp = status.up),
+      error: () => (this.sapStatusUp = false)
     });
-  }
-
-  ngOnDestroy(): void {
-    if (this.sapStatusSubscription) {
-      this.sapStatusSubscription.unsubscribe();
-    }
   }
 
   toggleSidebar(): void {
@@ -99,12 +88,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   toggleDarkMode(): void {
     this.isDarkMode = !this.isDarkMode;
     sessionStorage.setItem('darkMode', String(this.isDarkMode));
-
-    if (this.isDarkMode) {
-      document.body.classList.add('dark-mode');
-    } else {
-      document.body.classList.remove('dark-mode');
-    }
+    document.body.classList.toggle('dark-mode', this.isDarkMode);
   }
 
   toggleProfileCard(): void {
@@ -123,6 +107,15 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.selectedMenu = link;
     this.menuClick.emit(link);
     this.router.navigate([link]);
+  }
+
+  startHelpTour(): void {
+    const role = this.authService.getCurrentUserRole();
+    this.introService.start(role);
+  }
+
+  ngOnDestroy(): void {
+    if (this.sapStatusSubscription) this.sapStatusSubscription.unsubscribe();
   }
 
   @HostListener('document:click', ['$event'])

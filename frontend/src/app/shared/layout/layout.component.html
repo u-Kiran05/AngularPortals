@@ -1,6 +1,7 @@
 <div class="layout-container" [ngClass]="{ 'dark-mode': isDarkMode, 'collapsed': isCollapsed }">
+
   <!-- Sidebar -->
-  <aside class="sidebar">
+  <aside class="sidebar" id="sidebar-menu">
     <div class="sidebar-header">
       <button mat-icon-button (click)="toggleSidebar()">
         <mat-icon>{{ isCollapsed ? 'menu' : 'menu_open' }}</mat-icon>
@@ -11,32 +12,31 @@
     <div class="sidebar-body">
       <ul class="menu-top">
         <li *ngFor="let item of menuItems">
-  <a 
-    (click)="onMenuClick(item.link)" 
-    [routerLink]="item.link" 
-    routerLinkActive="active"
-    [matTooltip]="isCollapsed ? item.title : ''"
-    matTooltipPosition="right"
-    [ngClass]="{'selected': selectedMenu === item.link}">
-    <mat-icon>{{ item.icon }}</mat-icon>
-    <span *ngIf="!isCollapsed">{{ item.title }}</span>
-  </a>
-</li>
-
+          <a 
+            (click)="onMenuClick(item.link)" 
+            [routerLink]="item.link" 
+            routerLinkActive="active"
+            [matTooltip]="isCollapsed ? item.title : ''"
+            matTooltipPosition="right"
+            [ngClass]="{'selected': selectedMenu === item.link}">
+            <mat-icon>{{ item.icon }}</mat-icon>
+            <span *ngIf="!isCollapsed">{{ item.title }}</span>
+          </a>
+        </li>
       </ul>
 
       <ul class="menu-bottom">
         <li>
-  <a 
-    (click)="handleLogout()" 
-    class="logout-link"
-    [matTooltip]="isCollapsed ? logoutItem.title : ''"
-    matTooltipPosition="right">
-    <mat-icon>{{ logoutItem.icon }}</mat-icon>
-    <span *ngIf="!isCollapsed">{{ logoutItem.title }}</span>
-  </a>
-</li>
-
+          <a 
+            (click)="handleLogout()" 
+            id="logout-btn"
+            class="logout-link"
+            [matTooltip]="isCollapsed ? logoutItem.title : ''"
+            matTooltipPosition="right">
+            <mat-icon>{{ logoutItem.icon }}</mat-icon>
+            <span *ngIf="!isCollapsed">{{ logoutItem.title }}</span>
+          </a>
+        </li>
       </ul>
     </div>
   </aside>
@@ -47,31 +47,44 @@
       <div class="header-spacer"></div>
       <h2 class="header-title">{{ headerTitle }}</h2>
 
-      <div class="header-actions" >
+      <div class="header-actions">
         <!-- SAP Status -->
         <button mat-icon-button matTooltip="SAP Status" 
           disableRipple
-          matTooltipPosition="below">
+          matTooltipPosition="below"
+          id="sap-status-btn">
           <mat-icon [ngClass]="sapStatusUp ? 'sap-up' : 'sap-down'">
             {{ sapStatusUp ? 'cloud_done' : 'cloud_off' }}
           </mat-icon>
         </button>
 
-          <!-- Dark/white Mode -->
-        <button mat-icon-button matTooltip="Dark/white Mode" disableRipple
+        <!-- Dark/White Mode -->
+        <button mat-icon-button matTooltip="Dark/white Mode"
+          disableRipple
           matTooltipPosition="below"
+          id="dark-mode-btn"
           (click)="toggleDarkMode()">
           <mat-icon>{{ isDarkMode ? 'dark_mode' : 'light_mode' }}</mat-icon>
         </button>
 
         <!-- Profile -->
-        <button mat-icon-button matTooltip="Profile" disableRipple
+        <button mat-icon-button matTooltip="Profile"
+          disableRipple
           matTooltipPosition="below"
+          id="profile-btn"
           (click)="toggleProfileCard()">
           <mat-icon>account_circle</mat-icon>
         </button>
+
+        <!-- Help Tour -->
+<!-- Help Button -->
+<button mat-icon-button id="help-button" (click)="startHelpTour()" matTooltip="Help Tour">
+  <mat-icon>info</mat-icon>
+</button>
+
       </div>
-        <app-profile [showProfileCard]="showProfileCard"></app-profile>
+
+      <app-profile [showProfileCard]="showProfileCard"></app-profile>
     </header>
 
     <main class="content">

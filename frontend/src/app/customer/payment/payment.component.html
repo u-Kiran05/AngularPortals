@@ -1,12 +1,12 @@
 <div class="payment-container">
-  <h2>Customer Payment Details</h2>
 
-  <ag-grid-angular
-    class="ag-theme-alpine"
-    style="width: 100%; height: 450px;"
-    [rowData]="rowData"
-    [columnDefs]="agingColumnDefs"
-    [defaultColDef]="defaultColDef"
-    rowSelection="single">
-  </ag-grid-angular>
+
+<app-tablewith-items
+  [rowData]="rowData"
+  [columnDefs]="agingColumnDefs"
+  [itemColumnDefs]="[]"
+  [defaultColDef]="defaultColDef"
+  [enableItemPopup]="false"
+  [popupTitle]="'Customer Payment '"/>
+
 </div>
