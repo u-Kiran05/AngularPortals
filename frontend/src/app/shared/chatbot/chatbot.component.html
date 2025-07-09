@@ -1,0 +1,41 @@
+<div class="chatbot-container" [ngClass]="{ 'open': isOpen }">
+
+  <!-- Floating Intro Bubbles (Only show if chat is closed) -->
+<div class="chatbot-float-bubbles" 
+     *ngIf="!isOpen && (showIntro1 || showIntro2)" 
+     [ngClass]="{ 'fade-out': hideBubbles }">
+  <div *ngIf="showIntro1" class="bubble">Hi there!</div>
+  <div *ngIf="showIntro2" class="bubble">Need help navigating?</div>
+</div>
+
+  <!-- FAB icon (only when closed) -->
+  <button class="chatbot-toggle" *ngIf="!isOpen" (click)="toggleChat()" aria-label="Chat">
+    <mat-icon class="chat-icon" style="font-size: 27px;">forum</mat-icon>
+  </button>
+
+  <!-- Chat box -->
+  <div class="chatbot-box" *ngIf="isOpen">
+    <div class="chatbot-header">
+      <div class="header-left">
+        <mat-icon class="header-icon" style="font-size: 27px;">psychology</mat-icon>
+        <span> Ask me anything</span>
+      </div>
+      <button mat-icon-button class="header-close-btn" (click)="toggleChat()" aria-label="Close Chat">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <div class="chatbot-messages">
+      <div class="message bot fade-in">
+        Hi! How can I help you?
+      </div>
+    </div>
+
+    <div class="chatbot-input">
+      <input matInput placeholder="Type a message..." />
+      <button mat-icon-button class="send-button" aria-label="Send">
+        <mat-icon class="send-icon">send</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

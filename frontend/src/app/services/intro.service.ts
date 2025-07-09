@@ -27,13 +27,14 @@ export class IntroService {
       steps,
       showProgress: true,
       tooltipPosition: 'auto' as any,
-      exitOnOverlayClick: false
+      exitOnOverlayClick: false,
     }).start();
   }
 
-  public shouldStartTutorial(role: string): boolean {
-    return !localStorage.getItem(this.storagePrefix + role);
-  }
+public shouldStartTutorial(role: string): boolean {
+  return true; 
+}
+
 
   public markTutorialShown(role: string): void {
     localStorage.setItem(this.storagePrefix + role, 'true');
