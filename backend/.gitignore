@@ -2,3 +2,4 @@ node_modules
 .venv
 local_models
 __pycache__
+.env
