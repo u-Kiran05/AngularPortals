@@ -12,7 +12,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { ModuleRegistry, AllCommunityModule } from 'ag-grid-community';
 import { AgTableComponent } from './ag-table/ag-table.component';
 import { ChatbotComponent } from './chatbot/chatbot.component';
-
+import { FormsModule } from '@angular/forms';
 ModuleRegistry.registerModules([ AllCommunityModule ]);
 @NgModule({
   declarations: [
@@ -23,7 +23,7 @@ ModuleRegistry.registerModules([ AllCommunityModule ]);
     RouterModule,
     MatButtonModule,
     MatTooltipModule,
-    MatIconModule,MatDividerModule,AgGridModule,
+    MatIconModule,MatDividerModule,AgGridModule,FormsModule
   ],
   exports: [
     TablewithItemsComponent,
