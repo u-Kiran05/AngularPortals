@@ -19,7 +19,7 @@ function startPythonNlpServer() {
   });
 
   subprocess.on('exit', (code) => {
-    console.log(`ℹPython NLP server exited with code ${code}`);
+    console.log(`Python NLP server exited with code ${code}`);
   });
 }
 

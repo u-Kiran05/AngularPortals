@@ -17,7 +17,7 @@ import { CdashboardComponent } from './customer/cdashboard/cdashboard.component'
 import { ProfileCardComponent } from './shared/profile/profile.component';
 //Vendor Components
 import { VdashboardComponent } from './vendor/vdashboard/vdashboard.component';
-import { VfinanceComponent } from './vendor/vfinance/vfinance.component';
+
 import { VpurchaseComponent } from './vendor/vpurchase/vpurchase.component';
 //Vendor ends here
 import { EmployeeComponent } from './employee/employee.component';
@@ -53,7 +53,7 @@ export const routes: Routes = [
      data: { role: 'Vendor' },
     children:[
       { path: 'vdashboard', component:VdashboardComponent},
-      { path: 'vfinance', component: VfinanceComponent },
+   
       {path:'vpurchase',component:VpurchaseComponent},
       {path:'vquotation',component:VquotationComponent},
       {path:'vgoods',component:VgoodsComponent},

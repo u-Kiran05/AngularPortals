@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module'; 
 import { VendorComponent } from './vendor.component';
-import { VfinanceComponent } from './vfinance/vfinance.component';
 import { VpurchaseComponent } from './vpurchase/vpurchase.component';
 import { VdashboardComponent } from './vdashboard/vdashboard.component';
 import { VquotationComponent } from './vquotation/vquotation.component';
@@ -19,7 +18,6 @@ ModuleRegistry.registerModules([ AllCommunityModule ]);
 @NgModule({
   declarations: [
     VendorComponent,
-    VfinanceComponent,
     VpurchaseComponent,
     VdashboardComponent,
     VquotationComponent,

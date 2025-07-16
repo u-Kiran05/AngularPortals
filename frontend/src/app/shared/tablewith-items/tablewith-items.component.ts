@@ -31,10 +31,10 @@ export class TablewithItemsComponent implements OnInit {
     headerClass: 'custom-header'
   };
 
-  @Input() popupTitle: string = 'Items';
+  @Input() popupTitle: string = 'test title';
   @Input() enableItemPopup: boolean = true;
   @Input() enableDownload: boolean = false;
-
+  @Input() showTitle:boolean = true;
   @Output() downloadClicked = new EventEmitter<void>();
   @Output() rowSelected = new EventEmitter<any>();
 

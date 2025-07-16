@@ -15,11 +15,14 @@
   </div>
   <br>
 
-  <ag-grid-angular
-    class="ag-theme-alpine"
-    style="width: 100%; height: 450px;"
-    [rowData]="rowData"
-    [columnDefs]="columnDefs"
-    [defaultColDef]="{ flex: 1, resizable: true, sortable: true, filter: true }">
-  </ag-grid-angular>
+
+
+    <app-tablewith-items
+  [rowData]="rowData"
+  [columnDefs]="columnDefs"
+  [itemColumnDefs]="[]"
+
+  [enableItemPopup]="false"
+  [showTitle]="false"
+/>
 </div>

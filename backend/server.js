@@ -23,8 +23,7 @@ app.get('/api/sap-status', (req, res) => {
 
 // ------------------ Chat bot ------------------
 
-//const { startPythonNlpServer } = require('./utils/startPythonNlpServer');
-//startPythonNlpServer();
+
 const transformerRoute = require('./routes/commonRoutes/transformerRoute');
 app.use('/api/transformer-nlp', transformerRoute);
 

@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy,OnInit } from '@angular/core';
 import { ChatbotService, NlpResponse } from '../../services/chatbot.service';
 import { Router } from '@angular/router';
 import { EmployeeService } from '../../services/employee/employee.service';
@@ -9,7 +9,16 @@ import { EmployeeService } from '../../services/employee/employee.service';
   styleUrl: './chatbot.component.scss',
   templateUrl: './chatbot.component.html'
 })
-export class ChatbotComponent implements OnDestroy {
+export class ChatbotComponent implements OnDestroy,OnInit {
+
+  ngOnInit(): void {
+  setTimeout(() => {
+    this.hideBubbles = true;
+    this.showIntro1 = false;
+    this.showIntro2 = false;
+  }, 10000);
+}
+
   isOpen = false;
   chatMessages: { text: string, sender: 'user' | 'bot' }[] = [];
   userInput = '';
@@ -107,8 +116,8 @@ export class ChatbotComponent implements OnDestroy {
         this.router.navigate(['/customer/cdashboard']);
         return "Welcome to your customer dashboard.";
       case 'customer.open.profile':
-        this.router.navigate(['/profile']);
-        return "Here's your profile.";
+        //this.router.navigate(['/profile']);
+        return "I’m not sure where to navigate.";
       case 'customer.open.inquiries':
         this.router.navigate(['/customer/inquiry']);
         return "Fetching your sales inquiries.";
@@ -123,7 +132,7 @@ export class ChatbotComponent implements OnDestroy {
         return "Showing your invoices.";
       case 'customer.download.invoicepdf':
         this.router.navigate(['/customer/invoice']);
-        return "Downloading your invoice PDF...";
+        return "not sure what to do.";
       case 'customer.open.aging':
         this.router.navigate(['/customer/payment']);
         return "Showing your aging/payment report.";
@@ -142,8 +151,8 @@ export class ChatbotComponent implements OnDestroy {
         this.router.navigate(['/vendor/vdashboard']);
         return "Opening your vendor dashboard.";
       case 'vendor.open.profile':
-        this.router.navigate(['/profile']);
-        return "Here’s your vendor profile.";
+        //this.router.navigate(['/profile']);
+        return "I’m not sure where to navigate.";
       case 'vendor.open.purchase':
         this.router.navigate(['/vendor/vpurchase']);
         return "Fetching your purchase orders.";

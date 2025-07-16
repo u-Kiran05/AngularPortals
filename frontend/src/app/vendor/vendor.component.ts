@@ -9,19 +9,13 @@ import { Router } from '@angular/router';
 export class VendorComponent {
 menuItems = [
   { icon: 'home', title: 'Home', link: '/vendor/vdashboard' },
- // { icon: 'attach_money', title: 'Finance', link: '/vendor/vfinance' },
   { icon: 'request_quote', title: 'Quotations', link: '/vendor/vquotation' },
   { icon: 'assignment', title: 'Purchase Orders', link: '/vendor/vpurchase' },
- 
   { icon: 'inventory_2', title: 'Goods Receipt', link: '/vendor/vgoods' },
   { icon: 'receipt_long', title: 'Vendor Invoices', link: '/vendor/vinvoice' },
   { icon: 'event_repeat', title: 'Vendor Aging', link: '/vendor/vaging' },
   { icon: 'sync_alt', title: 'Credit/Debit Viewer', link: '/vendor/vcandd' } 
 ];
-
-
-
-
   constructor(private router: Router) {}
 
   onMenuItemClick(link: string) {
